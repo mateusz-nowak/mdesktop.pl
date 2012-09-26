@@ -6,8 +6,4 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
 class MovieAdminController extends Controller {
     
-    
-    
-    
-    
 }
