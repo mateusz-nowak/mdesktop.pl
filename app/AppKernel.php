@@ -26,11 +26,6 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            
-            /**
-             * My Bundles
-             */
-        
             new Acme\UserBundle\AcmeUserBundle(),
             new Acme\MainBundle\AcmeMainBundle(),
         );
