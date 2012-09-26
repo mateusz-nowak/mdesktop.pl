@@ -4,8 +4,6 @@ namespace Acme\MainBundle\Controller\Admin;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
-class ContentAdminController extends Controller {
-    
-    
-    
+class ContentAdminController extends Controller
+{
 }

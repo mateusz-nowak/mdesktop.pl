@@ -3,17 +3,15 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="movie")
  * @ORM\HasLifecycleCallbacks()
  */
- 
-class Movie {
-    
+
+class Movie
+{
     /**
      * @var integer $id
      *
@@ -36,35 +34,33 @@ class Movie {
      * @ORM\Column()
      */
     private $title;
-    
-    // 
+
+    //
     // /**
     //  * @var string $length
     //  *
     //  * @ORM\Column()
     //  */
     // // private $category;
-    
+
     /**
      * @var string $url
      *
      * @ORM\Column(type="float")
      */
     private $ratingValue;
-    
-     
+
     /**
      * @var string $url
      *
      * @ORM\Column(type="integer")
      */
     private $ratingCount;
-    
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,20 +70,20 @@ class Movie {
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Movie
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -97,20 +93,20 @@ class Movie {
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Movie
      */
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -120,20 +116,20 @@ class Movie {
     /**
      * Set ratingValue
      *
-     * @param float $ratingValue
+     * @param  float $ratingValue
      * @return Movie
      */
     public function setRatingValue($ratingValue)
     {
         $this->ratingValue = $ratingValue;
-    
+
         return $this;
     }
 
     /**
      * Get ratingValue
      *
-     * @return float 
+     * @return float
      */
     public function getRatingValue()
     {
@@ -143,20 +139,20 @@ class Movie {
     /**
      * Set ratingCount
      *
-     * @param integer $ratingCount
+     * @param  integer $ratingCount
      * @return Movie
      */
     public function setRatingCount($ratingCount)
     {
         $this->ratingCount = $ratingCount;
-    
+
         return $this;
     }
 
     /**
      * Get ratingCount
      *
-     * @return integer 
+     * @return integer
      */
     public function getRatingCount()
     {

@@ -11,9 +11,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="category")
  * @ORM\HasLifecycleCallbacks()
  */
- 
-class Category {
-    
+
+class Category
+{
     /**
      * @var integer $id
      *
@@ -37,35 +37,37 @@ class Category {
      * @Assert\NotNull()
      */
     private $name;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="content", mappedBy="category")
      */
-    
+
     private $collections;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->collections = new ArrayCollection();
     }
-    
+
     /**
      * @ORM\PreUpdate
      * @ORM\PrePersist
      */
 
-    public function addSlug() {
+    public function addSlug()
+    {
         $this->setSlug(mb_strtolower(str_replace(' ', '-', $this->getName())));
     }
-    
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->getName();
     }
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,20 +77,20 @@ class Category {
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string   $slug
      * @return Category
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -98,20 +100,20 @@ class Category {
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string   $name
      * @return Category
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -121,13 +123,13 @@ class Category {
     /**
      * Add collections
      *
-     * @param Acme\MainBundle\Entity\content $collections
+     * @param  Acme\MainBundle\Entity\content $collections
      * @return Category
      */
     public function addCollection(\Acme\MainBundle\Entity\content $collections)
     {
         $this->collections[] = $collections;
-    
+
         return $this;
     }
 
@@ -144,7 +146,7 @@ class Category {
     /**
      * Get collections
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCollections()
     {

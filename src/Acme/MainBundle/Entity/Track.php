@@ -3,17 +3,15 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="track")
  * @ORM\HasLifecycleCallbacks()
  */
- 
-class Track {
-    
+
+class Track
+{
     /**
      * @var integer $id
      *
@@ -43,7 +41,6 @@ class Track {
      * @ORM\Column()
      */
     private $length;
-    
 
     /**
      * @var string $url
@@ -51,12 +48,11 @@ class Track {
      * @ORM\Column()
      */
     private $url;
-    
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,20 +62,20 @@ class Track {
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Track
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -89,20 +85,20 @@ class Track {
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Track
      */
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -112,20 +108,20 @@ class Track {
     /**
      * Set length
      *
-     * @param string $length
+     * @param  string $length
      * @return Track
      */
     public function setLength($length)
     {
         $this->length = $length;
-    
+
         return $this;
     }
 
     /**
      * Get length
      *
-     * @return string 
+     * @return string
      */
     public function getLength()
     {
@@ -135,20 +131,20 @@ class Track {
     /**
      * Set url
      *
-     * @param string $url
+     * @param  string $url
      * @return Track
      */
     public function setUrl($url)
     {
         $this->url = $url;
-    
+
         return $this;
     }
 
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
