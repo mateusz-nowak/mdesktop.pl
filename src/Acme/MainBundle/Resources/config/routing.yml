@@ -1,0 +1,4 @@
+StfalconPageBundle:
+    resource: "@StfalconPageBundle/Controller/"
+    type:     annotation
+    prefix:   /page

@@ -1,0 +1,55 @@
+<?php
+
+namespace Acme\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="track")
+ * @ORM\HasLifecycleCallbacks()
+ */
+ 
+class Track {
+    
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column()
+     */
+    private $slug;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column()
+     */
+    private $title;
+
+    /**
+     * @var string $length
+     *
+     * @ORM\Column()
+     */
+    private $length;
+    
+
+    /**
+     * @var string $url
+     *
+     * @ORM\Column()
+     */
+    private $url;
+    
+}
