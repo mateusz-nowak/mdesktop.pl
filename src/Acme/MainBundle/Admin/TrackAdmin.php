@@ -5,6 +5,7 @@ namespace Acme\MainBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class TrackAdmin extends Admin
 {
@@ -30,4 +31,11 @@ class TrackAdmin extends Admin
 
         return $listMapper;
     }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('edit');
+        $collection->remove('create');
+    }
+
 }

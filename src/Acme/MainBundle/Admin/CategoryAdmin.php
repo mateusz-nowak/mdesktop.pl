@@ -21,7 +21,6 @@ class CategoryAdmin extends Admin
                    ->add('_action', 'actions', array(
                        'actions' => array(
                            'view' => array(),
-                           // 'delete' => array(),
                        )
                    ));
 
@@ -34,4 +33,5 @@ class CategoryAdmin extends Admin
 
         return $formMapper;
     }
+
 }

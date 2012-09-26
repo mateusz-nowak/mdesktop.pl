@@ -3,6 +3,7 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -22,9 +23,8 @@ class Track
     private $id;
 
     /**
-     * @var string $slug
-     *
-     * @ORM\Column()
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 

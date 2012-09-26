@@ -4,6 +4,7 @@ namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -23,9 +24,8 @@ class Content
     private $id;
 
     /**
-     * @var string $slug
-     *
-     * @ORM\Column()
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -75,8 +75,6 @@ class Content
     public function addSlugAndSetMetaData()
     {
         $this->setSlug(mb_strtolower(str_replace(' ', '-', $this->getTitle())));
-        $this->setMetaKeywords(mb_strtolower(str_replace(' ', ',', $this->getTitle())));
-        $this->setMetaDescription(mb_substr(mb_strtolower(strip_tags(str_replace(' ', ',', $this->getText()))), 0, 100));
     }
 
     /**
@@ -225,5 +223,10 @@ class Content
     public function getCategory()
     {
         return $this->category;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 }

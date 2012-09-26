@@ -1,25 +1,27 @@
 <?php
 
-namespace Acme\MainBundle\Admin;
+namespace Acme\UserBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class MovieAdmin extends Admin
+class UserAdmin extends Admin
 {
 
     public function configureShowFields(ShowMapper $filter)
     {
-        $filter->add('title', null, array('label' => 'sonata.track.title'))
-               ->add('url', null, array('label' => 'sonata.track.url'));
+        $filter->add('username', null, array('label' => 'sonata.user.username'))
+               ->add('email', null, array('label' => 'sonata.user.email'))
+               ->add('enabled', null, array('label' => 'sonata.user.enabled'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title', null, array('label' => 'sonata.track.title'))
-                   ->add('url', null, array('label' => 'sonata.track.url'))
+        $listMapper->addIdentifier('username', null, array('label' => 'sonata.user.username'))
+                   ->add('email', null, array('label' => 'sonata.user.email'))
+                   ->add('enabled', null, array('label' => 'sonata.user.enabled'))
                    ->add('_action', 'actions', array(
                        'actions' => array(
                            'view' => array(),
@@ -35,4 +37,5 @@ class MovieAdmin extends Admin
         $collection->remove('edit');
         $collection->remove('create');
     }
+
 }

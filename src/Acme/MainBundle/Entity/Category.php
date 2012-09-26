@@ -5,6 +5,7 @@ namespace Acme\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -24,9 +25,8 @@ class Category
     private $id;
 
     /**
-     * @var string $slug
-     *
-     * @ORM\Column()
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -47,16 +47,6 @@ class Category
     public function __construct()
     {
         $this->collections = new ArrayCollection();
-    }
-
-    /**
-     * @ORM\PreUpdate
-     * @ORM\PrePersist
-     */
-
-    public function addSlug()
-    {
-        $this->setSlug(mb_strtolower(str_replace(' ', '-', $this->getName())));
     }
 
     public function __toString()
