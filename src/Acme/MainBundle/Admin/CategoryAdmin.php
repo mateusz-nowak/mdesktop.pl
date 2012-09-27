@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class CategoryAdmin extends Admin
 {
@@ -32,6 +33,11 @@ class CategoryAdmin extends Admin
         $formMapper->add('name', null, array('label' => 'sonata.category.name'));
 
         return $formMapper;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('edit');
     }
 
 }

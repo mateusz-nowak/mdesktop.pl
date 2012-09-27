@@ -3,59 +3,72 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Acme\MainBundle\Entity\Movie
+ *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="movie")
- * @ORM\HasLifecycleCallbacks()
  */
-
 class Movie
 {
     /**
      * @var integer $id
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=128, unique=true)
-     */
-    private $slug;
-
-    /**
      * @var string $title
      *
-     * @ORM\Column()
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
-    //
-    // /**
-    //  * @var string $length
-    //  *
-    //  * @ORM\Column()
-    //  */
-    // // private $category;
+    /**
+     * @var string $body
+     *
+     * @ORM\Column(name="body", type="text")
+     */
+    private $body;
 
     /**
-     * @var string $url
+     * @var string $translation
      *
-     * @ORM\Column(type="float")
+     * @ORM\Column(name="translation", type="string", length=255)
      */
-    private $ratingValue;
+    private $translation;
 
     /**
-     * @var string $url
+     * @var string $category
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="category", type="string", length=255)
      */
-    private $ratingCount;
+    private $category;
+
+    /**
+     * @var string $remote_key
+     *
+     * @ORM\Column(name="remote_key", type="string", length=255)
+     */
+    private $remote_key;
+
+    /**
+     * @var float $ratingcount
+     *
+     * @ORM\Column(name="ratingcount", type="integer")
+     */
+    private $ratingcount;
+
+    /**
+     * @var float $ratingvalue
+     *
+     * @ORM\Column(name="ratingvalue", type="float")
+     */
+    private $ratingvalue;
 
     /**
      * Get id
@@ -65,29 +78,6 @@ class Movie
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param  string $slug
-     * @return Movie
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -114,48 +104,140 @@ class Movie
     }
 
     /**
-     * Set ratingValue
+     * Set body
      *
-     * @param  float $ratingValue
+     * @param  string $body
      * @return Movie
      */
-    public function setRatingValue($ratingValue)
+    public function setBody($body)
     {
-        $this->ratingValue = $ratingValue;
+        $this->body = $body;
 
         return $this;
     }
 
     /**
-     * Get ratingValue
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set translation
+     *
+     * @param  string $translation
+     * @return Movie
+     */
+    public function setTranslation($translation)
+    {
+        $this->translation = $translation;
+
+        return $this;
+    }
+
+    /**
+     * Get translation
+     *
+     * @return string
+     */
+    public function getTranslation()
+    {
+        return $this->translation;
+    }
+
+    /**
+     * Set category
+     *
+     * @param  string $category
+     * @return Movie
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set remote_key
+     *
+     * @param  string $remoteKey
+     * @return Movie
+     */
+    public function setRemoteKey($remoteKey)
+    {
+        $this->remote_key = $remoteKey;
+
+        return $this;
+    }
+
+    /**
+     * Get remote_key
+     *
+     * @return string
+     */
+    public function getRemoteKey()
+    {
+        return $this->remote_key;
+    }
+
+    /**
+     * Set ratingcount
+     *
+     * @param  float $ratingcount
+     * @return Movie
+     */
+    public function setRatingcount($ratingcount)
+    {
+        $this->ratingcount = $ratingcount;
+
+        return $this;
+    }
+
+    /**
+     * Get ratingcount
      *
      * @return float
      */
-    public function getRatingValue()
+    public function getRatingcount()
     {
-        return $this->ratingValue;
+        return $this->ratingcount;
     }
 
     /**
-     * Set ratingCount
+     * Set ratingvalue
      *
-     * @param  integer $ratingCount
+     * @param  float $ratingvalue
      * @return Movie
      */
-    public function setRatingCount($ratingCount)
+    public function setRatingvalue($ratingvalue)
     {
-        $this->ratingCount = $ratingCount;
+        $this->ratingvalue = $ratingvalue;
 
         return $this;
     }
 
     /**
-     * Get ratingCount
+     * Get ratingvalue
      *
-     * @return integer
+     * @return float
      */
-    public function getRatingCount()
+    public function getRatingvalue()
     {
-        return $this->ratingCount;
+        return $this->ratingvalue;
     }
 }

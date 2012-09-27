@@ -224,8 +224,9 @@ class Content
     {
         return $this->category;
     }
-    
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->getTitle();
     }
 }

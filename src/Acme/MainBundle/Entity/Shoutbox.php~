@@ -8,7 +8,7 @@ use Acme\UserBundle\Entity\User;
 /**
  * Acme\MainBundle\Entity\Shoutbox
  *
- * @ORM\Table()
+ * @ORM\Table(name="shoutbox")
  * @ORM\Entity
  */
 class Shoutbox
@@ -31,15 +31,14 @@ class Shoutbox
 
     /**
      * @ORM\ManyToOne(targetEntity="\Acme\UserBundle\Entity\User", inversedBy="users")
-     * @ORM\JoinColumn(name="User", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -49,20 +48,20 @@ class Shoutbox
     /**
      * Set text
      *
-     * @param string $text
+     * @param  string   $text
      * @return Shoutbox
      */
     public function setText($text)
     {
         $this->text = $text;
-    
+
         return $this;
     }
 
     /**
      * Get text
      *
-     * @return string 
+     * @return string
      */
     public function getText()
     {
@@ -72,23 +71,28 @@ class Shoutbox
     /**
      * Set user
      *
-     * @param \stdClass $user
+     * @param  \stdClass $user
      * @return Shoutbox
      */
     public function setUser($user)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function __toString()
+    {
+        return $this->getText();
     }
 }
