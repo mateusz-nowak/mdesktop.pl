@@ -25,9 +25,9 @@
         "sonata-project/block-bundle": "dev-master",
         "sonata-project/cache-bundle": "dev-master",
         "sonata-project/user-bundle": "dev-master",
-        "sonata-project/news-bundle\n": "dev-master",
-        "sonata-project/news-bundle": "require-dev",
-        "dev-master": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "kriswallsmith/Buzz": "dev-master",
+        "guilhermeblanco/sluggable": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -14,6 +14,14 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 
+stof_doctrine_extensions:
+    default_locale: pl_PL
+    orm:
+        default:
+            tree: true
+            timestampable: false # not needed: listeners are not enabled by default
+            sluggable: true
+
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }

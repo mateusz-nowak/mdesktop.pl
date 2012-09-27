@@ -2,3 +2,18 @@ sonata.page.title: Tytuł podstrony
 sonata.page.text: Treść podstrony
 
 sonata.category.name: Nazwa kategorii
+
+sonata.user.username: Nazwa użytkownika
+sonata.user.email: Adres e-mail
+sonata.user.enabled: Aktywny?
+sonata.user.password: Hasło
+sonata.user.password.confirm: Powtórz hasło
+
+sonata.shoutbox.text: Treść
+sonata.shoutbox.user: Użytkownik
+
+sonata.movie.title: Tytuł filmu
+sonata.movie.category: Kategoria
+sonata.movie.body: Opis
+
+Action: Akcja

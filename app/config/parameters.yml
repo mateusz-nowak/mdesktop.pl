@@ -5,10 +5,14 @@ parameters:
     database_name: devel_mdesk
     database_user: root
     database_password: 5qrnaq3
+    
     mailer_transport: smtp
     mailer_host: localhost
     mailer_user: null
     mailer_password: null
-    locale: en
+    
+    locale: pl
+    
     secret: d3cd2a0d582b0ba0e7f8c421ba3fe494d6b40379
+    
     database_path: null
