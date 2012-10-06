@@ -6,6 +6,9 @@ use Buzz\Browser;
 
 class WebProxyClient
 {
+	/** @var string $proxyUrl */
+	protected $proxyUrl = 'http://proxy.my-addr.com';
+	
 	/** @var array $parameters */
 	protected $parameters = array();
 	
