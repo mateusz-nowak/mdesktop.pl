@@ -9,14 +9,14 @@
 		<parameter key="track_grabber.class">Acme\MainBundle\Model\TrackGrabber</parameter>
 		<parameter key="track_factory.class">Acme\MainBundle\Model\Factory\Ulub</parameter>
 	</parameters>
-	
+
 	<services>
 		<service id="web_proxy_service" class="%web_proxy_client.class%"></service>
-		
+
 		<service id="track_factory_service" class="%track_factory.class%">
 			<argument type="service" id="web_proxy_service"></argument>
 		</service>
-		
+
 		<service id="track_container_service" class="%track_grabber.class%">
 			<argument type="service" id="track_factory_service"></argument>
 		</service>

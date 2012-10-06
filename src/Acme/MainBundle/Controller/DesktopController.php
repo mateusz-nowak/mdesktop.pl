@@ -9,13 +9,13 @@ class DesktopController extends Controller
 
     public function indexAction()
     {
-    	$trackContainer = $this->get('track_container_service');
-		$trackContainer->setParameters(array(
-			'query' => 'peja - materialna dziwka',
-			'page' => 2,
-		));
-		
-		var_dump($trackContainer->getResponse());die;
+        $trackContainer = $this->get('track_container_service');
+        $trackContainer->setParameters(array(
+            'query' => 'peja - materialna dziwka',
+            'page' => 2,
+        ));
+
+        var_dump($trackContainer->getResponse());die;
     }
 
 }
