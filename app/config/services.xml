@@ -4,56 +4,36 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <services>
-        
+    <services>        
         <service id="sonata.admin.user" class="Acme\UserBundle\Admin\UserAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Użytkownik"/>
-            <argument />
-            
+            <argument />            
             <argument>Acme\UserBundle\Entity\User</argument>
             <argument>AcmeUserBundle:Admin\UserAdmin</argument>
         </service>
-        
         <service id="sonata.admin.category" class="Acme\MainBundle\Admin\CategoryAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Kategorie"/>
             <argument />
-            
             <argument>Acme\MainBundle\Entity\Category</argument>
             <argument>AcmeMainBundle:Admin\CategoryAdmin</argument>
         </service>
-        
         <service id="sonata.admin.content" class="Acme\MainBundle\Admin\ContentAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Treści"/>
             <argument />
-            
             <argument>Acme\MainBundle\Entity\Content</argument>
             <argument>AcmeMainBundle:Admin\ContentAdmin</argument>
         </service>
-        
         <service id="sonata.admin.shoutbox" class="Acme\MainBundle\Admin\ShoutboxAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Shoutbox"/>
             <argument />
-            
             <argument>Acme\MainBundle\Entity\Shoutbox</argument>
             <argument>AcmeMainBundle:Admin\ShoutboxAdmin</argument>
         </service>
-        
         <service id="sonata.admin.movie" class="Acme\MainBundle\Admin\MovieAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Media" label="Filmy"/>
+            <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Filmy"/>
             <argument />
-            
             <argument>Acme\MainBundle\Entity\Movie</argument>
             <argument>AcmeMainBundle:Admin\MovieAdmin</argument>
         </service>
-        
-        <service id="sonata.admin.track" class="Acme\MainBundle\Admin\TrackAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Media" label="Muzyka"/>
-            <argument />
-            
-            <argument>Acme\MainBundle\Entity\Track</argument>
-            <argument>AcmeMainBundle:Admin\TrackAdmin</argument>
-        </service>
-        
     </services>
-    
 </container>
