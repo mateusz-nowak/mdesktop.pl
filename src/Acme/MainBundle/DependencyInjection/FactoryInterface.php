@@ -1,6 +1,8 @@
 <?php
 
-namespace Acme\MainBundle\Model;
+namespace Acme\MainBundle\DependencyInjection;
+
+use Acme\MainBundle\Entity\Track;
 
 interface FactoryInterface
 {
@@ -19,6 +21,14 @@ interface FactoryInterface
      * @return ArrayIterator
      */
 
-    public function	searchForTrack($query, $page);
+    public function searchForTrack($query, $page);
+
+    /**
+     * Prepare the force download
+     *
+     * @return void
+     */
+
+    public function processDownload(Track $track);
 
 }

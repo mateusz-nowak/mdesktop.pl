@@ -31,28 +31,29 @@ class Track
     /**
      * @var string $title
      *
-     * @ORM\Column()
+     * @ORM\Column(unique=false)
      */
     private $title;
 
     /**
      * @var string $length
      *
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
-    private $length;
+    private $size;
 
     /**
      * @var string $url
      *
-     * @ORM\Column()
+     * @ORM\Column(type="integer")
      */
-    private $url;
+    private $remote_id;
+
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -62,20 +63,20 @@ class Track
     /**
      * Set slug
      *
-     * @param  string $slug
+     * @param string $slug
      * @return Track
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
+    
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string
+     * @return string 
      */
     public function getSlug()
     {
@@ -85,20 +86,20 @@ class Track
     /**
      * Set title
      *
-     * @param  string $title
+     * @param string $title
      * @return Track
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
+    
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string
+     * @return string 
      */
     public function getTitle()
     {
@@ -106,48 +107,71 @@ class Track
     }
 
     /**
-     * Set length
+     * Set size
      *
-     * @param  string $length
+     * @param string $size
      * @return Track
      */
-    public function setLength($length)
+    public function setSize($size)
     {
-        $this->length = $length;
-
+        $this->size = $size;
+    
         return $this;
     }
 
     /**
-     * Get length
+     * Get size
      *
-     * @return string
+     * @return string 
      */
-    public function getLength()
+    public function getSize()
     {
-        return $this->length;
+        return $this->size;
     }
 
     /**
-     * Set url
+     * Set key
      *
-     * @param  string $url
+     * @param string $key
      * @return Track
      */
-    public function setUrl($url)
+    public function setKey($key)
     {
-        $this->url = $url;
-
+        $this->key = $key;
+    
         return $this;
     }
 
     /**
-     * Get url
+     * Get key
      *
-     * @return string
+     * @return string 
      */
-    public function getUrl()
+    public function getKey()
     {
-        return $this->url;
+        return $this->key;
+    }
+
+    /**
+     * Set remote_id
+     *
+     * @param integer $remoteId
+     * @return Track
+     */
+    public function setRemoteId($remoteId)
+    {
+        $this->remote_id = $remoteId;
+    
+        return $this;
+    }
+
+    /**
+     * Get remote_id
+     *
+     * @return integer 
+     */
+    public function getRemoteId()
+    {
+        return $this->remote_id;
     }
 }

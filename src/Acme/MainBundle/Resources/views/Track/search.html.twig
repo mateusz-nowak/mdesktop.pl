@@ -1,0 +1,31 @@
+<h1>Found Tracks List</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Key</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in tracks %}
+        <tr>
+            <td><a href="">{{ entity.title }}</a></td>
+            <td>{{ entity.slug }}</td>
+            <td>{{ entity.remoteid }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('track_show', { 'slug': entity.slug }) }}">pokaż</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('track_download', { 'slug': entity.slug }) }}">pobierz</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Acme\MainBundle\Entity\Movie
  *
- * @ORM\Table()
+ * @ORM\Table(name="movie")
  * @ORM\Entity
  */
 class Movie

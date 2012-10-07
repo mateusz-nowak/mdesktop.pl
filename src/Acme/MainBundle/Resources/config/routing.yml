@@ -1,4 +1,4 @@
-StfalconPageBundle:
-    resource: "@StfalconPageBundle/Controller/"
+track:
+    resource: "@AcmeMainBundle/Controller/TrackController.php"
     type:     annotation
-    prefix:   /page
+    

@@ -6,6 +6,9 @@
 _fos:
     resource: "@AcmeUserBundle/Resources/config/routing.yml"
     
+track:
+    resource: "@AcmeMainBundle/Resources/config/routing.yml"
+    
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

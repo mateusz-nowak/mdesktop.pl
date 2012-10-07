@@ -5,9 +5,9 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 	<parameters>
-		<parameter key="web_proxy_client.class">Acme\MainBundle\Model\WebProxyClient</parameter>
+		<parameter key="web_proxy_client.class">Acme\MainBundle\DependencyInjection\WebProxyClient</parameter>
 		<parameter key="track_grabber.class">Acme\MainBundle\Model\TrackGrabber</parameter>
-		<parameter key="track_factory.class">Acme\MainBundle\Model\Factory\Ulub</parameter>
+		<parameter key="track_factory.class">Acme\MainBundle\DependencyInjection\Factory\Dloader</parameter>
 	</parameters>
 
 	<services>
@@ -15,6 +15,7 @@
 
 		<service id="track_factory_service" class="%track_factory.class%">
 			<argument type="service" id="web_proxy_service"></argument>
+			<argument type="service" id="doctrine.orm.entity_manager"></argument>
 		</service>
 
 		<service id="track_container_service" class="%track_grabber.class%">
