@@ -36,14 +36,7 @@ class TrackGrabber
     
     public function processDownload(Track $track)
     {
-        $response = new Response();
-        $response->setStatusCode(200); 
-        
-        $response->headers->set('Content-Type', 'media/x-mp3'); 
-        $response->headers->set('Content-Disposition', sprintf('attachment;filename="%s.mp3"', $track->getTitle())); 
-        $response->headers->set('X-Sendfile', $this->factory->processDownload($track));
-        
-        return $response;
+        return $this->factory->processDownload($track);
     }
 
     protected function getParameter($parameter)

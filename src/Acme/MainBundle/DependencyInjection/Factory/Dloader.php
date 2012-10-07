@@ -8,6 +8,7 @@ use Acme\MainBundle\DependencyInjection\WebProxyClient;
 use Symfony\Component\DomCrawler\Crawler;
 use Acme\MainBundle\Entity\Track;
 use Doctrine\ORM\EntityManager;
+use Acme\MainBundle\DependencyInjection\Downloader;
 use Buzz\Browser;
 
 class Dloader implements FactoryInterface
@@ -26,11 +27,18 @@ class Dloader implements FactoryInterface
     
     /** @var $webProxyClient \Acme\MainBundle\Model\WebProxyClient */
     protected $entityManager;
+    
+    /** @var $downloaderContainer \Acme\MainBundle\DependencyInjection\Downloader */
+    protected $downloaderContainer;
+    
+    /** @var $prefixTitle string */
+    protected $prefixTitle;
 
-    public function __construct(WebProxyClient $client, EntityManager $manager)
+    public function __construct(WebProxyClient $client, EntityManager $manager, Downloader $downloader)
     {
         $this->webProxyClient = $client;
         $this->entityManager = $manager;
+        $this->downloaderContainer = $downloader;
     }
 
     public function getTrackInfo($trackRemoteKey)
@@ -68,9 +76,7 @@ class Dloader implements FactoryInterface
     
     public function processDownload(Track $track)
     {
-        $trackDownloadUrl = sprintf(self::$trackDownloadUrl, $track->getRemoteId());
-        
-        return $trackDownloadUrl;
+        return $this->downloaderContainer->process($track, sprintf(self::$trackDownloadUrl, $track->getRemoteId()));
     }
 
     protected function getResponse($url)
