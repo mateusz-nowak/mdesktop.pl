@@ -61,7 +61,7 @@ class Content
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="collections")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
 
@@ -71,7 +71,6 @@ class Content
      * @ORM\PreUpdate
      * @ORM\PrePersist
      */
-
     public function addSlugAndSetMetaData()
     {
         $this->setSlug(mb_strtolower(str_replace(' ', '-', $this->getTitle())));

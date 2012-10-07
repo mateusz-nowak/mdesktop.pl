@@ -22,16 +22,10 @@ class TrackController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AcmeMainBundle:Track')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
+        return array();
     }
 
-    /**
+	/**
      * Search Tracks entities.
      *
      * @Route("/search", name="track_search")
@@ -40,7 +34,8 @@ class TrackController extends Controller
     public function searchAction()
     {
         /** @var $trackContainerService \Acme\MainBundle\Model\TrackGrabberInterface */
-           $trackContainerService = $this->get('track_container_service');
+        $trackContainerService = $this->get('track_container_service');
+        
         $trackContainerService->setParameters(array(
             'page' => 1,
             'query' => $this->getRequest()->query->get('q'),

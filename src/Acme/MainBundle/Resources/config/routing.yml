@@ -1,3 +1,7 @@
+root:
+    pattern:  /
+    defaults: { _controller: AcmeMainBundle:Track:index }
+    
 track:
     resource: "@AcmeMainBundle/Controller/TrackController.php"
     type:     annotation

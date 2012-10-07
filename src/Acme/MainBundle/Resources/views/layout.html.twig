@@ -10,7 +10,29 @@
     </head>
     <body>
     <div id="container">
-        {% block content %}{% endblock %}
+    	
+    	<div id="topSideBar">
+	    {% include "AcmeMainBundle::user.html.twig" %}
+        {% include "AcmeMainBundle::flash.html.twig" %}
+        </div>
+        
+    	<div id="userSideBar">
+    		Some left content here
+        </div>
+        
+        <div id="contentBar">
+        	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+        	
+        	<div id="content">
+        		{% block content %}{% endblock %}
+        	</div>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <div id="footerBar">
+        	{% include 'AcmeMainBundle::footer.html.twig' %}
+        </div>
     </div>
     </body>
 </html>

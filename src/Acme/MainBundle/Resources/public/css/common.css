@@ -10,3 +10,54 @@ body
 	background: #fff;
 	padding: 10px;
 }
+
+#userSideBar 
+{
+	width: 200px;
+	float: left;
+}
+
+#contentBar 
+{
+	width: 800px;
+	float: right;
+	clear: both;
+}
+
+#topSideBar
+{
+	padding-bottom: 10px;
+	font-size: 12px;
+}
+
+#content
+{
+	padding-top: 10px;
+}
+
+#footerBar 
+{
+	padding-top: 10px;
+	font-size: 12px;
+	text-align: right;
+}
+
+.clearfix
+{
+	clear: both;
+}
+
+form 
+{
+	margin: 0px;
+}
+
+form label
+{
+	display: block;
+}
+
+form #remember_me
+{
+	display: block;
+}

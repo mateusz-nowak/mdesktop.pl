@@ -34,7 +34,9 @@ class ContentAdmin extends Admin
     {
         $formMapper->add('title', null, array('label' => 'sonata.page.title'))
                    ->add('text', null, array('label' => 'sonata.page.text'))
-                   ->add('category', null, array('label' => 'sonata.category.name'));
+                   ->add('category', 'sonata_type_model', array(
+                       'label' => 'sonata.category.name', 'expanded' => true, 'compound' => true
+                   ));
 
         return $formMapper;
     }

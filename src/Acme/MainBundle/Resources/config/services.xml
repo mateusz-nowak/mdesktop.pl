@@ -28,6 +28,16 @@
 		<service id="track_container_service" class="%track_grabber.class%">
 			<argument type="service" id="track_factory_service"></argument>
 		</service>
+		
+		<!-- Twig Extension -->
+		
+		<service id="twig_extension" class="Acme\MainBundle\Extension\Twig">
+			<tag name="twig.extension" />
+			
+			<call method="setEntityManager">
+				<argument type="service" id="doctrine.orm.entity_manager" />
+			</call>
+		</service>
 	</services>
 
 </container>
