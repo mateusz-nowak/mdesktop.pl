@@ -49,11 +49,10 @@ class Track
      */
     private $remote_id;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,20 +62,20 @@ class Track
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Track
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -86,20 +85,20 @@ class Track
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Track
      */
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -109,20 +108,20 @@ class Track
     /**
      * Set size
      *
-     * @param string $size
+     * @param  string $size
      * @return Track
      */
     public function setSize($size)
     {
         $this->size = $size;
-    
+
         return $this;
     }
 
     /**
      * Get size
      *
-     * @return string 
+     * @return string
      */
     public function getSize()
     {
@@ -132,20 +131,20 @@ class Track
     /**
      * Set key
      *
-     * @param string $key
+     * @param  string $key
      * @return Track
      */
     public function setKey($key)
     {
         $this->key = $key;
-    
+
         return $this;
     }
 
     /**
      * Get key
      *
-     * @return string 
+     * @return string
      */
     public function getKey()
     {
@@ -155,20 +154,20 @@ class Track
     /**
      * Set remote_id
      *
-     * @param integer $remoteId
+     * @param  integer $remoteId
      * @return Track
      */
     public function setRemoteId($remoteId)
     {
         $this->remote_id = $remoteId;
-    
+
         return $this;
     }
 
     /**
      * Get remote_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getRemoteId()
     {

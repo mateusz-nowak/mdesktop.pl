@@ -4,9 +4,6 @@ namespace Acme\MainBundle\Model;
 
 use Acme\MainBundle\Entity\Track;
 use Acme\MainBundle\DependencyInjection\FactoryInterface;
-use Symfony\Component\HttpFoundation\Response; 
-use Symfony\Component\HttpFoundation\Request;
-use Buzz\Browser;
 
 class TrackGrabber
 {
@@ -33,7 +30,7 @@ class TrackGrabber
     {
         return $this->factory->searchForTrack($this->getParameter('query'), $this->getParameter('page'));
     }
-    
+
     public function processDownload(Track $track)
     {
         return $this->factory->processDownload($track);

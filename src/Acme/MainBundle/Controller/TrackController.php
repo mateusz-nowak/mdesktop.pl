@@ -29,9 +29,9 @@ class TrackController extends Controller
         return array(
             'entities' => $entities,
         );
-	}
-	
-	/**
+    }
+
+    /**
      * Search Tracks entities.
      *
      * @Route("/search", name="track_search")
@@ -39,17 +39,17 @@ class TrackController extends Controller
      */
     public function searchAction()
     {
-    	/** @var $trackContainerService \Acme\MainBundle\Model\TrackGrabberInterface */
-       	$trackContainerService = $this->get('track_container_service');
-		$trackContainerService->setParameters(array(
-			'page' => 1,
-			'query' => $this->getRequest()->query->get('q'),
-		));
-        
-		return array(
-			'tracks' => $trackContainerService->process(),
-		);
-	}
+        /** @var $trackContainerService \Acme\MainBundle\Model\TrackGrabberInterface */
+           $trackContainerService = $this->get('track_container_service');
+        $trackContainerService->setParameters(array(
+            'page' => 1,
+            'query' => $this->getRequest()->query->get('q'),
+        ));
+
+        return array(
+            'tracks' => $trackContainerService->process(),
+        );
+    }
 
     /**
      * Download Track.
@@ -62,14 +62,13 @@ class TrackController extends Controller
 
         $track = $em->getRepository('AcmeMainBundle:Track')->findOneBySlug($slug);
 
-        if (!$track) 
-        {
+        if (!$track) {
             throw $this->createNotFoundException('Unable to find Track entity.');
         }
 
         /** @var $trackContainerService \Acme\MainBundle\Model\TrackGrabberInterface */
         $trackContainerService = $this->get('track_container_service');
-        
+
         return $trackContainerService->processDownload($track);
     }
 

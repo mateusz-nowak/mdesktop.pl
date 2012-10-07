@@ -1,7 +1,12 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-<h1>Found Tracks List</h1>
+<h1>Znalezione utwory</h1>
+
+<form action="{{ path('track_search') }}" method="get">
+<input type="text" name="q" />
+<input type="submit" value="Szukaj" />
+</form>
 
 <table class="records_list">
     <thead>
