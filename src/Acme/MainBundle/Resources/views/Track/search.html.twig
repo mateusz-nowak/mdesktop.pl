@@ -12,26 +12,21 @@
     <thead>
         <tr>
             <th>Title</th>
-            <th>Slug</th>
             <th>Key</th>
-            <th>Actions</th>
+            <th>Download</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in tracks %}
         <tr>
-            <td><a href="">{{ entity.title }}</a></td>
-            <td>{{ entity.slug }}</td>
-            <td>{{ entity.remoteid }}</td>
+            <td><a href="{{ path('track_show', {'remote': entity.remote}) }}">{{ entity.title }}</a></td>
+            <td>{{ entity.remote }}</td>
             <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('track_show', { 'slug': entity.slug }) }}">pokaż</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('track_download', { 'slug': entity.slug }) }}">pobierz</a>
-                    </li>
-                </ul>
+	            <object class="playerpreview" type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="200" height="20">
+	                <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf">
+	                <param name="FlashVars" value="mp3={{ path('track_download', {'id': entity.remote}) }}&amp;showstop=1&amp;showvolume=1&amp;bgcolor1=189ca8&amp;bgcolor2=085c68">
+	                <p>Musique de démonstration.</p>
+	            </object>
             </td>
         </tr>
     {% endfor %}

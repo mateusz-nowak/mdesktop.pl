@@ -2,7 +2,7 @@
 
 namespace Acme\MainBundle\DependencyInjection;
 
-use Acme\MainBundle\Entity\Track;
+use Acme\MainBundle\ObjectValue\Track;
 
 class Downloader
 {

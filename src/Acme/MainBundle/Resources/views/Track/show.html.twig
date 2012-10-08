@@ -1,8 +1,7 @@
-{% extends '@AcmeMainBundle:layout.html.twig' %}
+{% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
 <h1>Track Foound</h1>
-
 
 <table class="record_properties">
     <tbody>
@@ -19,12 +18,12 @@
             <td>{{ entity.title }}</td>
         </tr>
         <tr>
-            <th>Length</th>
-            <td>{{ entity.length }}</td>
+            <th>Size</th>
+            <td>{{ entity.size }}</td>
         </tr>
         <tr>
-            <th>Url</th>
-            <td>{{ entity.url }}</td>
+            <th>Remote Key</th>
+            <td>{{ entity.remoteid }}</td>
         </tr>
     </tbody>
 </table>

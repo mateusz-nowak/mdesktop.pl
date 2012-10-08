@@ -3,12 +3,12 @@
 namespace Acme\MainBundle\DependencyInjection\Factory;
 
 use ArrayIterator, Exception;
-use Acme\MainBundle\DependencyInjection\FactoryInterface;
-use Acme\MainBundle\DependencyInjection\WebProxyClient;
-use Symfony\Component\DomCrawler\Crawler;
-use Acme\MainBundle\Entity\Track;
 use Doctrine\ORM\EntityManager;
+use Acme\MainBundle\ObjectValue\Track;
+use Symfony\Component\DomCrawler\Crawler;
 use Acme\MainBundle\DependencyInjection\Downloader;
+use Acme\MainBundle\DependencyInjection\WebProxyClient;
+use Acme\MainBundle\DependencyInjection\FactoryInterface;
 
 class Dloader implements FactoryInterface
 {
@@ -53,21 +53,16 @@ class Dloader implements FactoryInterface
         $crawler = new Crawler;
         $crawler->addHtmlContent($response);
 
-        foreach ($crawler->filter('.page ul li a') as $item) {
+        foreach ($crawler->filter('.page ul li a') as $item) 
+        {
             preg_match('/\/plik\/(.*?)\,(?P<remote_id>\d+)/', $item->getAttribute('href'), $tmp);
 
-            $track = new Track;
-            $track->setTitle(ucwords($item->nodeValue));
-            $track->setRemoteId((int) $tmp['remote_id']);
-
-            $trackArray[] = $track;
+            $trackArray[] = array(
+                'title' => ucwords($item->nodeValue),
+                'remote' => $tmp['remote_id'],
+            );
         }
-
-        foreach ($trackArray as $trackEntity) {
-            $this->entityManager->persist($trackEntity);
-            $this->entityManager->flush();
-        }
-       
+        
         if(preg_match('/Następna/', $response))
         {
             $isNextPage = true;

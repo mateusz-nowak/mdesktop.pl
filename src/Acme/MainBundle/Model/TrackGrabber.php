@@ -2,7 +2,7 @@
 
 namespace Acme\MainBundle\Model;
 
-use Acme\MainBundle\Entity\Track;
+use Acme\MainBundle\ObjectValue\Track;
 use Acme\MainBundle\DependencyInjection\FactoryInterface;
 
 class TrackGrabber
@@ -46,7 +46,8 @@ class TrackGrabber
 
     protected function getParameter($parameter)
     {
-        if (isset($this->parameters[$parameter])) {
+        if (isset($this->parameters[$parameter]))
+        {
             return $this->parameters[$parameter];
         }
     }

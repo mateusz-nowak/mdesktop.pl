@@ -5,7 +5,7 @@ namespace Acme\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Acme\MainBundle\Entity\Track;
+use Acme\MainBundle\ObjectValue\Track;
 
 /**
  * Track controller.
@@ -36,8 +36,10 @@ class TrackController extends Controller
         /** @var $trackContainerService \Acme\MainBundle\Model\TrackGrabberInterface */
         $trackContainerService = $this->get('track_container_service');
         
+        $page = $this->getRequest()->query->get('page', 1);
+        
         $trackContainerService->setParameters(array(
-            'page' => 1,
+            'page' => $page,
             'query' => $this->getRequest()->query->get('q'),
         ));
 
@@ -45,50 +47,35 @@ class TrackController extends Controller
             'tracks' => $trackContainerService->process(),
             'next_page' => $trackContainerService->isNextPage(),
             'query' => $this->getRequest()->query->get('q'),
-            'page' => (int) $this->getRequest()->query->get('page') ? $this->getRequest()->query->get('page')+1 : 2 
+            'page' => ++$page
         );
     }
 
     /**
      * Download Track.
      *
-     * @Route("/{slug}/download", name="track_download")
+     * @Route("/{id}/download", name="track_download")
      */
-    public function downloadAction($slug)
+    public function downloadAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $track = $em->getRepository('AcmeMainBundle:Track')->findOneBySlug($slug);
-
-        if (!$track) {
-            throw $this->createNotFoundException('Unable to find Track entity.');
-        }
-
         /** @var $trackContainerService \Acme\MainBundle\Model\TrackGrabberInterface */
         $trackContainerService = $this->get('track_container_service');
-
+        
+        $track = new Track;
+        $track->setRemoteId($id);
+        
         return $trackContainerService->processDownload($track);
     }
 
     /**
      * Finds and displays a Track entity.
      *
-     * @Route("/{slug}/show", name="track_show")
+     * @Route("/{remote}/show", name="track_show")
      * @Template()
      */
-    public function showAction($slug)
+    public function showAction($remote)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AcmeMainBundle:Track')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Track entity.');
-        }
-
-        return array(
-            'entity' => $entity,
-        );
+        var_dump($remote);die;
     }
 
 }
