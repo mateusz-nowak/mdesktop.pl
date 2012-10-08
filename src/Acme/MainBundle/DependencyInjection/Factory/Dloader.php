@@ -45,7 +45,7 @@ class Dloader implements FactoryInterface
 
     }
 
-    public function	searchForTrack($query, $page)
+    public function	searchForTrack($query, $page, &$isNextPage)
     {
         $response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $page, urlencode($query)));
 
@@ -66,6 +66,11 @@ class Dloader implements FactoryInterface
         foreach ($trackArray as $trackEntity) {
             $this->entityManager->persist($trackEntity);
             $this->entityManager->flush();
+        }
+       
+        if(preg_match('/Następna/', $response))
+        {
+            $isNextPage = true;
         }
 
         return new ArrayIterator($trackArray);

@@ -38,4 +38,13 @@
     </tbody>
 </table>
 
+<div id="pagination">
+{% if  page != 2 %}
+	<a href="{{ path('track_search', {'q': query, 'page': page-2}) }}">Poprzednia strona</a>
+{% endif %}
+{% if next_page %}
+	<a href="{{ path('track_search', {'q': query, 'page': page}) }}">Nastepna strona</a>
+{% endif %}
+</div>
+
 {% endblock %}

@@ -5,3 +5,7 @@ root:
 track:
     resource: "@AcmeMainBundle/Controller/TrackController.php"
     type:     annotation
+
+content:
+    resource: "@AcmeMainBundle/Controller/ContentController.php"
+    type: annotation

@@ -21,7 +21,7 @@ interface FactoryInterface
      * @return ArrayIterator
      */
 
-    public function searchForTrack($query, $page);
+    public function searchForTrack($query, $page, &$isNextPage);
 
     /**
      * Prepare the force download

@@ -15,10 +15,18 @@ class TrackGrabber
 
     /** @var string $responseBody */
     protected $responseBody;
+    
+    /** @var bool $isNextPage */
+    protected $isNextPage = false;
 
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
+    }
+
+    public function isNextPage()
+    {
+        return $this->isNextPage;
     }
 
     public function setParameters(array $parameters = array())
@@ -28,7 +36,7 @@ class TrackGrabber
 
     public function process()
     {
-        return $this->factory->searchForTrack($this->getParameter('query'), $this->getParameter('page'));
+        return $this->factory->searchForTrack($this->getParameter('query'), $this->getParameter('page'), $this->isNextPage);
     }
 
     public function processDownload(Track $track)

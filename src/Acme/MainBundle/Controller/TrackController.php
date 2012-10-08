@@ -43,6 +43,9 @@ class TrackController extends Controller
 
         return array(
             'tracks' => $trackContainerService->process(),
+            'next_page' => $trackContainerService->isNextPage(),
+            'query' => $this->getRequest()->query->get('q'),
+            'page' => (int) $this->getRequest()->query->get('page') ? $this->getRequest()->query->get('page')+1 : 2 
         );
     }
 

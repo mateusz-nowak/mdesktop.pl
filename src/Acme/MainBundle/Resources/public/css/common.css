@@ -61,3 +61,8 @@ form #remember_me
 {
 	display: block;
 }
+
+#pagination 
+{
+	text-align: center;
+}
