@@ -17,6 +17,24 @@ class ContentController extends Controller
     /**
      * Finds and displays a Content entity.
      *
+     * @Route("", name="content")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $contents = $em->getRepository('AcmeMainBundle:Content')->findAll();
+        
+        return array
+        (
+            'contents' => $contents,
+        );
+    }
+    
+    /**
+     * Finds and displays a Content entity.
+     *
      * @Route("/{slug}/show", name="content_show")
      * @Template()
      */
@@ -26,11 +44,13 @@ class ContentController extends Controller
 
         $entity = $em->getRepository('AcmeMainBundle:Content')->findOneBySlug($slug);
 
-        if (!$entity) {
+        if (!$entity) 
+        {
             throw $this->createNotFoundException('Unable to find Content entity.');
         }
 
-        return array(
+        return array
+        (
             'content' => $entity,
         );
     }

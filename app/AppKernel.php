@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Acme\UserBundle\AcmeUserBundle(),
             new Acme\MainBundle\AcmeMainBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

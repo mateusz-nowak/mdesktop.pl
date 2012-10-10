@@ -1,5 +1,6 @@
 sonata.page.title: Tytuł podstrony
 sonata.page.text: Treść podstrony
+sonata.page.categories: Kategorie
 
 sonata.category.name: Nazwa kategorii
 
@@ -15,5 +16,3 @@ sonata.shoutbox.user: Użytkownik
 sonata.movie.title: Tytuł filmu
 sonata.movie.category: Kategoria
 sonata.movie.body: Opis
-
-Action: Akcja

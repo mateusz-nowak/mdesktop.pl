@@ -19,6 +19,7 @@ class LoadCategories implements FixtureInterface
         foreach ($categories as $category) {
             $categoryEntity = new Category();
             $categoryEntity->setName($category);
+            $categoryEntity->setType(1);
 
             $manager->persist($categoryEntity);
         }

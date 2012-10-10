@@ -3,16 +3,14 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="category")
  * @ORM\HasLifecycleCallbacks()
  */
-
 class Category
 {
     /**
@@ -37,17 +35,14 @@ class Category
      * @Assert\NotNull()
      */
     private $name;
-
+    
     /**
-     * @ORM\OneToMany(targetEntity="content", mappedBy="category")
+     * @var int $type
+     *
+     * @ORM\Column(type="integer")
+     * @Assert\NotNull()
      */
-
-    private $collections;
-
-    public function __construct()
-    {
-        $this->collections = new ArrayCollection();
-    }
+    private $type;
 
     public function __toString()
     {
@@ -111,35 +106,25 @@ class Category
     }
 
     /**
-     * Add collections
+     * Set type
      *
-     * @param  Acme\MainBundle\Entity\content $collections
+     * @param integer $type
      * @return Category
      */
-    public function addCollection(\Acme\MainBundle\Entity\content $collections)
+    public function setType($type)
     {
-        $this->collections[] = $collections;
-
+        $this->type = $type;
+    
         return $this;
     }
 
     /**
-     * Remove collections
+     * Get type
      *
-     * @param Acme\MainBundle\Entity\content $collections
+     * @return integer 
      */
-    public function removeCollection(\Acme\MainBundle\Entity\content $collections)
+    public function getType()
     {
-        $this->collections->removeElement($collections);
-    }
-
-    /**
-     * Get collections
-     *
-     * @return Doctrine\Common\Collections\Collection
-     */
-    public function getCollections()
-    {
-        return $this->collections;
+        return $this->type;
     }
 }

@@ -3,6 +3,8 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Acme\MainBundle\Entity\Category;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Acme\MainBundle\Entity\Movie
@@ -35,6 +37,14 @@ class Movie
      */
     private $body;
 
+
+    /**
+     * @var string $photo
+     *
+     * @ORM\Column(name="photo", type="string", length=255)
+     */
+    private $photo;
+
     /**
      * @var string $translation
      *
@@ -43,37 +53,54 @@ class Movie
     private $translation;
 
     /**
-     * @var string $category
+     * @var string $remote_key
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\Column(name="remoteKey", type="string", length=255, unique=true)
      */
-    private $category;
-
+    private $remoteKey;
+    
     /**
      * @var string $remote_key
      *
-     * @ORM\Column(name="remote_key", type="string", length=255)
+     * @ORM\Column(name="embed", type="text", nullable=true)
      */
-    private $remote_key;
+    private $embed;
 
     /**
      * @var float $ratingcount
      *
-     * @ORM\Column(name="ratingcount", type="integer")
+     * @ORM\Column(name="ratingCount", type="integer")
      */
-    private $ratingcount;
+    private $ratingCount;
 
     /**
      * @var float $ratingvalue
      *
-     * @ORM\Column(name="ratingvalue", type="float")
+     * @ORM\Column(name="ratingValue", type="float")
      */
-    private $ratingvalue;
+    private $ratingValue;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Category", inversedBy="movies")
+     * @ORM\JoinTable(
+     *      joinColumns={@ORM\JoinColumn(name="movie_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     * )
+     */
+    private $categories;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -83,20 +110,20 @@ class Movie
     /**
      * Set title
      *
-     * @param  string $title
+     * @param string $title
      * @return Movie
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
+    
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string
+     * @return string 
      */
     public function getTitle()
     {
@@ -106,20 +133,20 @@ class Movie
     /**
      * Set body
      *
-     * @param  string $body
+     * @param string $body
      * @return Movie
      */
     public function setBody($body)
     {
         $this->body = $body;
-
+    
         return $this;
     }
 
     /**
      * Get body
      *
-     * @return string
+     * @return string 
      */
     public function getBody()
     {
@@ -127,22 +154,45 @@ class Movie
     }
 
     /**
+     * Set photo
+     *
+     * @param string $photo
+     * @return Movie
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
      * Set translation
      *
-     * @param  string $translation
+     * @param string $translation
      * @return Movie
      */
     public function setTranslation($translation)
     {
         $this->translation = $translation;
-
+    
         return $this;
     }
 
     /**
      * Get translation
      *
-     * @return string
+     * @return string 
      */
     public function getTranslation()
     {
@@ -150,94 +200,161 @@ class Movie
     }
 
     /**
-     * Set category
+     * Set remoteKey
      *
-     * @param  string $category
-     * @return Movie
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return string
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Set remote_key
-     *
-     * @param  string $remoteKey
+     * @param string $remoteKey
      * @return Movie
      */
     public function setRemoteKey($remoteKey)
     {
-        $this->remote_key = $remoteKey;
-
+        $this->remoteKey = $remoteKey;
+    
         return $this;
     }
 
     /**
-     * Get remote_key
+     * Get remoteKey
      *
-     * @return string
+     * @return string 
      */
     public function getRemoteKey()
     {
-        return $this->remote_key;
+        return $this->remoteKey;
     }
 
     /**
-     * Set ratingcount
+     * Set embed
      *
-     * @param  float $ratingcount
+     * @param string $embed
      * @return Movie
      */
-    public function setRatingcount($ratingcount)
+    public function setEmbed($embed)
     {
-        $this->ratingcount = $ratingcount;
-
+        $this->embed = $embed;
+    
         return $this;
     }
 
     /**
-     * Get ratingcount
+     * Get embed
      *
-     * @return float
+     * @return string 
      */
-    public function getRatingcount()
+    public function getEmbed()
     {
-        return $this->ratingcount;
+        return $this->embed;
     }
 
     /**
-     * Set ratingvalue
+     * Set ratingCount
      *
-     * @param  float $ratingvalue
+     * @param integer $ratingCount
      * @return Movie
      */
-    public function setRatingvalue($ratingvalue)
+    public function setRatingCount($ratingCount)
     {
-        $this->ratingvalue = $ratingvalue;
-
+        $this->ratingCount = $ratingCount;
+    
         return $this;
     }
 
     /**
-     * Get ratingvalue
+     * Get ratingCount
      *
-     * @return float
+     * @return integer 
      */
-    public function getRatingvalue()
+    public function getRatingCount()
     {
-        return $this->ratingvalue;
+        return $this->ratingCount;
+    }
+
+    /**
+     * Set ratingValue
+     *
+     * @param float $ratingValue
+     * @return Movie
+     */
+    public function setRatingValue($ratingValue)
+    {
+        $this->ratingValue = $ratingValue;
+    
+        return $this;
+    }
+
+    /**
+     * Get ratingValue
+     *
+     * @return float 
+     */
+    public function getRatingValue()
+    {
+        return $this->ratingValue;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     * @return Content
+     */
+    public function addCategory(Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategory(Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    /**
+     * Return the title
+     * 
+     * @return string
+     */
+    
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     * @return Movie
+     */
+    public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
     }
 }

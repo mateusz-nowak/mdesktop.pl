@@ -1,5 +1,5 @@
 {
-    "hash": "e48d2bf539b3712d469dc8840a51356d",
+    "hash": "be78e08e97cdb5cbf29d75d9efeb7153",
     "packages": [
         {
             "name": "doctrine/common",
@@ -363,6 +363,89 @@
             ]
         },
         {
+            "name": "exercise/htmlpurifier-bundle",
+            "version": "dev-master",
+            "target-dir": "Exercise/HTMLPurifierBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Exercise/HTMLPurifierBundle",
+                "reference": "f79f6bcd8725f41ba5c3af2d045a91bcfd00ba2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Exercise/HTMLPurifierBundle/zipball/f79f6bcd8725f41ba5c3af2d045a91bcfd00ba2a",
+                "reference": "f79f6bcd8725f41ba5c3af2d045a91bcfd00ba2a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "ezyang/htmlpurifier": "dev-master"
+            },
+            "time": "1349359552",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Exercise\\HTMLPurifierBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "contributors",
+                    "homepage": "https://github.com/Exercise/HTMLPurifierBundle/contributors"
+                }
+            ],
+            "description": "HTMLPurifier integration for your Symfony2 project",
+            "homepage": "https://github.com/Exercise/HTMLPurifierBundle",
+            "keywords": [
+                "htmlpurifier"
+            ]
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/ezyang/htmlpurifier.git",
+                "reference": "8a8b123d3322d24d77114dfa767a5eafbe9ff24b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ezyang/htmlpurifier/zipball/8a8b123d3322d24d77114dfa767a5eafbe9ff24b",
+                "reference": "8a8b123d3322d24d77114dfa767a5eafbe9ff24b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "time": "1347811906",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "classmap": [
+                    "library/"
+                ]
+            },
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ]
+        },
+        {
             "name": "friendsofsymfony/user-bundle",
             "version": "dev-master",
             "target-dir": "FOS/UserBundle",
@@ -511,7 +594,7 @@
                 "symfony/framework-bundle": "2.*",
                 "jms/cg": "1.0.0"
             },
-            "time": "2012-01-02 13:50:26",
+            "time": "2012-01-02 12:50:26",
             "type": "symfony-bundle",
             "installation-source": "dist",
             "autoload": {
@@ -553,7 +636,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 13:40:52",
+            "time": "2012-01-02 12:40:52",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -655,7 +738,7 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 14:32:49",
+            "time": "2012-01-02 13:32:49",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -830,7 +913,7 @@
                 "knplabs/knp-menu": "1.1.*",
                 "symfony/framework-bundle": ">=2.0,<2.2-dev"
             },
-            "time": "2012-05-17 01:56:49",
+            "time": "2012-05-16 23:56:49",
             "type": "symfony-bundle",
             "installation-source": "dist",
             "autoload": {
@@ -2176,6 +2259,7 @@
         "sonata-project/cache-bundle": 20,
         "sonata-project/user-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
-        "kriswallsmith/buzz": 20
+        "kriswallsmith/buzz": 20,
+        "exercise/htmlpurifier-bundle": 20
     }
 }

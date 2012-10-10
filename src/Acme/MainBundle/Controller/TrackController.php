@@ -43,7 +43,8 @@ class TrackController extends Controller
             'query' => $this->getRequest()->query->get('q'),
         ));
 
-        return array(
+        return array
+        (
             'tracks' => $trackContainerService->process(),
             'next_page' => $trackContainerService->isNextPage(),
             'query' => $this->getRequest()->query->get('q'),
@@ -65,17 +66,6 @@ class TrackController extends Controller
         $track->setRemoteId($id);
         
         return $trackContainerService->processDownload($track);
-    }
-
-    /**
-     * Finds and displays a Track entity.
-     *
-     * @Route("/{remote}/show", name="track_show")
-     * @Template()
-     */
-    public function showAction($remote)
-    {
-        var_dump($remote);die;
     }
 
 }

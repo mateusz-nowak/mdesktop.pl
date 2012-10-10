@@ -3,15 +3,16 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Acme\MainBundle\Entity\Category;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="content")
  * @ORM\HasLifecycleCallbacks()
  */
-
 class Content
 {
     /**
@@ -46,40 +47,23 @@ class Content
     private $text;
 
     /**
-     * @var string $metaKeywords
-     *
-     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Category", inversedBy="children")
+     * @ORM\JoinTable(
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     * )
      */
-    private $metaKeywords;
-
-    /**
-     * @var string $metaDescription
-     *
-     * @ORM\Column(name="meta_description", type="string", length=255, nullable=true)
-     */
-    private $metaDescription;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="collections")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     * @Assert\NotNull()
-     */
-
-    private $category;
-
-    /**
-     * @ORM\PreUpdate
-     * @ORM\PrePersist
-     */
-    public function addSlugAndSetMetaData()
+    private $categories;
+    
+    public function __construct()
     {
-        $this->setSlug(mb_strtolower(str_replace(' ', '-', $this->getTitle())));
+        $this->categories = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -89,20 +73,20 @@ class Content
     /**
      * Set slug
      *
-     * @param  string  $slug
+     * @param string $slug
      * @return Content
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
+    
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string
+     * @return string 
      */
     public function getSlug()
     {
@@ -112,20 +96,20 @@ class Content
     /**
      * Set title
      *
-     * @param  string  $title
+     * @param string $title
      * @return Content
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
+    
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string
+     * @return string 
      */
     public function getTitle()
     {
@@ -135,20 +119,20 @@ class Content
     /**
      * Set text
      *
-     * @param  string  $text
+     * @param string $text
      * @return Content
      */
     public function setText($text)
     {
         $this->text = $text;
-
+    
         return $this;
     }
 
     /**
      * Get text
      *
-     * @return string
+     * @return string 
      */
     public function getText()
     {
@@ -156,76 +140,69 @@ class Content
     }
 
     /**
-     * Set metaKeywords
+     * Add categories
      *
-     * @param  string  $metaKeywords
+     * @param Acme\MainBundle\Entity\Category $categories
      * @return Content
      */
-    public function setMetaKeywords($metaKeywords)
+    public function addCategory(Category $categories)
     {
-        $this->metaKeywords = $metaKeywords;
-
+        $this->categories[] = $categories;
+    
         return $this;
     }
 
     /**
-     * Get metaKeywords
+     * Remove categories
      *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategory(Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    /**
+     * Return the title
+     * 
      * @return string
      */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
-    }
-
-    /**
-     * Set metaDescription
-     *
-     * @param  string  $metaDescription
-     * @return Content
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->metaDescription = $metaDescription;
-
-        return $this;
-    }
-
-    /**
-     * Get metaDescription
-     *
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->metaDescription;
-    }
-
-    /**
-     * Set category
-     *
-     * @param  Acme\MainBundle\Entity\Category $category
-     * @return Content
-     */
-    public function setCategory(\Acme\MainBundle\Entity\Category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return Acme\MainBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
+    
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     * @return Content
+     */
+    public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
     }
 }

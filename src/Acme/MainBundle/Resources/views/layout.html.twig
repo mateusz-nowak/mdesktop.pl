@@ -16,17 +16,21 @@
     	</a>
     	
     	<div id="topSideBar">
-	    {% include "AcmeMainBundle::user.html.twig" %}
-        {% include "AcmeMainBundle::flash.html.twig" %}
+	    	{% include "AcmeMainBundle::user.html.twig" %}
+        	{% include "AcmeMainBundle::flash.html.twig" %}
         </div>
         
+        <div id="menu">
+    		{{ knp_menu_render('AcmeMainBundle:Builder:mainMenu') }}
+    	</div>
+    	    
     	<div id="userSideBar">
-    		Some left content here
+    		<h1>Mp3</h1>
+    		
+    		{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
         </div>
         
         <div id="contentBar">
-        	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
-        	
         	<div id="content">
         		{% block content %}{% endblock %}
         	</div>

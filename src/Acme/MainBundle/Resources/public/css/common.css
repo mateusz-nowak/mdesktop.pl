@@ -13,22 +13,21 @@ body
 
 #userSideBar 
 {
-	width: 200px;
 	float: left;
+	width: 200px;
 }
 
 #contentBar 
 {
 	width: 800px;
 	float: right;
-	clear: both;
 }
 
 #topSideBar
 {
 	padding: 10px;
-	background: #eee;
 	margin-bottom: 10px;
+	text-align: right;
 }
 
 #content
@@ -65,4 +64,47 @@ form #remember_me
 #pagination 
 {
 	text-align: center;
+}
+
+#menu 
+{
+}
+
+#menu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	margin-bottom: 10px;
+	background: #999;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#menu ul li {
+	display: inline;
+}
+
+#menu ul li a
+{
+	color: #000;
+	font-style: none;
+	background: #999;
+	padding: 10px;
+}
+
+#menu ul li a:hover
+{
+	background: #666;
+}
+
+#menu ul li.current a
+{
+	font-weight: bold;
+}
+
+a 
+{
+	font-style: none;
+	text-decoration: none;
+	color: #000
 }

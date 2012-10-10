@@ -1,11 +1,18 @@
 root:
     pattern:  /
-    defaults: { _controller: AcmeMainBundle:Track:index }
+    defaults: 
+        _controller: FrameworkBundle:Redirect:redirect
+        route: content
+        permanent: true # this is for 301
     
 track:
     resource: "@AcmeMainBundle/Controller/TrackController.php"
     type:     annotation
 
+movie:
+    resource: "@AcmeMainBundle/Controller/MovieController.php"
+    type:     annotation
+    
 content:
     resource: "@AcmeMainBundle/Controller/ContentController.php"
     type: annotation

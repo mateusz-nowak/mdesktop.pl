@@ -13,14 +13,14 @@ class MovieAdmin extends Admin
     public function configureShowFields(ShowMapper $filter)
     {
         $filter->add('title', null, array('label' => 'sonata.movie.title'))
-               ->add('category', null, array('label' => 'sonata.movie.category'))
+               ->add('categories', null, array('label' => 'sonata.movie.category'))
                ->add('body', null, array('label' => 'sonata.movie.body'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('title', null, array('label' => 'sonata.movie.title'))
-                   ->add('category', null, array('label' => 'sonata.movie.category'))
+                   ->add('categories', null, array('label' => 'sonata.movie.category'))
                    ->add('_action', 'actions', array(
                        'actions' => array(
                            'view' => array(),

@@ -23,6 +23,12 @@ stof_doctrine_extensions:
             timestampable: false # not needed: listeners are not enabled by default
             sluggable: true
 
+knp_menu:
+    twig:  
+        template: knp_menu.html.twig
+    templating: false 
+    default_renderer: twig 
+    
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
