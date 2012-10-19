@@ -37,7 +37,7 @@ class Comment
     /**
      * @var Acme\UserBundle\Entity\User $text
      *
-     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="comments", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $user;

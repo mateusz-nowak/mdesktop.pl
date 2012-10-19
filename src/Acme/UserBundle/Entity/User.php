@@ -4,6 +4,7 @@ namespace Acme\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Acme\MainBundle\Entity\Comment;
 
 /**
  * @ORM\Entity
@@ -37,6 +38,11 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function canManageComment(Comment $comment)
+    {
+        return (bool) $comment->getUser() == $this;
     }
 
 }
