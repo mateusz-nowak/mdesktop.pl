@@ -19,6 +19,11 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Comment", mappedBy="user", cascade={"persist"})
+     */
+    private $comments;
+
     public function __construct()
     {
         parent::__construct();

@@ -1,0 +1,77 @@
+#Sonata Content
+Content List: 'Zarządzanie treściami'
+Content Show: 'Podgląd treści'
+Content Delete: 'Usuń treść'
+Content Create: 'Tworzenie treści'
+Content Edit: 'Edycja treści'
+
+content.title: 'Tytuł podstrony'
+content.text: 'Treść podstrony'
+content.categories: 'Kategorie'
+content.commentable: 'Komentowanie'
+
+content.basic: 'Podstawowe dane'
+content.optionally: 'Opcjonalnie'
+content.photos: 'Dołącz zdjęcia'
+
+#Sonata Movie
+Movie List: 'Zarządzanie filmami'
+Movie Show: 'Podgląd filmu'
+Movie Delete: 'Usuń film'
+Movie Create: 'Tworzenie filmu'
+
+movie.title: 'Tytuł filmu'
+movie.category: 'Kategoria'
+movie.body: 'Opis'
+
+#Sonata Category
+Category List: 'Zarządzanie kategoriami'
+Category Show: 'Podgląd kategorii'
+Category Delete: 'Usuń kategorię'
+Category Create: 'Tworzenie kategorii'
+
+category.name: 'Nazwa kategorii'
+
+#Sonata Comment
+Comment List: 'Zarządzanie komentarzami'
+Comment Show: 'Podgląd komentarza'
+Comment Delete: 'Usuń komentarz'
+Comment Create: 'Tworzenie komentarza'
+Comment Edit: 'Edycja komentarza'
+
+comment.text: 'Treść komentarza'
+comment.user: 'Użytkownik'
+
+#Sonata User
+User List: 'Zarządzanie użytkownikami'
+User Show: 'Podgląd użytkownika'
+User Delete: 'Usuń użytkownika'
+User Create: 'Tworzenie użytkownika'
+
+user.username: 'Nazwa użytkownika'
+user.email: 'Adres e-mail'
+user.enabled: 'Aktywny?'
+user.password: 'Hasło'
+user.password.confirm: 'Powtórz hasło'
+
+#Sonata Shoutbox
+Shoutbox List: 'Zarządzanie wpisami na shoutboxie'
+Shoutbox Show: 'Podgląd wpisu na shoutboxie'
+Shoutbox Delete: 'Usuń wpis'
+Shoutbox Create: 'Tworzenie wpisu na shoutboxie'
+Shoutbox Edit: 'Edycja wpisu'
+
+shoutbox.text: 'Treść'
+shoutbox.user: 'Użytkownik'
+
+#Sonata Photo
+Photo List: 'Zarządzanie zdjęciami'
+Photo Edit: 'Edycja zdjęcia'
+Photo Create: 'Tworzenie nowego zdjęcia'
+Photo Delete: 'Usuwanie zdjęcia'
+
+photo.file: 'Zdjęcia'
+
+#Sonata Settings
+actions: 'Zarządzanie'
+title_dashboard: 'Zarządzanie'

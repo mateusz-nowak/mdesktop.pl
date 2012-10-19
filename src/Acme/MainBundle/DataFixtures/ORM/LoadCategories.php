@@ -7,13 +7,11 @@ use Acme\MainBundle\Entity\Category;
 
 class LoadCategories implements FixtureInterface
 {
-
     public function load(ObjectManager $manager)
     {
         $categories = array(
             'Podstrony dynamiczne CMS',
             'Wiadomości',
-
         );
 
         foreach ($categories as $category) {
@@ -25,12 +23,10 @@ class LoadCategories implements FixtureInterface
         }
 
         $manager->flush();
-
     }
 
     public function getOrder()
     {
         return 2; // number in which order to load fixtures
     }
-
 }

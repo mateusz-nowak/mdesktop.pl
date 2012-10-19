@@ -1,6 +1,32 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-	<h1>{{ content.title }}</h1>
-	{{ content.text }}
+<h1>{{ content.title }}</h1>
+{{ content.text|raw }}
+
+{% for photo in content.photos %}
+	<img src="{{ photo.fullPath|apply_filter('movie') }}" />
+{% endfor %}
+
+{% if content.commentable %}
+<h2>Komentarze</h2>
+<ul id="comments">
+{% for comment in content.comments %}
+	<li>
+		<h3>{{ comment.user }} dnia {{ comment.createdAt|date("d.m G:i:s") }}</h3>
+		<p>{{ comment.text|raw }}</p>
+	</li>
+{% endfor %}
+</ul>
+
+{% if is_granted('ROLE_USER') %}
+<form action="{{ path('content_comment', {'slug': content.slug}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" />
+</form>
+{% else %}
+	Zaloguj się, aby móc komentować utwory muzyczne.
+{% endif %}
+{% endif %}
+
 {% endblock %}

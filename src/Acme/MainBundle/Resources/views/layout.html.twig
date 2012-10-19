@@ -10,37 +10,47 @@
     </head>
     <body>
     <div id="container">
-    
+
     	<a href="{{ path('root') }}">
     		<img src="{{ asset('images/logo.png') }}" />
     	</a>
-    	
+
     	<div id="topSideBar">
 	    	{% include "AcmeMainBundle::user.html.twig" %}
-        	{% include "AcmeMainBundle::flash.html.twig" %}
         </div>
-        
+
         <div id="menu">
     		{{ knp_menu_render('AcmeMainBundle:Builder:mainMenu') }}
     	</div>
-    	    
+
     	<div id="userSideBar">
     		<h1>Mp3</h1>
-    		
+
     		{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
         </div>
-        
+
         <div id="contentBar">
+    		<div id="navigation">
+    			{{ knp_menu_render('AcmeMainBundle:Builder:navigation')|raw }}
+			</div>
+
+        	{% include "AcmeMainBundle::flash.html.twig" %}
+
         	<div id="content">
         		{% block content %}{% endblock %}
         	</div>
         </div>
-        
+
         <div class="clearfix"></div>
-        
+
+		<img src="/images/footer.png" id="footerLinks" />
+
+        {% block footer %}
+        {{ tinymce_init() }}
         <div id="footerBar">
         	{% include 'AcmeMainBundle::footer.html.twig' %}
         </div>
+        {% endblock %}
     </div>
     </body>
 </html>

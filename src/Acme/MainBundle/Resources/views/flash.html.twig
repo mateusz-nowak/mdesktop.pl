@@ -1,5 +1,7 @@
+<div id="flashContainer">
 {% for key, message in app.session.getFlashes() %}
-<div class="{{ key }}">
+<div class="flash_{{ key }}">
     {{ message|trans({}, 'FOSUserBundle') }}
 </div>
 {% endfor %}
+</div>

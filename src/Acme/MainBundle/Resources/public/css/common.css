@@ -1,6 +1,7 @@
 body
 {
-	background: #0D68B8;
+	background: #333;
+	font: 12px Arial, Helvetica, sans-serif;
 }
 
 #container
@@ -11,10 +12,34 @@ body
 	padding: 10px;
 }
 
+#contentBox li span.comment
+{
+	display: block;
+	text-align: right;
+}
+
 #userSideBar 
 {
 	float: left;
 	width: 200px;
+}
+
+#mediaLeft 
+{
+	width: 400px;
+	float: left;
+}
+
+#mediaRight 
+{
+	width: 400px;
+	float: right;
+}
+
+#mediaRight img 
+{
+	width: 380px;
+	margin: 5px;
 }
 
 #contentBar 
@@ -39,6 +64,21 @@ body
 {
 	padding-top: 10px;
 	text-align: right;
+	font-size: 12px;
+}
+
+#footerBar a 
+{
+	margin-right: 5px;
+	padding-right: 5px;
+	border-right: 1px solid #666;
+	color: #666;
+}
+
+#footerBar a:last-child
+{
+	border-right: 0px;
+	padding-right: 0px;
 }
 
 .clearfix
@@ -75,7 +115,7 @@ form #remember_me
 	margin: 0px;
 	padding: 0px;
 	margin-bottom: 10px;
-	background: #999;
+	background: #ccc;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
@@ -88,13 +128,13 @@ form #remember_me
 {
 	color: #000;
 	font-style: none;
-	background: #999;
+	background: #ccc;
 	padding: 10px;
 }
 
 #menu ul li a:hover
 {
-	background: #666;
+	background: #999;
 }
 
 #menu ul li.current a
@@ -107,4 +147,37 @@ a
 	font-style: none;
 	text-decoration: none;
 	color: #000
+}
+
+#flashContainer div
+{
+	clear: both;
+	color: #FFF;
+	text-align: center;
+	padding: 10px;
+}
+
+.flash_notice 
+{
+	background: #006611;
+}
+
+.flash_error
+{
+	background: #ff0000;
+}
+
+#navigation ul 
+{
+	list-style: none;
+}
+
+#navigation ul li
+{
+	display: inline;
+}
+
+#footerLinks
+{
+	margin-top: 20px;
 }

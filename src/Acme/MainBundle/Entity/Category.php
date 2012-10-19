@@ -5,6 +5,8 @@ namespace Acme\MainBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Acme\MainBundle\Entity\Content;
 
 /**
  * @ORM\Entity
@@ -23,6 +25,13 @@ class Category
     private $id;
 
     /**
+     * @var integer $type
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $type;
+
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -31,18 +40,20 @@ class Category
     /**
      * @var string $title
      *
-     * @ORM\Column()
+     * @ORM\Column(length=128, unique=true)
      * @Assert\NotNull()
      */
     private $name;
-    
+
     /**
-     * @var int $type
-     *
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull()
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Content", mappedBy="categories", cascade={"persist"})
      */
-    private $type;
+    private $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -108,23 +119,56 @@ class Category
     /**
      * Set type
      *
-     * @param integer $type
+     * @param  integer  $type
      * @return Category
      */
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add items
+     *
+     * @param  Acme\MainBundle\Entity\Content $items
+     * @return Category
+     */
+    public function addItem(Content $items)
+    {
+        $this->items[] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param Acme\MainBundle\Entity\Content $items
+     */
+    public function removeItem(Content $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

@@ -2,6 +2,6 @@
 
 {% block content %}
 	{% for category in categories %}
-		<h1>{{ category.name }}</h1>
+		<h2><a href="{{ path('category_movie', {'slug': category.slug}) }}">{{ category.name }}</a></h2>
 	{% endfor %}
 {% endblock %}

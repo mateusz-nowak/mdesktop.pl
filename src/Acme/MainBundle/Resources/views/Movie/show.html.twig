@@ -1,0 +1,37 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+
+<div id="mediaLeft">
+<h1>{{ movie.title }}</h1>
+
+<p>
+	<iframe src="http://www.megustavid.com/e={{ movie.embed }}?w=400&h=450" style="border:0;width:400px;height:450px;" frameborder="0" scrolling="no"></iframe>
+</p>
+
+<h2>Komentarze</h2>
+
+<ul id="comments">
+{% for comment in movie.comments %}
+	<li>
+		<h3>{{ comment.user }} dnia {{ comment.createdAt|date("d.m G:i:s") }}</h3>
+		<p>{{ comment.text|raw }}</p>
+	</li>
+{% endfor %}
+</ul>
+
+{% if is_granted('ROLE_USER') %}
+<form action="{{ path('movie_comment', {'slug': movie.slug}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" />
+</form>
+{% else %}
+	Zaloguj się, aby móc komentować utwory muzyczne.
+{% endif %}
+</div>
+
+<div id="mediaRight">
+	<img src="{{ movie.getFullPhoto }}" />
+</div>
+
+{% endblock %}

@@ -1,6 +1,0 @@
-Stfalcon\Bundle\PageBundle\Entity\BasePage:
-    properties:
-        title:
-            - NotBlank: ~
-        text:
-            - NotBlank: ~

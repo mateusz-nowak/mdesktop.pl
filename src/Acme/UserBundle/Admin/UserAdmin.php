@@ -9,25 +9,26 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class UserAdmin extends Admin
 {
-
     public function configureShowFields(ShowMapper $filter)
     {
-        $filter->add('username', null, array('label' => 'sonata.user.username'))
-               ->add('email', null, array('label' => 'sonata.user.email'))
-               ->add('enabled', null, array('label' => 'sonata.user.enabled'));
+        $filter
+            ->add('username', null, array('label' => 'user.username'))
+            ->add('email', null, array('label' => 'user.email'))
+            ->add('enabled', null, array('label' => 'user.enabled'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('username', null, array('label' => 'sonata.user.username'))
-                   ->add('email', null, array('label' => 'sonata.user.email'))
-                   ->add('enabled', null, array('label' => 'sonata.user.enabled'))
-                   ->add('_action', 'actions', array(
-                       'actions' => array(
-                           'view' => array(),
-                           'delete' => array(),
-                       )
-                   ));
+        $listMapper
+            ->addIdentifier('username', null, array('label' => 'user.username'))
+            ->add('email', null, array('label' => 'user.email'))
+            ->add('enabled', null, array('label' => 'user.enabled'))
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'view' => array(),
+                    'delete' => array(),
+                )
+            ));
 
         return $listMapper;
     }
@@ -37,5 +38,4 @@ class UserAdmin extends Admin
         $collection->remove('edit');
         $collection->remove('create');
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace Acme\MainBundle\Model;
 
-use Acme\MainBundle\ObjectValue\Track;
+use Acme\MainBundle\Entity\Track;
 use Acme\MainBundle\DependencyInjection\FactoryInterface;
 
 class TrackGrabber
@@ -15,7 +15,7 @@ class TrackGrabber
 
     /** @var string $responseBody */
     protected $responseBody;
-    
+
     /** @var bool $isNextPage */
     protected $isNextPage = false;
 
@@ -39,6 +39,11 @@ class TrackGrabber
         return $this->factory->searchForTrack($this->getParameter('query'), $this->getParameter('page'), $this->isNextPage);
     }
 
+    public function getTrackMetaData($remote)
+    {
+        return $this->factory->getTrackInfo($remote);
+    }
+
     public function processDownload(Track $track)
     {
         return $this->factory->processDownload($track);
@@ -46,8 +51,7 @@ class TrackGrabber
 
     protected function getParameter($parameter)
     {
-        if (isset($this->parameters[$parameter]))
-        {
+        if (isset($this->parameters[$parameter])) {
             return $this->parameters[$parameter];
         }
     }

@@ -2,14 +2,18 @@
 
 namespace Acme\MainBundle\Entity;
 
+use Datetime;
 use Doctrine\ORM\Mapping as ORM;
 use Acme\UserBundle\Entity\User;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Acme\MainBundle\Entity\Shoutbox
  *
  * @ORM\Table(name="shoutbox")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Shoutbox
 {
@@ -26,14 +30,39 @@ class Shoutbox
      * @var string $text
      *
      * @ORM\Column(name="text", type="text")
+     * @Assert\Regex(pattern="#^<p>(\s|&nbsp;|\xA0)*<\/p>$#i", match=false)
      */
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Acme\UserBundle\Entity\User", inversedBy="users")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * @var Acme\UserBundle\Entity\User $text
+     *
+     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="shouts", cascade={"remove"})
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @var \Datetime $createdAt
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \Datetime $updatedAt
+     *
+     * @Gedmo\Timestampable
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new Datetime;
+        $this->updatedAt = new Datetime;
+    }
 
     /**
      * Get id
@@ -94,5 +123,51 @@ class Shoutbox
     public function __toString()
     {
         return $this->getText();
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  string   $createdAt
+     * @return Shoutbox
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param  string   $updatedAt
+     * @return Shoutbox
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

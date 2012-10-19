@@ -1,8 +1,0 @@
-{% extends 'AcmeMainBundle::layout.html.twig' %}
-
-{% block content %}
-	{% for content in contents %}
-		<h1><a href="{{ path('content_show', {'slug': content.slug}) }}">{{ content.title }}</a></h1>
-		<p>{{ content.text|cut }}</p>
-	{% endfor %}
-{% endblock %}

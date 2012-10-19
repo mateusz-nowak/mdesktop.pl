@@ -1,40 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}mdesktop.pl{% endblock %}</title>
-{% stylesheets '@AcmeMainBundle/Resources/public/css/*' %}
-		<link rel="stylesheet" href="{{ asset_url }}" />
-{% endstylesheets %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <div id="container">
-    
-    	<a href="{{ path('root') }}">
-    		<img src="{{ asset('images/logo.png') }}" />
-    	</a>
-    	
-    	<div id="topSideBar">
-	    {% include "AcmeMainBundle::user.html.twig" %}
-        {% include "AcmeMainBundle::flash.html.twig" %}
-        </div>
-        
-    	<div id="userSideBar">
-    		Some left content here
-        </div>
-        
-        <div id="contentBar">
-        	<div id="content">
-        		{% block fos_user_content %}{% endblock fos_user_content %}
-        	</div>
-        </div>
-        
-        <div class="clearfix"></div>
-        
-        <div id="footerBar">
-        	{% include 'AcmeMainBundle::footer.html.twig' %}
-        </div>
-    </div>
-    </body>
-</html>
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+	{% block fos_user_content %}{% endblock %}
+{% endblock %}

@@ -30,6 +30,10 @@ class AppKernel extends Kernel
             new Acme\MainBundle\AcmeMainBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new BinaryThinking\LastfmBundle\BinaryThinkingLastfmBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

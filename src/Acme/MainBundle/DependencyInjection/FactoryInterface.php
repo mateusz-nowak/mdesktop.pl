@@ -2,11 +2,10 @@
 
 namespace Acme\MainBundle\DependencyInjection;
 
-use Acme\MainBundle\ObjectValue\Track;
+use Acme\MainBundle\Entity\Track;
 
 interface FactoryInterface
 {
-
     /**
      * Get the informations about one track
      *
@@ -30,5 +29,4 @@ interface FactoryInterface
      */
 
     public function processDownload(Track $track);
-
 }
