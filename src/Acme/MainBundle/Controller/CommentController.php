@@ -27,7 +27,7 @@ class CommentController extends Controller
      */
     public function editAction(Comment $comment)
     {
-        if(!$this->getUser() || !$this->getUser()->canEditComment($comment)) {
+        if(!$this->getUser() || !$this->getUser()->canManageComment($comment)) {
             throw new AccessDeniedException();
         }
         
