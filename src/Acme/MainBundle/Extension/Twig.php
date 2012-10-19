@@ -17,16 +17,14 @@ class Twig extends Twig_Extension
 
     public function getGlobals()
     {
-        return array
-        (
+        return array(
             'footerContainer' => $this->entityManager->getRepository('AcmeMainBundle:Content')->findAllByCategoryName(Content::PAGE),
         );
     }
 
     public function getFunctions()
     {
-        return array
-        (
+        return array(
             'photoTrack' => new Twig_Function_Method($this, 'getPhotoTrack'),
         );
     }
@@ -44,8 +42,7 @@ class Twig extends Twig_Extension
 
     public function getFilters()
     {
-        return array
-        (
+        return array(
             'cut' => new Twig_Filter_Method($this, 'getCuttedVersion')
         );
     }

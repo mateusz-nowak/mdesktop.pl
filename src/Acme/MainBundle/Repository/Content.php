@@ -22,7 +22,8 @@ class Content extends EntityRepository
 
     public function findAllByCategoryName($categoryName)
     {
-        $queryBuilder = $this->createQueryBuilder('c')
+        $queryBuilder = $this
+            ->createQueryBuilder('c')
             ->leftJoin('c.categories', 'cc')
             ->where('cc.type = :type')
             ->andWhere('cc.slug = :slug')
