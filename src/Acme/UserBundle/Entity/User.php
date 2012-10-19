@@ -39,7 +39,7 @@ class User extends BaseUser
     {
         return $this->id;
     }
-    
+
     public function canManageComment(Comment $comment)
     {
         return (bool) $comment->getUser() == $this;

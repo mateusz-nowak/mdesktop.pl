@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Acme\MainBundle\Form\Type\CommentType;
 use Acme\MainBundle\Entity\Comment;
+use Acme\MainBundle\Entity\Movie;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -86,6 +87,46 @@ class MovieController extends Controller
                 $this->get('session')->setFlash('error', 'Nie udało się dodać kometnarza');
             }
         }
+
+        return $this->redirect($this->generateUrl('movie_show', array('slug' => $movie->getSlug())));
+    }
+
+    /**
+     * Vote Movie.
+     *
+     * @Route("/{id}/vote/{vote}", name="movie_vote")
+     */
+    public function voteAction(Movie $movie, $vote)
+    {
+        $sessionName = 'movieVoted';
+        $em = $this->getDoctrine()->getEntityManager();
+
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
+
+        if ($vote > 10 || $vote < 0) {
+            throw new Exception('Vote has to be between 1 and 10');
+        }
+
+        $votedIds = (array) $this->get('session')->get($sessionName);
+
+        if (in_array($movie->getId(), $votedIds)) {
+            $this->get('session')->setFlash('error', 'Już głosowałeś na ten film');
+
+            return $this->redirect($this->generateUrl('movie_show', array('slug' => $movie->getSlug())));
+        }
+
+        $votedIds[] = $movie->getId();
+        $this->get('session')->set($sessionName, $votedIds);
+
+        $movie->setRatingValue(($movie->getRatingCount()*$movie->getRatingValue()+$vote)/($movie->getRatingCount()+1));
+        $movie->setRatingCount($movie->getRatingCount()+1);
+
+        $em->merge($movie);
+        $em->flush();
+
+        $this->get('session')->setFlash('notice', 'Dziękujemy za oddanie głosu');
 
         return $this->redirect($this->generateUrl('movie_show', array('slug' => $movie->getSlug())));
     }

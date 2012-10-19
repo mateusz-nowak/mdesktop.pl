@@ -6,7 +6,7 @@
 		<h3>{{ comment.user }} dnia {{ comment.createdAt|date("d.m G:i:s") }}</h3>
 		{% if app.user and app.user.canManageComment(comment) %}
 			<span>
-				<a href="{{ path('comment_edit', {'id' : comment.id}) }}">edytuj komentarz</a> | 
+				<a href="{{ path('comment_edit', {'id' : comment.id}) }}">edytuj komentarz</a> |
 				<a href="{{ path('comment_delete', {'id' : comment.id}) }}">usuń komentarz</a>
 			</span>
 		{% endif %}

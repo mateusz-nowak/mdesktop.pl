@@ -10,6 +10,7 @@
 </p>
 
 {% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': movie.comments} %}
+{% include 'AcmeMainBundle::voteWidget.html.twig' with {'item': movie, 'route': 'movie_vote'} %}
 
 {% if is_granted('ROLE_USER') %}
 <form action="{{ path('movie_comment', {'slug': movie.slug}) }}" method="post" {{ form_enctype(form) }}>

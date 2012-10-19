@@ -22,7 +22,7 @@ category:
 news:
     resource: "@AcmeMainBundle/Controller/NewsController.php"
     type: annotation
-    
+
 comment:
     resource: "@AcmeMainBundle/Controller/CommentController.php"
     type: annotation
