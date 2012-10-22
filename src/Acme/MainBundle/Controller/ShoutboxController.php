@@ -26,13 +26,13 @@ class ShoutboxController extends Controller
     public function indexAction()
     {
         $form = $this->createForm(new ShoutboxType);
-        
+
         return array(
             'form' => $form->createView(),
             'entries' => $this->getDoctrine()->getRepository('AcmeMainBundle:Shoutbox')->getLastShouts(20),
         );
     }
-    
+
     /**
      * Display shoutbox.
      *
@@ -45,7 +45,7 @@ class ShoutboxController extends Controller
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException();
         }
-        
+
         $shoutbox = new Shoutbox;
         $form = $this->createForm(new ShoutboxType, $shoutbox);
 
@@ -53,16 +53,16 @@ class ShoutboxController extends Controller
             $form->bind($this->getRequest());
 
             if ($form->isValid()) {
-                
+
                 $shoutbox->setUser($this->getUser());
-                
+
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($shoutbox);
                 $em->flush();
-                
+
                 $this->get('session')->setFlash('notice', 'Dziękujemy za twój wpis!');
             } else {
-                $this->get('session')->setFlash('error', 'Wystąpił błąd podczas dodawania wpisu');    
+                $this->get('session')->setFlash('error', 'Wystąpił błąd podczas dodawania wpisu');
             }
         }
 

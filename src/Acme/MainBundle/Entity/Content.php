@@ -381,13 +381,13 @@ class Content
     /**
      * Add categories
      *
-     * @param Acme\MainBundle\Entity\Category $categories
+     * @param  Acme\MainBundle\Entity\Category $categories
      * @return Content
      */
     public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
     {
         $this->categories[] = $categories;
-    
+
         return $this;
     }
 

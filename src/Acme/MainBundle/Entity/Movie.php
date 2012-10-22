@@ -412,13 +412,13 @@ class Movie
     /**
      * Add categories
      *
-     * @param Acme\MainBundle\Entity\Category $categories
+     * @param  Acme\MainBundle\Entity\Category $categories
      * @return Movie
      */
     public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
     {
         $this->categories[] = $categories;
-    
+
         return $this;
     }
 

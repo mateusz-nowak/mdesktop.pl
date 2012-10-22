@@ -26,7 +26,7 @@ news:
 comment:
   resource: "@AcmeMainBundle/Controller/CommentController.php"
   type: annotation
-    
+
 shoutbox:
   resource: "@AcmeMainBundle/Controller/ShoutboxController.php"
   type: annotation

@@ -24,7 +24,7 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Comment", mappedBy="user", cascade={"persist"})
      */
     private $comments;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Shoutbox", mappedBy="user", cascade={"persist"})
      */
