@@ -34,3 +34,6 @@ shoutbox:
 _imagine:
   resource: .
   type:     imagine
+
+genemu_image:
+    resource: "@GenemuFormBundle/Resources/config/routing/image.xml"

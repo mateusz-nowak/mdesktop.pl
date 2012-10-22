@@ -11,7 +11,18 @@ sonata_admin:
 binary_thinking_lastfm:
   client_apikey: "7a3862e67fc9af835c659a083941ffbd"
   client_secret: "361fa0754402e709bc7e6514ab6ebb04"
-  
+
+genemu_form:
+    image:
+        enabled:  true
+        selected: 'large'
+        filters:  ['rotate', 'bw', 'negative', 'sepia', 'crop']
+        thumbnails:
+            small:  [100, 100]
+            medium: [200, 200]
+            large:  [500, 500]
+            extra:  [1024, 768]
+
 fos_user:
     db_driver: orm
     firewall_name: main
