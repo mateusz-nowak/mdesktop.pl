@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Acme\MainBundle\Entity\Shoutbox
  *
  * @ORM\Table(name="shoutbox")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Acme\MainBundle\Repository\Shoutbox")
  * @ORM\HasLifecycleCallbacks()
  */
 class Shoutbox
@@ -31,6 +31,7 @@ class Shoutbox
      *
      * @ORM\Column(name="text", type="text")
      * @Assert\Regex(pattern="#^<p>(\s|&nbsp;|\xA0)*<\/p>$#i", match=false)
+     * @Assert\MaxLength(100)
      */
     private $text;
 

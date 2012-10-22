@@ -408,4 +408,27 @@ class Movie
     {
         return $this->comments;
     }
+
+    /**
+     * Add categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     * @return Movie
+     */
+    public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
 }

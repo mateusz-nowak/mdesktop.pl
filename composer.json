@@ -35,7 +35,9 @@
         "binarythinking/lastfm-bundle": "dev-master",
         "wbx/file-bundle": "dev-master",
         "gregwar/image-bundle": "dev-master",
-        "liip/imagine-bundle": "v0.3.0"
+        "liip/imagine-bundle": "v0.3.0",
+        "exercise/elastica-bundle": "dev-master",
+        "excelwebzone/search-bundle": "master"
     },
     "scripts": {
         "post-install-cmd": [

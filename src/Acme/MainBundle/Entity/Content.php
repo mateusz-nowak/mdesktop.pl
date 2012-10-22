@@ -377,4 +377,27 @@ class Content
     {
         $this->photos->removeElement($photos);
     }
+
+    /**
+     * Add categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     * @return Content
+     */
+    public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
 }
