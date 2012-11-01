@@ -1,7 +1,7 @@
 # Internal routing configuration to handle ESI
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal
+_internal:
+   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+   prefix:   /_internal
 
 _fos:
     resource: "@AcmeUserBundle/Resources/config/routing.yml"
@@ -17,3 +17,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
+_imagine:
+    resource: .
+    type:     imagine

@@ -1,0 +1,7 @@
+<h2>Oceń</h2>
+
+<ul id="vote">
+{% for i in 1..10 %}
+	<li><a href="{{ path(route, {'id': item.id, 'vote': i}) }}">Oceń na: {{ i }}</a></li>
+{% endfor %}
+</ul>

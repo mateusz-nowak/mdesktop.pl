@@ -8,7 +8,6 @@ use Acme\UserBundle\Entity\User;
 
 class LoadShoutBoxContent implements FixtureInterface
 {
-
     public function load(ObjectManager $manager)
     {
         $user = current($manager->getRepository('Acme\UserBundle\Entity\User')->findAll());
@@ -22,12 +21,10 @@ class LoadShoutBoxContent implements FixtureInterface
         }
 
         $manager->flush();
-
     }
 
     public function getOrder()
     {
         return 3; // number in which order to load fixtures
     }
-
 }

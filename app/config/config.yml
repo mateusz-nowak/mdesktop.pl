@@ -4,16 +4,112 @@ imports:
     - { resource: services.xml }
     - { resource: @AcmeMainBundle/Resources/config/services.xml }
 
+sonata_admin:
+    templates:
+        layout: :SonataAdminBundle:layout.html.twig
+
+binary_thinking_lastfm:
+  client_apikey: "7a3862e67fc9af835c659a083941ffbd"
+  client_secret: "361fa0754402e709bc7e6514ab6ebb04"
+
+genemu_form:
+    image:
+        enabled:  true
+        selected: 'large'
+        filters:  ['rotate', 'bw', 'negative', 'sepia', 'crop']
+        thumbnails:
+            small:  [100, 100]
+            medium: [200, 200]
+            large:  [500, 500]
+            extra:  [1024, 768]
+
 fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Acme\UserBundle\Entity\User
+    
+avalanche_imagine:
+    source_root:  %kernel.root_dir%/../web
+    web_root:     %kernel.root_dir%/../web
+    cache_prefix: uploads/media/cache
+    driver:       gd
+    filters:
+      movie:
+        type: thumbnail
+        options: { size: [150, 150], mode: outbound, quality: 100, format: png }
 
 sonata_block:
     default_contexts: [cms]
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
+
+stfalcon_tinymce:
+        include_jquery: true
+        tinymce_jquery: true
+        textarea_class: "tinymce"
+        theme:
+            # Simple theme as same as default theme
+            simple:
+                mode: "textareas"
+                theme: "advanced"
+                theme_advanced_buttons1: "mylistbox,mysplitbutton,bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink"
+                theme_advanced_buttons2: ""
+                theme_advanced_buttons3: ""
+                theme_advanced_toolbar_location: "top"
+                theme_advanced_toolbar_align: "left"
+                theme_advanced_statusbar_location: "bottom"
+                plugins: "fullscreen"
+                theme_advanced_buttons1_add: "fullscreen"
+            # Advanced theme with almost all enabled plugins
+            advanced:
+                theme: "advanced"
+                plugins: "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template"
+                theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect"
+                theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor"
+                theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen"
+                theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak"
+                theme_advanced_toolbar_location: "top"
+                theme_advanced_toolbar_align: "left"
+                theme_advanced_statusbar_location: "bottom"
+                theme_advanced_resizing: true
+            # Medium number of enabled plugins + spellchecker
+            medium:
+                mode: "textareas"
+                theme: "advanced"
+                plugins: "table,advhr,advlink,paste,xhtmlxtras,spellchecker"
+                theme_advanced_buttons1: "image,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,forecolor,backcolor,|,hr,removeformat,|,sub,sup,|,spellchecker"
+                theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,undo,redo,|,link,unlink,anchor,cleanup,code,|,tablecontrols"
+                theme_advanced_buttons3: ""
+                theme_advanced_toolbar_location: "top"
+                theme_advanced_toolbar_align: "left"
+                theme_advanced_statusbar_location: ""
+                paste_auto_cleanup_on_paste: true
+                spellchecker_languages: "+English=en,Dutch=nl"
+            # BBCode tag compatible theme (see http://www.bbcode.org/reference.php)
+            bbcode:
+                mode: "none"
+                theme: "advanced"
+                plugins: "bbcode"
+                theme_advanced_buttons1: "bold,italic,underline,undo,redo,link,unlink,image,forecolor,styleselect,removeformat,cleanup,code"
+                theme_advanced_buttons2: ""
+                theme_advanced_buttons3: ""
+                theme_advanced_toolbar_location: "bottom"
+                theme_advanced_toolbar_align: "center"
+                theme_advanced_styles: "Code=codeStyle;Quote=quoteStyle"
+                entity_encoding: "raw"
+                add_unload_trigger: false
+                remove_linebreaks: false
+                inline_styles: false
+                convert_fonts_to_spans: false
+        
+knp_paginator:
+    page_range: 10
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
 
 stof_doctrine_extensions:
     default_locale: pl_PL
@@ -23,6 +119,12 @@ stof_doctrine_extensions:
             timestampable: false # not needed: listeners are not enabled by default
             sluggable: true
 
+knp_menu:
+    twig:  
+        template: knp_menu.html.twig
+    templating: false 
+    default_renderer: twig 
+    
 framework:
     #esi:             ~
     translator:      { fallback: %locale% }
@@ -42,12 +144,12 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-
+    
 # Assetic Configuration
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ AcmeMainBundle ]
+    bundles:        [ AcmeMainBundle , FOSUserBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

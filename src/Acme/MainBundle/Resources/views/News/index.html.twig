@@ -1,0 +1,18 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+<ul id="contentBox">
+	{% for content in news %}
+		<li>
+			<h1><a href="{{ path('content_show', {'slug': content.slug}) }}">{{ content.title }}</a></h1>
+			<p>
+				{{ content.text|cut(200)|raw }}
+
+				{% if content.commentable %}
+					<span class="comment">[Komentarze: {{ content.comments.count }}]</span>
+				{% endif %}
+			</p>
+		</li>
+	{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+	<h1>Ostatnio odtwarzane mp3</h1>
+
+	{% for item in played %}
+		<h2>{{ item.header }}</h2>
+
+		<ol>
+		{% for track in item.data %}
+			<li><a href="{{ path('track_search', {'q': track}) }}">{{ track }}</a></li>
+		{% endfor %}
+		</ol>
+	{% endfor %}
+{% endblock %}

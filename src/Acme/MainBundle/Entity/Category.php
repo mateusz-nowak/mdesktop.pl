@@ -3,16 +3,16 @@
 namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Acme\MainBundle\Entity\Content;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="category")
  * @ORM\HasLifecycleCallbacks()
  */
-
 class Category
 {
     /**
@@ -25,6 +25,13 @@ class Category
     private $id;
 
     /**
+     * @var integer $type
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $type;
+
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -33,20 +40,19 @@ class Category
     /**
      * @var string $title
      *
-     * @ORM\Column()
+     * @ORM\Column(length=128, unique=true)
      * @Assert\NotNull()
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="content", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Content", mappedBy="categories", cascade={"persist"})
      */
-
-    private $collections;
+    private $items;
 
     public function __construct()
     {
-        $this->collections = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     public function __toString()
@@ -111,35 +117,58 @@ class Category
     }
 
     /**
-     * Add collections
+     * Set type
      *
-     * @param  Acme\MainBundle\Entity\content $collections
+     * @param  integer  $type
      * @return Category
      */
-    public function addCollection(\Acme\MainBundle\Entity\content $collections)
+    public function setType($type)
     {
-        $this->collections[] = $collections;
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Remove collections
+     * Get type
      *
-     * @param Acme\MainBundle\Entity\content $collections
+     * @return integer
      */
-    public function removeCollection(\Acme\MainBundle\Entity\content $collections)
+    public function getType()
     {
-        $this->collections->removeElement($collections);
+        return $this->type;
     }
 
     /**
-     * Get collections
+     * Add items
+     *
+     * @param  Acme\MainBundle\Entity\Content $items
+     * @return Category
+     */
+    public function addItem(Content $items)
+    {
+        $this->items[] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param Acme\MainBundle\Entity\Content $items
+     */
+    public function removeItem(Content $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getCollections()
+    public function getItems()
     {
-        return $this->collections;
+        return $this->items;
     }
 }

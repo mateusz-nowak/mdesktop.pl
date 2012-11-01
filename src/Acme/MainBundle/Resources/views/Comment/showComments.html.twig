@@ -1,0 +1,16 @@
+<h2>Komentarze (<span class="commentCount">{{ comments.count }}</span>)</h2>
+
+<ul id="comments">
+{% for comment in comments %}
+	<li>
+		<h3>{{ comment.user }} dnia {{ comment.createdAt|date("d.m G:i:s") }}</h3>
+		{% if app.user and app.user.canManageComment(comment) %}
+			<span>
+				<a href="{{ path('comment_edit', {'id' : comment.id}) }}">edytuj komentarz</a> |
+				<a href="{{ path('comment_delete', {'id' : comment.id}) }}">usuń komentarz</a>
+			</span>
+		{% endif %}
+		<p>{{ comment.text|raw }}</p>
+	</li>
+{% endfor %}
+</ul>
