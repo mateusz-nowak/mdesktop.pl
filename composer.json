@@ -27,7 +27,15 @@
         "sonata-project/user-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "kriswallsmith/Buzz": "dev-master",
-        "guilhermeblanco/sluggable": "dev-master"
+        "exercise/htmlpurifier-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "avalanche123/imagine-bundle": "dev-master",
+        "imagine/Imagine": "dev-master",
+        "stfalcon/tinymce-bundle": "dev-master",
+        "binarythinking/lastfm-bundle": "dev-master",
+        "wbx/file-bundle": "dev-master",
+        "gregwar/image-bundle": "dev-master",
+        "genemu/form-bundle": "2.1.*"
     },
     "scripts": {
         "post-install-cmd": [

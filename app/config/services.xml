@@ -4,36 +4,67 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <services>        
-        <service id="sonata.admin.user" class="Acme\UserBundle\Admin\UserAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Użytkownik"/>
-            <argument />            
-            <argument>Acme\UserBundle\Entity\User</argument>
-            <argument>AcmeUserBundle:Admin\UserAdmin</argument>
-        </service>
-        <service id="sonata.admin.category" class="Acme\MainBundle\Admin\CategoryAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Kategorie"/>
-            <argument />
-            <argument>Acme\MainBundle\Entity\Category</argument>
-            <argument>AcmeMainBundle:Admin\CategoryAdmin</argument>
-        </service>
-        <service id="sonata.admin.content" class="Acme\MainBundle\Admin\ContentAdmin">
+    <services>
+		<!-- Podstawowe -->
+		<service id="sonata.admin.content" class="Acme\MainBundle\Admin\ContentAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Treści"/>
             <argument />
             <argument>Acme\MainBundle\Entity\Content</argument>
             <argument>AcmeMainBundle:Admin\ContentAdmin</argument>
-        </service>
-        <service id="sonata.admin.shoutbox" class="Acme\MainBundle\Admin\ShoutboxAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Shoutbox"/>
-            <argument />
-            <argument>Acme\MainBundle\Entity\Shoutbox</argument>
-            <argument>AcmeMainBundle:Admin\ShoutboxAdmin</argument>
+            <call method="setEntityManager">
+				<argument type="service" id="doctrine.orm.entity_manager" />
+			</call>
+			<call method="setTranslationDomain">
+            	<argument>SonataAdminBundle</argument>
+          	</call>
         </service>
         <service id="sonata.admin.movie" class="Acme\MainBundle\Admin\MovieAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Filmy"/>
             <argument />
             <argument>Acme\MainBundle\Entity\Movie</argument>
             <argument>AcmeMainBundle:Admin\MovieAdmin</argument>
+			<call method="setTranslationDomain">
+            	<argument>SonataAdminBundle</argument>
+          	</call>
         </service>
+        <service id="sonata.admin.photo" class="Acme\MainBundle\Admin\PhotoAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Podstawowe" label="Zdjęcia"/>
+            <argument />
+            <argument>Acme\MainBundle\Entity\Photo</argument>
+            <argument>AcmeMainBundle:Admin\PhotoAdmin</argument>
+			<call method="setTranslationDomain">
+            	<argument>SonataAdminBundle</argument>
+          	</call>
+        </service>
+		<!-- Użytkownika -->
+        <service id="sonata.admin.shoutbox" class="Acme\MainBundle\Admin\ShoutboxAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Użytkownika" label="Wpisy na shoutboxie"/>
+            <argument />
+            <argument>Acme\MainBundle\Entity\Shoutbox</argument>
+            <argument>AcmeMainBundle:Admin\ShoutboxAdmin</argument>
+			<call method="setTranslationDomain">
+            	<argument>SonataAdminBundle</argument>
+          	</call>
+        </service>
+        <service id="sonata.admin.comment" class="Acme\MainBundle\Admin\CommentAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Użytkownika" label="Komentarze"/>
+            <argument />
+            <argument>Acme\MainBundle\Entity\Comment</argument>
+            <argument>AcmeMainBundle:Admin\CommentAdmin</argument>
+			<call method="setTranslationDomain">
+            	<argument>SonataAdminBundle</argument>
+          	</call>
+        </service>
+		<!-- Zarządzanie -->
+        <service id="sonata.admin.user" class="Acme\UserBundle\Admin\UserAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Zarządzanie" label="Użytkownicy"/>
+            <argument />            
+            <argument>Acme\UserBundle\Entity\User</argument>
+            <argument>AcmeUserBundle:Admin\UserAdmin</argument>
+			<call method="setTranslationDomain">
+            	<argument>SonataAdminBundle</argument>
+          	</call>
+        </service>
+        
     </services>
 </container>

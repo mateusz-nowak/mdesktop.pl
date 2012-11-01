@@ -1,0 +1,27 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+	<h1>{{ category.name }}</h1>
+
+	<ul>
+	{% for movie in movies %}
+		<li>
+			<img src="{{ movie.fullPhoto }}" align="left" />
+			<h2><a href="{{ path('movie_show', {'slug': movie.slug}) }}">{{ movie.title }}</a></h2>
+			<small>
+				kategorie:
+				{% for category in movie.categories %}
+					<a href="{{ path('category_movie', {'slug': category.slug}) }}">{{ category.name }}</a>
+				{% endfor %}
+			</small>
+			<p>{{ movie.text|cut(200) }}</p>
+			<div class="clearfix" />
+		</li>
+	{% endfor %}
+	</ul>
+
+	{# display navigation #}
+	<div class="navigation">
+	    {{ movies.render()|raw }}
+	</div>
+{% endblock %}

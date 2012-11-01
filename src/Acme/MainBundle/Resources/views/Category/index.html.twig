@@ -1,0 +1,7 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+	{% for category in categories %}
+		<h2><a href="{{ path('category_movie', {'slug': category.slug}) }}">{{ category.name }}</a></h2>
+	{% endfor %}
+{% endblock %}

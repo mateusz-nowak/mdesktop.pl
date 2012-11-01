@@ -2,16 +2,20 @@
 
 namespace Acme\MainBundle\Entity;
 
+use Datetime;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Acme\MainBundle\Entity\Category;
+use Acme\MainBundle\Entity\Photo;
+use Acme\MainBundle\Entity\Comment;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Acme\MainBundle\Repository\Content")
  * @ORM\Table(name="content")
  * @ORM\HasLifecycleCallbacks()
  */
-
 class Content
 {
     /**
@@ -22,6 +26,13 @@ class Content
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var boolean $commentable
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $commentable = true;
 
     /**
      * @Gedmo\Slug(fields={"title"})
@@ -42,39 +53,58 @@ class Content
      *
      * @ORM\Column(type="text")
      * @Assert\NotNull()
+     * @Assert\Regex(pattern="#^<p>(\s|&nbsp;|\xA0)*<\/p>$#i", match=false)
      */
     private $text;
 
     /**
-     * @var string $metaKeywords
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Category", inversedBy="items", cascade={"persist"})
+     * @ORM\JoinTable(
+     *      name="content_category",
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     * )
+     **/
+    private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Comment", inversedBy="items", cascade={"persist"})
+     */
+    private $comments;
+
+    /**
+     * @var \Datetime $createdAt
      *
-     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $metaKeywords;
+    private $createdAt;
 
     /**
-     * @var string $metaDescription
+     * @var \Datetime $updatedAt
      *
-     * @ORM\Column(name="meta_description", type="string", length=255, nullable=true)
+     * @Gedmo\Timestampable
+     * @ORM\Column(type="datetime")
      */
-    private $metaDescription;
+    private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="collections")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
-     * @Assert\NotNull()
-     */
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Photo", inversedBy="items", cascade={"persist"})
+     * @ORM\JoinTable(
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="photo_id", referencedColumnName="id")}
+     * )
+     **/
+    private $photos;
 
-    private $category;
-
-    /**
-     * @ORM\PreUpdate
-     * @ORM\PrePersist
-     */
-
-    public function addSlugAndSetMetaData()
+    public function __construct()
     {
-        $this->setSlug(mb_strtolower(str_replace(' ', '-', $this->getTitle())));
+        $this->categories = new ArrayCollection();
+        $this->photos = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+
+        $this->createdAt = new Datetime;
+        $this->updatedAt = new Datetime;
     }
 
     /**
@@ -157,76 +187,217 @@ class Content
     }
 
     /**
-     * Set metaKeywords
+     * Get categories
      *
-     * @param  string  $metaKeywords
-     * @return Content
+     * @return Doctrine\Common\Collections\Collection
      */
-    public function setMetaKeywords($metaKeywords)
+    public function getCategories()
     {
-        $this->metaKeywords = $metaKeywords;
-
-        return $this;
+        return $this->categories;
     }
 
     /**
-     * Get metaKeywords
+     * Return the title
      *
      * @return string
      */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
-    }
-
-    /**
-     * Set metaDescription
-     *
-     * @param  string  $metaDescription
-     * @return Content
-     */
-    public function setMetaDescription($metaDescription)
-    {
-        $this->metaDescription = $metaDescription;
-
-        return $this;
-    }
-
-    /**
-     * Get metaDescription
-     *
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->metaDescription;
-    }
-
-    /**
-     * Set category
-     *
-     * @param  Acme\MainBundle\Entity\Category $category
-     * @return Content
-     */
-    public function setCategory(\Acme\MainBundle\Entity\Category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return Acme\MainBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
 
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * Add categories
+     *
+     * @param  Acme\MainBundle\Entity\Category $categories
+     * @return Content
+     */
+    public function addCategory(Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategory(Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  string  $createdAt
+     * @return Content
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param  string  $updatedAt
+     * @return Content
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param  Acme\MainBundle\Entity\Comment $comments
+     * @return Content
+     */
+    public function addComment(Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param Acme\MainBundle\Entity\Comment $comments
+     */
+    public function removeComment(Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set commentable
+     *
+     * @param  boolean $commentable
+     * @return Content
+     */
+    public function setCommentable($commentable)
+    {
+        $this->commentable = $commentable;
+
+        return $this;
+    }
+
+    /**
+     * Get commentable
+     *
+     * @return boolean
+     */
+    public function getCommentable()
+    {
+        return $this->commentable;
+    }
+
+    /**
+     * Set photos
+     *
+     * @param  Acme\MainBundle\Entity\Photo $photos
+     * @return Content
+     */
+    public function setPhotos(Photo $photos = null)
+    {
+        $this->photos = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Get photos
+     *
+     * @return Acme\MainBundle\Entity\File
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Add photos
+     *
+     * @param  Acme\MainBundle\Entity\Photo $photos
+     * @return Content
+     */
+    public function addPhoto(Photo $photos)
+    {
+        $this->photos[] = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Remove photos
+     *
+     * @param Acme\MainBundle\Entity\Photo $photos
+     */
+    public function removePhoto(Photo $photos)
+    {
+        $this->photos->removeElement($photos);
+    }
+
+    /**
+     * Add categories
+     *
+     * @param  Acme\MainBundle\Entity\Category $categories
+     * @return Content
+     */
+    public function addCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param Acme\MainBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Acme\MainBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
     }
 }

@@ -4,56 +4,82 @@ namespace Acme\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
+use Acme\MainBundle\Entity\Comment;
 
 /**
- * @ORM\Entity
+ * Acme\MainBundle\Entity\Movie
+ *
  * @ORM\Table(name="track")
+ * @ORM\Entity(repositoryClass="Acme\MainBundle\Repository\Track")
  * @ORM\HasLifecycleCallbacks()
  */
-
 class Track
 {
     /**
      * @var integer $id
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=128, unique=true)
-     */
-    private $slug;
-
-    /**
      * @var string $title
      *
-     * @ORM\Column(unique=false)
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string $length
+     * @var string $title
      *
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(type="integer", unique=true)
+     */
+    private $remote;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="size", type="string", length=16)
      */
     private $size;
 
     /**
-     * @var string $url
+     * @var \Datetime $createdAt
      *
-     * @ORM\Column(type="integer")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $remote_id;
+    private $createdAt;
 
+    /**
+     * @var \Datetime $updatedAt
+     *
+     * @Gedmo\Timestampable
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Acme\MainBundle\Entity\Comment", inversedBy="items", cascade={"persist"})
+     * @ORM\JoinTable(
+     *      joinColumns={@ORM\JoinColumn(name="commentId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="trackId", referencedColumnName="id")}
+     * )
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -61,45 +87,22 @@ class Track
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Track
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Track
      */
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -107,22 +110,45 @@ class Track
     }
 
     /**
+     * Set remote
+     *
+     * @param  string $remote
+     * @return Track
+     */
+    public function setRemote($remote)
+    {
+        $this->remote = $remote;
+
+        return $this;
+    }
+
+    /**
+     * Get remote
+     *
+     * @return string
+     */
+    public function getRemote()
+    {
+        return $this->remote;
+    }
+
+    /**
      * Set size
      *
-     * @param string $size
+     * @param  string $size
      * @return Track
      */
     public function setSize($size)
     {
         $this->size = $size;
-    
+
         return $this;
     }
 
     /**
      * Get size
      *
-     * @return string 
+     * @return string
      */
     public function getSize()
     {
@@ -130,48 +156,86 @@ class Track
     }
 
     /**
-     * Set key
+     * Add comments
      *
-     * @param string $key
+     * @param  Acme\MainBundle\Entity\Comment $comments
      * @return Track
      */
-    public function setKey($key)
+    public function addComment(Comment $comments)
     {
-        $this->key = $key;
-    
+        $this->comments[] = $comments;
+
         return $this;
     }
 
     /**
-     * Get key
+     * Remove comments
      *
-     * @return string 
+     * @param Acme\MainBundle\Entity\Comment $comments
      */
-    public function getKey()
+    public function removeComment(Comment $comments)
     {
-        return $this->key;
+        $this->comments->removeElement($comments);
     }
 
     /**
-     * Set remote_id
+     * Get comments
      *
-     * @param integer $remoteId
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  string $createdAt
      * @return Track
      */
-    public function setRemoteId($remoteId)
+    public function setCreatedAt($createdAt)
     {
-        $this->remote_id = $remoteId;
-    
+        $this->createdAt = $createdAt;
+
         return $this;
     }
 
     /**
-     * Get remote_id
+     * Get createdAt
      *
-     * @return integer 
+     * @return string
      */
-    public function getRemoteId()
+    public function getCreatedAt()
     {
-        return $this->remote_id;
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param  string $updatedAt
+     * @return Track
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function getSlug()
+    {
+        return sprintf("%d-%s", $this->getId(), str_replace(' ', '-', $this->getTitle()));
     }
 }

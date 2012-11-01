@@ -9,9 +9,12 @@
 		<parameter key="track_grabber.class">Acme\MainBundle\Model\TrackGrabber</parameter>
 		<parameter key="track_factory.class">Acme\MainBundle\DependencyInjection\Factory\Dloader</parameter>
 		<parameter key="downloader.class">Acme\MainBundle\DependencyInjection\Downloader</parameter>
+		<parameter key="menu_builder.class">Acme\MainBundle\Menu\Builder</parameter>
 	</parameters>
 
 	<services>
+		<service id="menu_builder_service" class="%menu_builder.class%"></service>
+
 		<service id="downloader_service" class="%downloader.class%">
 			<call method="setPrefixTitle">
         		<argument type="string">mdesktop.pl</argument>
@@ -27,6 +30,16 @@
 
 		<service id="track_container_service" class="%track_grabber.class%">
 			<argument type="service" id="track_factory_service"></argument>
+		</service>
+
+		<!-- Twig Extension -->
+
+		<service id="twig_extension" class="Acme\MainBundle\Extension\Twig">
+			<tag name="twig.extension" />
+
+			<call method="setEntityManager">
+				<argument type="service" id="doctrine.orm.entity_manager" />
+			</call>
 		</service>
 	</services>
 

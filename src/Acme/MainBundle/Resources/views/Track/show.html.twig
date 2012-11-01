@@ -1,39 +1,37 @@
-{% extends '@AcmeMainBundle:layout.html.twig' %}
+{% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-<h1>Track Foound</h1>
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Slug</th>
-            <td>{{ entity.slug }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Length</th>
-            <td>{{ entity.length }}</td>
-        </tr>
-        <tr>
-            <th>Url</th>
-            <td>{{ entity.url }}</td>
-        </tr>
-    </tbody>
-</table>
+<div id="mediaLeft">
+<h1>{{ track.title }}</h1>
+<p>Rozmiar: {{ track.size }}</p>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('track') }}">
-            Back to the list
-        </a>
-    </li>
+<object class="playerpreview" type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="200" height="20">
+    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf">
+    <param name="FlashVars" value="mp3={{ path('track_download', {'slug': track.slug}) }}&amp;showstop=1&amp;showvolume=1&amp;bgcolor1=189ca8&amp;bgcolor2=085c68">
+    <p>Musique de démonstration.</p>
+</object>
+
+<ul>
+	<li>
+		<a href="{{ path('track_download', {'slug': track.slug}) }}">Pobierz ten plik</a>
+	</li>
 </ul>
+
+{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': track.comments} %}
+
+{% if is_granted('ROLE_USER') %}
+<form action="{{ path('track_comment', {'slug': track.slug}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" />
+</form>
+{% else %}
+	<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
+{% endif %}
+</div>
+
+<div id="mediaRight">
+	<img src="{{ photoTrack(artist) }}" />
+</div>
 
 {% endblock %}

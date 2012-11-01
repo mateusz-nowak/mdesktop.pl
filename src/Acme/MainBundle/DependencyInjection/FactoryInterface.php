@@ -6,7 +6,6 @@ use Acme\MainBundle\Entity\Track;
 
 interface FactoryInterface
 {
-
     /**
      * Get the informations about one track
      *
@@ -21,7 +20,7 @@ interface FactoryInterface
      * @return ArrayIterator
      */
 
-    public function searchForTrack($query, $page);
+    public function searchForTrack($query, $page, &$isNextPage);
 
     /**
      * Prepare the force download
@@ -30,5 +29,4 @@ interface FactoryInterface
      */
 
     public function processDownload(Track $track);
-
 }

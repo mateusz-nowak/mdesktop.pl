@@ -4,9 +4,6 @@ namespace Acme\MainBundle\Model;
 
 use Acme\MainBundle\Entity\Track;
 use Acme\MainBundle\DependencyInjection\FactoryInterface;
-use Symfony\Component\HttpFoundation\Response; 
-use Symfony\Component\HttpFoundation\Request;
-use Buzz\Browser;
 
 class TrackGrabber
 {
@@ -19,9 +16,17 @@ class TrackGrabber
     /** @var string $responseBody */
     protected $responseBody;
 
+    /** @var bool $isNextPage */
+    protected $isNextPage = false;
+
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
+    }
+
+    public function isNextPage()
+    {
+        return $this->isNextPage;
     }
 
     public function setParameters(array $parameters = array())
@@ -31,9 +36,14 @@ class TrackGrabber
 
     public function process()
     {
-        return $this->factory->searchForTrack($this->getParameter('query'), $this->getParameter('page'));
+        return $this->factory->searchForTrack($this->getParameter('query'), $this->getParameter('page'), $this->isNextPage);
     }
-    
+
+    public function getTrackMetaData($remote)
+    {
+        return $this->factory->getTrackInfo($remote);
+    }
+
     public function processDownload(Track $track)
     {
         return $this->factory->processDownload($track);
