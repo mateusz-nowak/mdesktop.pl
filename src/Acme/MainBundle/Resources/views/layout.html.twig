@@ -9,21 +9,27 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    <div id="container">
-
-    	<a href="{{ path('root') }}">
-    		<img src="{{ asset('images/logo.png') }}" />
-    	</a>
-
-    	<div id="topSideBar">
-	    	{% include "AcmeMainBundle::user.html.twig" %}
+	
+    <div id="header">
+        <div id="logo">
+        	<a href="{{ path('root') }}">
+            	<img src="{{ asset('images/logo.png') }}" />
+            </a>
         </div>
-
+        
+        <div id="auth">
+        	{% include "AcmeMainBundle::user.html.twig" %}
+        </div>
+        
         <div id="menu">
     		{{ knp_menu_render('AcmeMainBundle:Builder:mainMenu') }}
     	</div>
-
-    	<div id="shoutbox">
+    </div>
+	
+    <div id="container">
+        <div id="shoutbox">
+            <span class="heading">Rozmowy prowadzone przez użytkowników serwisu</span>
+            
     		{% render 'AcmeMainBundle:Shoutbox:index' %}
     	</div>
 
@@ -47,14 +53,17 @@
 
         <div class="clearfix"></div>
 
-		<img src="/images/footer.png" id="footerLinks" />
-
+        <div id="footer">
         {% block footer %}
-        {{ tinymce_init() }}
-        <div id="footerBar">
-        	{% include 'AcmeMainBundle::footer.html.twig' %}
-        </div>
+            {{ tinymce_init() }}
+            <img src="/images/footer.png" id="footerLinks" />
+            <span id="footerBar">
+            	{% include 'AcmeMainBundle::footer.html.twig' %}
+            </span>
+            <div class="clearfix"></div>
         {% endblock %}
+        </div>
+        
     </div>
     </body>
 </html>

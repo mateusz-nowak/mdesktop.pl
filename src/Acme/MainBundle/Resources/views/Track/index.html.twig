@@ -12,4 +12,9 @@
 		{% endfor %}
 		</ol>
 	{% endfor %}
+	
+	{# display navigation #}
+	<div class="navigation">
+	    {{ played.render()|raw }}
+	</div>
 {% endblock %}

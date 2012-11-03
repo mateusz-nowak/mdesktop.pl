@@ -28,6 +28,8 @@ class TrackController extends Controller
      */
     public function indexAction()
     {
+        $paginator = $this->get('knp_paginator');
+		
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation
@@ -35,9 +37,12 @@ class TrackController extends Controller
 
         return array
         (
-            'played' => $this->getDoctrine()->getEntityManager()->getRepository('AcmeMainBundle:Played')->findBy(array(
-                'type' => 1
-            ))
+        	'played' => $paginator->paginate(
+                $this->getDoctrine()->getEntityManager()->getRepository('AcmeMainBundle:Played')->findBy(array(
+                	'type' => 1
+            	)),
+                $this->get('request')->query->get('page', 1)
+            ),
         );
     }
 

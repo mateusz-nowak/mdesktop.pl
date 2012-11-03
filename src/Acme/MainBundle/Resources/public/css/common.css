@@ -1,198 +1,234 @@
-body
-{
-	background: #333;
+body {
+	background: #222;
 	font: 12px Arial, Helvetica, sans-serif;
+	margin: 0px;
 }
 
-#container
-{
+#header {
+	margin: auto;
+	display: block;
+	background: #000;
+}
+
+#header div#logo, #header div#menu {
+	width: 1000px;
+	margin: auto;
+}
+
+#container {
 	margin: auto;
 	width: 1000px;
-	background: #fff;
-	padding: 10px;
 }
 
-ul#shoutbox
-{
-	list-style: none;
+#footer {
 	margin: 0px;
-	padding: 0px;
-	height: 150px;
-	overflow: auto;
-}
-
-ul#shoutbox li
-{
-	margin: 0px;
-	padding: 3px;
-}
-
-#contentBox li span.comment
-{
-	display: block;
-	text-align: right;
-}
-
-#userSideBar 
-{
-	float: left;
-	width: 200px;
-}
-
-#mediaLeft 
-{
-	width: 400px;
-	float: left;
-}
-
-#mediaRight 
-{
-	width: 400px;
-	float: right;
-}
-
-#mediaRight img 
-{
-	width: 380px;
-	margin: 5px;
-}
-
-#contentBar 
-{
-	width: 800px;
-	float: right;
-}
-
-#topSideBar
-{
-	padding: 10px;
-	margin-bottom: 10px;
-	text-align: right;
-}
-
-#content
-{
 	margin-top: 10px;
+	background: #000;
 }
 
-#footerBar 
-{
-	padding-top: 10px;
+#footerBar {
 	text-align: right;
+	display: block;
+	position: absolute;
 	font-size: 12px;
+	width: 1000px;
+	margin-top: 5px;
 }
 
-#footerBar a 
-{
+#footerBar a {
 	margin-right: 5px;
 	padding-right: 5px;
-	border-right: 1px solid #666;
-	color: #666;
+	border-right: 1px solid #333;
+	color: #444;
+	font-size: 11px;
 }
 
-#footerBar a:last-child
-{
+#footerBar a:last-child {
 	border-right: 0px;
 	padding-right: 0px;
 }
 
-.clearfix
-{
-	clear: both;
+#header div#auth {
+	width: 1000px;
+	margin: auto;
+	background: #fff;
 }
 
-form 
-{
+#header div#auth div#userAuthBar {
+	position: absolute;
+	margin-top: -50px;
+	margin-left: auto;
+	width: 1000px;
+	text-align: right;
+}
+
+#header div#auth div#userAuthBar a {
+	background: #499dd1;
+	padding: 10px;
+	color: #fff;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#header div#auth div#userAuthBar a.logged_as {
+	background: #FF0000;
+}
+
+ul#shoutbox {
+	list-style: none;
 	margin: 0px;
+	padding: 0px;
+	height: 150px;
+	background: #111;
+	padding: 5px;
+	font-size: 11px;
+	overflow: hidden;
+	border: 2px solid #fff;
 }
 
-form label
-{
+ul#shoutbox li {
+	margin: 0px;
+	color: #999;
+	padding: 3px;
 	display: block;
 }
 
-form #remember_me
-{
+#shoutbox .heading {
 	display: block;
+	background: #fff;
+	padding: 5px;
+	color: #000;
+	font-size: 11px;
+	font-style: italic;
 }
 
-#pagination 
-{
-	text-align: center;
+ul#shoutbox li:nth-child(odd) {
+	background: #222;
 }
 
-#menu 
-{
+#contentBox li span.comment {
+	display: block;
+	text-align: right;
+}
+
+#userSideBar {
+	float: left;
+	width: 200px;
+}
+
+#mediaLeft {
+	width: 400px;
+	float: left;
+}
+
+#mediaRight {
+	width: 400px;
+	float: right;
 }
 
 #menu ul {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
-	margin-bottom: 10px;
-	background: #ccc;
+	background: #fff;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
 #menu ul li {
 	display: inline;
+	margin: 0px;
 }
 
-#menu ul li a
-{
+#menu ul li a {
 	color: #000;
 	font-style: none;
-	background: #ccc;
+	background: #fff;
 	padding: 10px;
+	margin: 0px;
+	font-size: 13px;
 }
 
-#menu ul li a:hover
-{
-	background: #999;
+#menu ul li a:hover {
+	background: #eee;
+	text-decoration: underline;
 }
 
-#menu ul li.current a
-{
-	font-weight: bold;
+#menu ul li.current a {
+	background: #499dd1;
+	color: #fff;
+	text-decoration: underline;
 }
 
-a 
-{
+#mediaRight img {
+	width: 380px;
+	margin: 5px;
+}
+
+#contentBar {
+	width: 800px;
+	float: right;
+}
+
+#topSideBar {
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+
+#content {
+	margin-top: 10px;
+}
+
+.clearfix {
+	clear: both;
+}
+
+form {
+	margin: 0px;
+}
+
+form label {
+	display: block;
+}
+
+form #remember_me {
+	display: block;
+}
+
+#pagination {
+	text-align: center;
+}
+
+a {
 	font-style: none;
 	text-decoration: none;
 	color: #000
 }
 
-#flashContainer div
-{
+#flashContainer div {
 	clear: both;
 	color: #FFF;
 	text-align: center;
 	padding: 10px;
 }
 
-.flash_notice 
-{
+.flash_notice {
 	background: #006611;
 }
 
-.flash_error
-{
+.flash_error {
 	background: #ff0000;
 }
 
-#navigation ul 
-{
+#navigation ul {
 	list-style: none;
 }
 
-#navigation ul li
-{
+#navigation ul li {
 	display: inline;
 }
 
-#footerLinks
-{
+#footerLinks {
 	margin-top: 20px;
 }
