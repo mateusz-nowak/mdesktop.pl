@@ -1,18 +1,28 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-<ul id="contentBox">
+<ul id="boxes">
 	{% for content in news %}
 		<li>
-			<h1><a href="{{ path('content_show', {'slug': content.slug}) }}">{{ content.title }}</a></h1>
+			{% if content.photos.count %}
+			<img src="{{ content.getThumbnail|apply_filter('boxes') }}" />
+			{% endif %}
+			<strong><a href="{{ path('content_show', {'slug': content.slug}) }}">{{ content.title }}</a></strong>
 			<p>
 				{{ content.text|cut(200)|raw }}
 
 				{% if content.commentable %}
-					<span class="comment">[Komentarze: {{ content.comments.count }}]</span>
+					<span class="comment">Komentarze: {{ content.comments.count }}</span>
 				{% endif %}
 			</p>
 		</li>
 	{% endfor %}
 </ul>
+
+<div class="clearfix"></div>
+
+{# display navigation #}
+<div class="navigation">
+    {{ news.render()|raw }}
+</div>
 {% endblock %}

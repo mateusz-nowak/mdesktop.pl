@@ -1,12 +1,10 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-	<h1>{{ category.name }}</h1>
-
-	<ul>
+<ul id="boxes">
 	{% for movie in movies %}
-		<li>
-			<img src="{{ movie.fullPhoto }}" align="left" />
+		<li style="height: 380px;">
+			<img src="{{ movie.fullPhoto }}" />
 			<h2><a href="{{ path('movie_show', {'slug': movie.slug}) }}">{{ movie.title }}</a></h2>
 			<small>
 				kategorie:
@@ -15,13 +13,24 @@
 				{% endfor %}
 			</small>
 			<p>{{ movie.text|cut(200) }}</p>
-			<div class="clearfix" />
+			<div class="clearfix"></div>
 		</li>
 	{% endfor %}
-	</ul>
+</ul>
 
-	{# display navigation #}
-	<div class="navigation">
-	    {{ movies.render()|raw }}
-	</div>
+<div class="clearfix"></div>
+
+{# display navigation #}
+<div class="navigation">
+    {{ movies.render()|raw }}
+</div>
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+	
+	<form action="{{ path('category') }}" method="get" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+	    <input type="submit" value="szukaj" />
+	</form>
 {% endblock %}

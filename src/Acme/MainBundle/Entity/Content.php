@@ -400,4 +400,11 @@ class Content
     {
         $this->categories->removeElement($categories);
     }
+	
+	public function getThumbnail()
+	{
+		if($this->photos->first()) {
+			return $this->photos->first()->getFullPath();	
+		}
+	}
 }

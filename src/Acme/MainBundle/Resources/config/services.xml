@@ -31,6 +31,12 @@
 		<service id="track_container_service" class="%track_grabber.class%">
 			<argument type="service" id="track_factory_service"></argument>
 		</service>
+		
+		<service id="movie_filter_type" class="Acme\MainBundle\Form\Type\MovieFilterType">
+			<call method="setEntityManager">
+				<argument type="service" id="doctrine.orm.entity_manager" />
+			</call>
+		</service>
 
 		<!-- Twig Extension -->
 

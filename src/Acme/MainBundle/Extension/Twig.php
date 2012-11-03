@@ -49,11 +49,13 @@ class Twig extends Twig_Extension
 
     public function getCuttedVersion($string, $length = 300)
     {
-        if (mb_strlen($string) == mb_strlen(mb_substr($string, 0, $length))) {
+    	$string = strip_tags($string);
+		
+        if (mb_strlen($string, 'UTF-8') == mb_strlen(mb_substr($string, 0, $length, 'UTF-8'), 'UTF-8')) {
             return $string;
         }
 
-        return mb_substr($string, 0, $length) . '...';
+        return mb_substr($string, 0, $length, 'UTF-8') . '...';
     }
 
     public function getName()

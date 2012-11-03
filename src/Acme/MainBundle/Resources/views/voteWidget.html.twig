@@ -1,7 +1,8 @@
-<h2>Oceń</h2>
+<h3>Oceń</h3>
 
 <ul id="vote">
 {% for i in 1..10 %}
-	<li><a href="{{ path(route, {'id': item.id, 'vote': i}) }}">Oceń na: {{ i }}</a></li>
+	<li><a href="{{ path(route, {'id': item.id, 'vote': i}) }}">{{ i }}</a></li>
 {% endfor %}
 </ul>
+<div class="clearfix"></div>
