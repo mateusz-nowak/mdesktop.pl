@@ -1,20 +1,30 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-	<h1>Ostatnio odtwarzane mp3</h1>
-
+<ul id="boxes">
 	{% for item in played %}
-		<h2>{{ item.header }}</h2>
-
-		<ol>
-		{% for track in item.data %}
-			<li><a href="{{ path('track_search', {'q': track}) }}">{{ track }}</a></li>
-		{% endfor %}
-		</ol>
+		<li>
+			<img src="{{ asset('images/music.png') }}" />
+			<div>
+				<strong>{{ item.header }}</strong>
+			</div>
+			{% for id, track in item.data %}
+				{{ id+1 }}. <a href="{{ path('track_search', {'q': track}) }}">{{ track|cut(35) }}</a><br/>
+			{% endfor %}
+		</li>
 	{% endfor %}
+</ul>
+
+<div class="clearfix"></div>
+
+{# display navigation #}
+<div class="navigation">
+    {{ played.render()|raw }}
+</div>
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
 	
-	{# display navigation #}
-	<div class="navigation">
-	    {{ played.render()|raw }}
-	</div>
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
 {% endblock %}

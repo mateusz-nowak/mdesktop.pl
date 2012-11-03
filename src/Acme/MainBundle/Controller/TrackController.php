@@ -41,7 +41,8 @@ class TrackController extends Controller
                 $this->getDoctrine()->getEntityManager()->getRepository('AcmeMainBundle:Played')->findBy(array(
                 	'type' => 1
             	)),
-                $this->get('request')->query->get('page', 1)
+                $this->get('request')->query->get('page', 1), 
+                9
             ),
         );
     }

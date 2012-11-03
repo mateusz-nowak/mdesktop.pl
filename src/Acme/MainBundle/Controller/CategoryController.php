@@ -5,6 +5,7 @@ namespace Acme\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Acme\MainBundle\Form\Type\MovieFilterType;
 
 /**
  * Track controller.
@@ -17,17 +18,30 @@ class CategoryController extends Controller
      * Lists all Category entities.
      *
      * @Route("", name="category")
-     * @Template()
+     * @Template("AcmeMainBundle:Category:category.html.twig")
      */
     public function indexAction()
     {
+    	$paginator = $this->get('knp_paginator');
+		
+		if($filter = $this->getRequest()->query->get('MovieFilter')) {
+			$movies = $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Movie')->filterQuery($filter);
+		} else {
+			$movies = $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Movie')->findAll();
+		}
+		
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation
-            ->addLocation('Kategorie filmowe', array('route' => 'category'));
+            ->addLocation('Wszystkie filmy', array('route' => 'category'));
 
         return array(
-            'categories' => $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Category')->findBy(array('type' => 2)),
+            'movies' => $paginator->paginate(
+                $movies,
+                $this->get('request')->query->get('page', 1),
+                9
+            ),
+            'form' => $this->createForm($this->get('movie_filter_type'))->createView(),
         );
     }
 
@@ -75,7 +89,8 @@ class CategoryController extends Controller
         return array(
             'movies' => $paginator->paginate(
                 $movies,
-                $this->get('request')->query->get('page', 1)
+                $this->get('request')->query->get('page', 1),
+                9
             ),
             'category' => $category,
         );
