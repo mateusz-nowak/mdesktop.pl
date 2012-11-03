@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div id="mediaLeft">
+<div class="cmsContent">
 <h1>{{ track.title }}</h1>
-<p>Rozmiar: {{ track.size }}</p>
+<span class="date">Rozmiar: {{ track.size }}</span>
 
 <object class="playerpreview" type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="200" height="20">
     <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf">
@@ -12,26 +12,34 @@
     <p>Musique de démonstration.</p>
 </object>
 
-<ul>
-	<li>
-		<a href="{{ path('track_download', {'slug': track.slug}) }}">Pobierz ten plik</a>
-	</li>
-</ul>
+<a class="button_download" href="{{ path('track_download', {'slug': track.slug}) }}" rel="nofollow">
+	<img src="{{ asset('images/download.png') }}" />
+</a>
 
-{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': track.comments} %}
-
-{% if is_granted('ROLE_USER') %}
-<form action="{{ path('track_comment', {'slug': track.slug}) }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <input type="submit" />
-</form>
-{% else %}
-	<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
-{% endif %}
+<div>
+	<img class="cms_photo_right" src="{{ photoTrack(artist) }}" />
 </div>
 
-<div id="mediaRight">
-	<img src="{{ photoTrack(artist) }}" />
 </div>
 
+<div class="cmsContent">
+	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': track.comments} %}
+	
+	{% if is_granted('ROLE_USER') %}
+	<form class="formComment" action="{{ path('track_comment', {'slug': track.slug}) }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+	    <input type="submit" value="komentuj" />
+	</form>
+	{% else %}
+		<div class="noticeUser">
+			<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
+		</div>
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+	
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
 {% endblock %}

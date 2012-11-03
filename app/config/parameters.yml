@@ -2,7 +2,7 @@ parameters:
     database_driver: pdo_mysql
     database_host: localhost
     database_port: null
-    database_name: devel_mdesk
+    database_name: devel_mdesktop
     database_user: root
     database_password: 5qrnaq3
     

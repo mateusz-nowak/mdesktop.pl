@@ -1,7 +1,8 @@
 <ul id="shoutbox">
 {% for entry in entries %}
 	<li>
-		<strong>{{ entry.user }}</strong>
+		[ {{ entry.createdAt|date("d/m/y H:i") }} ]
+		<strong>{{ entry.user }}: </strong>
 		<span>{{ entry.text }}</span>
 	</li>
 {% endfor %}
@@ -9,5 +10,5 @@
 
 <form action="{{ path('shoutbox_new') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <input type="submit" />
+    <input type="submit" value="Krzyknij"/>
 </form>

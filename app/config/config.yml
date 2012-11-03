@@ -37,6 +37,9 @@ avalanche_imagine:
       movie:
         type: thumbnail
         options: { size: [150, 150], mode: outbound, quality: 100, format: png }
+      boxes:
+        type: thumbnail
+        options: { size: [225, 150], mode: outbound, quality: 100, format: png }
 
 sonata_block:
     default_contexts: [cms]
@@ -104,7 +107,7 @@ stfalcon_tinymce:
                 convert_fonts_to_spans: false
         
 knp_paginator:
-    page_range: 10
+    page_range: 9
     default_options:
         page_name: page                # page query parameter name
         sort_field_name: sort          # sort field query parameter name

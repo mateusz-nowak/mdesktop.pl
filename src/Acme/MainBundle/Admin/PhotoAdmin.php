@@ -33,7 +33,7 @@ class PhotoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('file', 'genemu_jqueryfile', array('label' => 'photo.file'));
+            ->add('file', null, array('label' => 'photo.file'));
 
         return $formMapper;
     }

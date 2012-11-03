@@ -27,7 +27,7 @@ class Builder extends ContainerAware
         $menu = $factory->createItem('root');
         $menu->setCurrentUri($this->container->get('request')->getRequestUri());
 
-        $menu->addChild('Strona Główna', array('route' => 'root'));
+        $menu->addChild('Wiadomości', array('route' => 'root'));
         $menu->addChild('Muzyka', array('route' => 'track'));
         $menu->addChild('Filmy', array('route' => 'category'));
 

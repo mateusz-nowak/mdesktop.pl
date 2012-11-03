@@ -48,6 +48,7 @@ class MovieController extends Controller
             // 'artist' => current($lastApiTrackClient->search(current(explode(' ', $track->getTitle())))),
             'movie' => $movie,
             'form' => $this->createForm(new CommentType, new Comment)->createView(),
+            'sidebar' => $this->createForm($this->get('movie_filter_type'))->createView(),
         );
     }
     /**

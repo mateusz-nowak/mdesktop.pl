@@ -1,29 +1,38 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-
-<div id="mediaLeft">
-<h1>{{ movie.title }}</h1>
-
-<p>
-	<iframe src="http://www.megustavid.com/e={{ movie.embed }}?w=400&h=450" style="border:0;width:400px;height:450px;" frameborder="0" scrolling="no"></iframe>
-</p>
-
-{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': movie.comments} %}
-{% include 'AcmeMainBundle::voteWidget.html.twig' with {'item': movie, 'route': 'movie_vote'} %}
-
-{% if is_granted('ROLE_USER') %}
-<form action="{{ path('movie_comment', {'slug': movie.slug}) }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <input type="submit" />
-</form>
-{% else %}
-	<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
-{% endif %}
+<div class="cmsContent">
+	<h1>{{ movie.title }}</h1>
+	<p><iframe src="http://www.megustavid.com/e={{ movie.embed }}?w=400&h=400" style="border:0;width:400px;height:400px;" frameborder="0" scrolling="no"></iframe></p>
+	
+	<div><img class="cms_photo_right" src="{{ movie.getFullPhoto }}" style="margin-top: -500px;" /></div>
+	<p>{{ movie.text }}</p>
+</div>
+<div class="cmsContent">
+	{% include 'AcmeMainBundle::voteWidget.html.twig' with {'item': movie, 'route': 'movie_vote'} %}
+</div>
+<div class="cmsContent">
+	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': movie.comments} %}
+	
+	{% if is_granted('ROLE_USER') %}
+	<form class="formComment" action="{{ path('movie_comment', {'slug': movie.slug}) }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+	    <input type="submit" value="komentuj" />
+	</form>
+	{% else %}
+		<div class="noticeUser">
+			<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
+		</div>
+	{% endif %}
 </div>
 
-<div id="mediaRight">
-	<img src="{{ movie.getFullPhoto }}" />
-</div>
+{% endblock %}
 
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+	
+	<form action="{{ path('category') }}" method="get" {{ form_enctype(form) }}>
+	    {{ form_widget(sidebar) }}
+	    <input type="submit" value="szukaj" />
+	</form>
 {% endblock %}

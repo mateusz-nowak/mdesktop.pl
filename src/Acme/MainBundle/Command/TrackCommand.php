@@ -22,15 +22,22 @@ class TrackCommand extends ContainerAwareCommand
     {
         $browser = new Browser;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
-        $topTrackPlaylist = array(
-            'http://www.polskastacja.pl/radiochannel/HOT+100+-+Goraca+Setka+Nowosci..htm',
-            'http://www.polskastacja.pl/radiochannel/Super+Przeboje.htm',
-            'http://www.polskastacja.pl/radiochannel/Dance+100.htm',
-            'http://www.polskastacja.pl/radiochannel/RnB.htm',
-            'http://www.polskastacja.pl/radiochannel/HIP+HOP.htm',
-            'http://www.polskastacja.pl/radiochannel/Polski+Hip+Hop.htm',
-        );
+		
+		$response = (string) $browser->get('http://www.polskastacja.pl/');
+		
+		$crawler = new Crawler;
+		$crawler->addHtmlContent($response);
+		
+		$topTrackPlaylist = array();	
+		foreach ($crawler->filter('#scrollkanal div div a') as $topTrackList) {
+			$topTrackPlaylist[] = $topTrackList->getAttribute('href');
+        }
+		
+		$topTrackPlaylist = array_unique(array_map(function($playlist) {
+			return 'http://www.polskastacja.pl' . $playlist;
+		}, array_filter($topTrackPlaylist, function($playlist) {
+			return preg_match('/radiochannel/', $playlist);
+		})));
 
         foreach ($topTrackPlaylist as $playlistUrl) {
             $response = (string) $browser->get($playlistUrl);

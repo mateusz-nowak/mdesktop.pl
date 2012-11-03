@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}mdesktop.pl{% endblock %}</title>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}mdesktop.pl{% endblock %}</title>
+    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
 {% stylesheets '@AcmeMainBundle/Resources/public/css/*' %}
-		<link rel="stylesheet" href="{{ asset_url }}" />
+	<link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <div id="container">
-
-    	<a href="{{ path('root') }}">
-    		<img src="{{ asset('images/logo.png') }}" />
-    	</a>
-
-    	<div id="topSideBar">
-	    	{% include "AcmeMainBundle::user.html.twig" %}
+{% javascripts '@AcmeMainBundle/Resources/public/js/*' %}
+	<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div id="header">
+        <div id="logo">
+        	<a href="{{ path('root') }}">
+            	<img src="{{ asset('images/logo.png') }}" />
+            </a>
         </div>
-
+        <div id="auth">
+        	{% include "AcmeMainBundle::user.html.twig" %}
+        </div>
         <div id="menu">
     		{{ knp_menu_render('AcmeMainBundle:Builder:mainMenu') }}
     	</div>
-
-    	<div id="shoutbox">
+    </div>
+    <div id="container">
+        <div id="shoutbox">
+            <span class="heading">Rozmowy prowadzone przez użytkowników serwisu</span>
     		{% render 'AcmeMainBundle:Shoutbox:index' %}
     	</div>
-
-    	<div id="userSideBar">
-    		<h1>Mp3</h1>
-
-    		{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+		<div id="cmsContent">
+	    	<div id="userSideBar">
+	    		{% block sideBar %}
+	    			<h2>Plotki</h2>
+	    			{% render 'AcmeMainBundle:News:Gossip' %}
+	    		{% endblock %}
+	        </div>
+	        <div id="contentBar">
+		        <div id="nav">
+			    	{{ knp_menu_render('AcmeMainBundle:Builder:navigation')|raw }}
+				</div>
+	        	<div id="content">
+	        		{% include "AcmeMainBundle::flash.html.twig" %}
+	        		{% block content %}{% endblock %}
+	        	</div>
+	        </div>
+        	<div class="clearfix"></div>
         </div>
-
-        <div id="contentBar">
-    		<div id="navigation">
-    			{{ knp_menu_render('AcmeMainBundle:Builder:navigation')|raw }}
-			</div>
-
-        	{% include "AcmeMainBundle::flash.html.twig" %}
-
-        	<div id="content">
-        		{% block content %}{% endblock %}
-        	</div>
-        </div>
-
-        <div class="clearfix"></div>
-
-		<img src="/images/footer.png" id="footerLinks" />
-
-        {% block footer %}
-        {{ tinymce_init() }}
-        <div id="footerBar">
-        	{% include 'AcmeMainBundle::footer.html.twig' %}
-        </div>
-        {% endblock %}
+    </div>
+    <div id="footer">
+    	<div id="footerContent">
+    	{% block footer %}
+	        {{ tinymce_init() }}
+	        <img src="/images/footer.png" id="footerLinks" />
+	        <div class="clearfix"></div>
+    	{% endblock %}
+    	</div>
+    </div>
+    <div id="footerBottomArea">
+		<div id="footerBar">
+	    	{% include 'AcmeMainBundle::footer.html.twig' %}
+	    </div>
+	    <div id="policy">
+	    	Wszelkie prawa zastrzeżone. {{ "now"|date("Y") }} &copy;<br />
+	    	Twoja autoryzacja oraz działania w serwisie są logowane.<br />
+	    	Rozpowszechnianie jakichkolwiek informacji, próba włamania się do serwisu będzie skutkowała powiadomieniem odpowiednich służb.
+	    </div>
     </div>
     </body>
 </html>

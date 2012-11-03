@@ -1,16 +1,31 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-{% for entity in tracks %}
-    <h2><a href="{{ path('track_show', {'slug': entity.slug}) }}">{{ entity.title }}</a></h2>
-{% endfor %}
+<ul id="boxes" class="movieBox">
+	{% for entity in tracks %}
+		<li>
+			<img src="{{ asset('images/music.png') }}" />
+			<h2><a href="{{ path('track_show', {'slug': entity.slug}) }}">{{ entity.title }}</a></h2>
+			<div class="clearfix"></div>
+		</li>
+	{% endfor %}
+</ul>
 
-<div id="pagination">
-{% if  page != 2 %}
-	<a href="{{ path('track_search', {'q': query, 'page': page-2}) }}">Poprzednia strona</a>
+<div class="clearfix"></div>
+
+<div class="navigation">
+{% if page != 2 %}
+	<span><a href="{{ path('track_search', {'q': query, 'page': page-2}) }}">Poprzednia strona</a></span>
 {% endif %}
 {% if next_page %}
-	<a href="{{ path('track_search', {'q': query, 'page': page}) }}">Nastepna strona</a>
+	<span><a href="{{ path('track_search', {'q': query, 'page': page}) }}">Nastepna strona</a></span>
 {% endif %}
 </div>
+
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+	
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
 {% endblock %}

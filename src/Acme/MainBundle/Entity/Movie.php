@@ -14,7 +14,7 @@ use Acme\MainBundle\Entity\Comment;
  * Acme\MainBundle\Entity\Movie
  *
  * @ORM\Table(name="movie")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Acme\MainBundle\Repository\Movie")
  * @ORM\HasLifecycleCallbacks()
  */
 class Movie
