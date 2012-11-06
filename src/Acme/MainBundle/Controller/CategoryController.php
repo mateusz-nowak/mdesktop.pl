@@ -93,6 +93,7 @@ class CategoryController extends Controller
                 9
             ),
             'category' => $category,
+            'form' => $this->createForm($this->get('movie_filter_type'))->createView(),
         );
     }
 }
