@@ -19,7 +19,7 @@ class Dloader implements FactoryInterface
     protected static $trackInfoUrl = 'http://dloader.pl/plik/dev,%s.html';
 
     /** @var $string $trackDownloadUrl */
-    protected static $trackDownloadUrl = 'http://dloader.pl/pobierz/dev,%s.html';
+    protected static $trackDownloadUrl = 'http://s1.dloader.pl/download.php?link=http://%s.wrzuta.pl/audio/%s/dev';
 
     /** @var $webProxyClient \Acme\MainBundle\Model\WebProxyClient */
     protected $webProxyClient;
@@ -66,7 +66,13 @@ class Dloader implements FactoryInterface
     public function	searchForTrack($query, $page, &$isNextPage)
     {
         $query = iconv(mb_detect_encoding($query), 'ASCII//TRANSLIT', $query);
-        $response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $page, $query));
+		
+		try {
+			$response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $page, $query));
+		} catch (RuntimeException $e) {
+			throw new RuntimeException('Nie można było wyszukać tego utworu. Wystąpił problem z połaczeniem z zewnętrzną bazą danych - spróbuj poźniej.');
+		}
+        
 
         $trackArray = array();
         $crawler = new Crawler;
@@ -90,7 +96,12 @@ class Dloader implements FactoryInterface
 
     public function processDownload(Track $track)
     {
-        return $this->downloaderContainer->process($track, sprintf(self::$trackDownloadUrl, $track->getRemote()));
+    	$crawler = new Crawler;
+    	$response = (string) $this->getResponse(sprintf(self::$trackInfoUrl, $track->getRemote()));
+		preg_match('/key=(?P<key>.*?)&login=(?P<login>.*?)&/', $response, $key);
+		
+    	$downloadUrl = sprintf(self::$trackDownloadUrl, $key['login'], $key['key']);
+        return $this->downloaderContainer->process($track, $downloadUrl);
     }
 
     protected function getResponse($url)
