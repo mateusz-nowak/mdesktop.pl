@@ -2,6 +2,7 @@
 
 namespace Acme\MainBundle\Entity;
 
+use Datetime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -42,7 +43,7 @@ class Track
     /**
      * @var string $title
      *
-     * @ORM\Column(name="size", type="string", length=16)
+     * @ORM\Column(name="size", type="string", length=16, nullable=true)
      */
     private $size;
 
@@ -74,6 +75,8 @@ class Track
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+		$this->createdAt = new Datetime;
+		$this->updatedAt = new Datetime;
     }
 
     /**

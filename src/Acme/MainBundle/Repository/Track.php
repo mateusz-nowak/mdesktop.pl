@@ -5,11 +5,15 @@ namespace Acme\MainBundle\Repository;
 use Exception;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Acme\MainBundle\Entity\Track as TrackEntity;
 
 class Track extends EntityRepository
 {
     public function batchInsertTracks(array $trackContainer)
     {
+    	/** @var $em \Doctrine\ORM\EntityRepository */
+    	$em = $this->_em;
+		
         $insertBatch = array();
         $remoteId = array();
 
@@ -18,18 +22,22 @@ class Track extends EntityRepository
         }
 
         foreach ($trackContainer as $trackObjectValue) {
-            $remoteId[] = $trackObjectValue['remote'];
-            $insertBatch[] = sprintf('("%s", "%s", now(), now())', addslashes($trackObjectValue['title']), addslashes($trackObjectValue['remote']));
+			try {
+				$track = new TrackEntity;
+			
+				$track->setRemote($trackObjectValue['remote']);
+				$track->setTitle($trackObjectValue['title']);
+			
+				$em->persist($track);
+	        	$em->flush();
+	        } catch (Exception $e) {
+	            // ...
+	        }
+			
+			$remoteId[] = $trackObjectValue['remote'];
         }
-
-        $plainSql = 'INSERT INTO track (title, remote, createdAt, updatedAt) VALUES ' . join(', ' . PHP_EOL , $insertBatch);
 		
-        try {
-            $this->_em->createNativeQuery($plainSql, new ResultSetMapping)->execute();
-        } catch (Exception $e) {
-            // ...
-        }
-		
+        
         return $this->findByRemote($remoteId);
     }
 }
