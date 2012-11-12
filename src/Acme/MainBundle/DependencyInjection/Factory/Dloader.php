@@ -22,7 +22,7 @@ class Dloader implements FactoryInterface
     protected static $trackInfoUrl = 'http://dloader.pl/plik/dev,%s.html';
 
     /** @var $string $trackDownloadUrl */
-    protected static $trackDownloadUrl = 'http://s1.dloader.pl/download.php?link=http://%s.wrzuta.pl/audio/%s/dev';
+    protected static $trackDownloadUrl = 'http://d.pobieranie-wrzuta.pl/download.php?link=http://%s.wrzuta.pl/audio/%s/dev';
 
     /** @var $webProxyClient \Acme\MainBundle\Model\WebProxyClient */
     protected $webProxyClient;
