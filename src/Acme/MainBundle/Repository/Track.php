@@ -19,17 +19,17 @@ class Track extends EntityRepository
 
         foreach ($trackContainer as $trackObjectValue) {
             $remoteId[] = $trackObjectValue['remote'];
-            $insertBatch[] = sprintf('("%s", "%s", now(), now())', $trackObjectValue['title'], $trackObjectValue['remote']);
+            $insertBatch[] = sprintf('("%s", "%s", now(), now())', addslashes($trackObjectValue['title']), addslashes($trackObjectValue['remote']));
         }
 
-        $plainSql = 'INSERT INTO track (title, remote, createdAt, updatedAt) VALUES ' . join(', ' , $insertBatch);
-
+        $plainSql = 'INSERT INTO track (title, remote, createdAt, updatedAt) VALUES ' . join(', ' . PHP_EOL , $insertBatch);
+		
         try {
             $this->_em->createNativeQuery($plainSql, new ResultSetMapping)->execute();
         } catch (Exception $e) {
             // ...
         }
-
+		
         return $this->findByRemote($remoteId);
     }
 }
