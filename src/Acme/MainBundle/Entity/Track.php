@@ -36,7 +36,7 @@ class Track
     /**
      * @var string $title
      *
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="string", unique=true, length=32)
      */
     private $remote;
 

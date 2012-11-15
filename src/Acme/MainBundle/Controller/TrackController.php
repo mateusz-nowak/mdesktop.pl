@@ -67,7 +67,7 @@ class TrackController extends Controller
                     ->get('track_container_service')
                     ->getTrackMetaData($track->getRemote());
 
-                $track->setSize($trackMetaData->size);
+                $track->setSize($trackMetaData->getSize());
 
                 $this->getDoctrine()->getEntityManager()->persist($track);
                 $this->getDoctrine()->getEntityManager()->flush($track);
@@ -77,7 +77,7 @@ class TrackController extends Controller
                 return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
             }
         }
-
+		
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation

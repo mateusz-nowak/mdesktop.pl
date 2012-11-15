@@ -3,6 +3,7 @@
 namespace Acme\MainBundle\DependencyInjection;
 
 use Buzz\Browser;
+use Buzz\Message\RequestInterface;
 
 class WebProxyClient
 {
@@ -23,8 +24,12 @@ class WebProxyClient
     public function process()
     {
         $client = new Browser;
-
-        return $client->get($this->getParameter('url'));
+		
+		// get current proxy url
+		preg_match('/<form method=\'get\' action=\'(?P<href>.*?)\'/', (string) $client->get($this->proxyUrl), $regexp);
+		$parsedProxyUrl = str_replace(':', '', $this->getParameter('url'));
+		
+        return $client->get($regexp['href'] . 'myaddrproxy.php/' . $parsedProxyUrl);
     }
 
     protected function getParameter($parameter)

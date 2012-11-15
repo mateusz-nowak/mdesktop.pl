@@ -7,7 +7,7 @@
 	<parameters>
 		<parameter key="web_proxy_client.class">Acme\MainBundle\DependencyInjection\WebProxyClient</parameter>
 		<parameter key="track_grabber.class">Acme\MainBundle\Model\TrackGrabber</parameter>
-		<parameter key="track_factory.class">Acme\MainBundle\DependencyInjection\Factory\Dloader</parameter>
+		<parameter key="track_factory.class">Acme\MainBundle\DependencyInjection\Factory\Ulub</parameter>
 		<parameter key="downloader.class">Acme\MainBundle\DependencyInjection\Downloader</parameter>
 		<parameter key="menu_builder.class">Acme\MainBundle\Menu\Builder</parameter>
 	</parameters>

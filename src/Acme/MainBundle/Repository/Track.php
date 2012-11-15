@@ -25,8 +25,8 @@ class Track extends EntityRepository
 			try {
 				$track = new TrackEntity;
 			
-				$track->setRemote($trackObjectValue['remote']);
 				$track->setTitle($trackObjectValue['title']);
+				$track->setRemote($trackObjectValue['remote']);
 			
 				$em->persist($track);
 	        	$em->flush();
@@ -36,7 +36,6 @@ class Track extends EntityRepository
 			
 			$remoteId[] = $trackObjectValue['remote'];
         }
-		
         
         return $this->findByRemote($remoteId);
     }
