@@ -81,17 +81,17 @@ class Ulub implements FactoryInterface
 		} catch (RuntimeException $e) {
 			throw new RuntimeException('Nie można było wyszukać tego utworu. Wystąpił problem z połaczeniem z zewnętrzną bazą danych - spróbuj poźniej.');
 		}
-        
+		
         $trackArray = array();
         $crawler = new Crawler;
-        $crawler->addHtmlContent($response);
+        $crawler->addHtmlContent($response, 'UTF-8');
 
 		foreach($crawler->filter('h3.r a') as $item) {
 			preg_match('/ulub.pl\/(?<remote>.*?)\//', $item->getAttribute('href'), $tmp);
 			
 			if(!isset($tmp['remote'])) 
 				continue;
-			
+
 			$trackArray[] = array(
 				'title' => trim(str_replace('- pobierz MP3', '', $item->nodeValue)),
 				'remote' => $tmp['remote'],
