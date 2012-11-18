@@ -1,5 +1,8 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
+{% block title %}
+	{{ app.request.query.get('q') }}
+{% endblock %}
 {% block content %}
 <ul id="boxes" class="movieBox">
 	{% for entity in tracks %}

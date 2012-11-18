@@ -2,6 +2,7 @@
 
 namespace Acme\MainBundle\Extension;
 
+use Acme\MainBundle\ValueObject\Meta;
 use Acme\MainBundle\Repository\Content;
 use Doctrine\ORM\EntityManager;
 use Twig_Extension, Twig_Filter_Method, Twig_Function_Method;
@@ -17,8 +18,11 @@ class Twig extends Twig_Extension
 
     public function getGlobals()
     {
+    	$meta = Meta::getInstance();
+		
         return array(
             'footerContainer' => $this->entityManager->getRepository('AcmeMainBundle:Content')->findAllByCategoryName(Content::PAGE),
+            'lastTitle' => $meta->getLastTitle(),
         );
     }
 
