@@ -37,6 +37,9 @@ class MovieFilterType extends AbstractType
 				return $repo->createQueryBuilder('c')->where('c.type = 2');
 			},
 			'required' => false,
+			'attr' => array(
+				'class' => 'option_list'
+			),
 		));
     }
 
