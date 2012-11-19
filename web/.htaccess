@@ -5,6 +5,9 @@
     #    RewriteBase /
     #</IfModule>
 
+    RewriteCond %{HTTP_HOST} ^www.filmymp3.pl [NC]
+    RewriteRule ^(.*)$ http://filmymp3.pl/$1 [L,R=301]
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>
