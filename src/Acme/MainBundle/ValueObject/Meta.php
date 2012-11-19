@@ -28,6 +28,8 @@ class Meta
 	
 	public function getLastTitle() 
 	{
-		return $this->title[count($this->title)-1];
+		 if (count($this->title)) {
+	 	     return $this->title[count($this->title)-1];
+		 }
 	}
 }
