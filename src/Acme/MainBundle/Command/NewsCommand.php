@@ -62,7 +62,7 @@ class NewsCommand extends ContainerAwareCommand
 			$news = new Content;
 			$news->setText($newsItem['text']);
 			$news->setTitle($newsItem['title']);
-			$news->addCategory($em->getRepository('AcmeMainBundle:Category')->find(2));
+			$news->addCategory($em->getRepository('AcmeMainBundle:Category')->findOneBy(array('slug' => 'wiadomosci')));
 			$news->setThumbnail($newsItem['photo']);
 			
 			$em->persist($news);
