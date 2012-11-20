@@ -21,3 +21,6 @@ _sonata_admin:
 _imagine:
     resource: .
     type:     imagine
+    
+liip_search:
+    resource: "@LiipSearchBundle/Resources/config/routing.yml"

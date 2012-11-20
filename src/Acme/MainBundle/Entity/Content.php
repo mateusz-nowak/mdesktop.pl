@@ -49,6 +49,13 @@ class Content
     private $title;
 
     /**
+     * @var string $thumbnail
+     *
+     * @ORM\Column()
+     */
+    private $thumbnail = NULL;
+
+    /**
      * @var text $text
      *
      * @ORM\Column(type="text")
@@ -400,11 +407,29 @@ class Content
     {
         $this->categories->removeElement($categories);
     }
-	
-	public function getThumbnail()
-	{
-		if($this->photos->first()) {
-			return $this->photos->first()->getFullPath();	
-		}
-	}
+
+    public function getThumbnailContent()
+    {
+        return $this->thumbnail;
+    }
+
+    public function getThumbnail()
+    {
+        if ($this->photos->first()) {
+            return $this->photos->first()->getFullPath();
+        }
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param  string  $thumbnail
+     * @return Content
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
 }

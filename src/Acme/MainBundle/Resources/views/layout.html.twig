@@ -2,7 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}mdesktop.pl{% endblock %}</title>
+    <title>{% block title %}{{ lastTitle }}{% endblock %} - Filmy Online, Wyszukiwarka MP3, Darmowe MP3</title>
+    <meta name="description" content="filmy online, darmowe mp3, wyszukiwarka mp3, najlepsze mp3, wyszukaj mp3, filmy z wrzuty, wrzuta.pl pobieranie, ulub.pl pobieranie, wrzuta.pl downloader" />
+    <meta name="keywords" content="filmy online, darmowe mp3, wyszukiwarka mp3, najlepsze mp3, wyszukaj mp3, filmy z wrzuty, wrzuta.pl pobieranie, ulub.pl pobieranie, wrzuta.pl downloader” />
+
     <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
 {% stylesheets '@AcmeMainBundle/Resources/public/css/*' %}
 	<link rel="stylesheet" href="{{ asset_url }}" />
@@ -10,7 +13,7 @@
 {% javascripts '@AcmeMainBundle/Resources/public/js/*' %}
 	<script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('favicon.jpg') }}" />
 </head>
 <body>
     <div id="header">
@@ -70,4 +73,14 @@
 	    </div>
     </div>
     </body>
+    <script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-36458059-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
 </html>

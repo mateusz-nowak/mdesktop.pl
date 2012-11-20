@@ -5,7 +5,6 @@ namespace Acme\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Acme\MainBundle\Form\Type\MovieFilterType;
 
 /**
  * Track controller.
@@ -22,14 +21,14 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-    	$paginator = $this->get('knp_paginator');
-		
-		if($filter = $this->getRequest()->query->get('MovieFilter')) {
-			$movies = $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Movie')->filterQuery($filter);
-		} else {
-			$movies = $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Movie')->findAll();
-		}
-		
+        $paginator = $this->get('knp_paginator');
+
+        if ($filter = $this->getRequest()->query->get('MovieFilter')) {
+            $movies = $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Movie')->filterQuery($filter);
+        } else {
+            $movies = $this->get('doctrine.orm.entity_manager')->getRepository('AcmeMainBundle:Movie')->findAll();
+        }
+
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation

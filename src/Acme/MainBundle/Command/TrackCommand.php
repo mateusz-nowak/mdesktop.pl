@@ -22,22 +22,22 @@ class TrackCommand extends ContainerAwareCommand
     {
         $browser = new Browser;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-		
-		$response = (string) $browser->get('http://www.polskastacja.pl/');
-		
-		$crawler = new Crawler;
-		$crawler->addHtmlContent($response);
-		
-		$topTrackPlaylist = array();	
-		foreach ($crawler->filter('#scrollkanal div div a') as $topTrackList) {
-			$topTrackPlaylist[] = $topTrackList->getAttribute('href');
+
+        $response = (string) $browser->get('http://www.polskastacja.pl/');
+
+        $crawler = new Crawler;
+        $crawler->addHtmlContent($response);
+
+        $topTrackPlaylist = array();
+        foreach ($crawler->filter('#scrollkanal div div a') as $topTrackList) {
+            $topTrackPlaylist[] = $topTrackList->getAttribute('href');
         }
-		
-		$topTrackPlaylist = array_unique(array_map(function($playlist) {
-			return 'http://www.polskastacja.pl' . $playlist;
-		}, array_filter($topTrackPlaylist, function($playlist) {
-			return preg_match('/radiochannel/', $playlist);
-		})));
+
+        $topTrackPlaylist = array_unique(array_map(function($playlist) {
+            return 'http://www.polskastacja.pl' . $playlist;
+        }, array_filter($topTrackPlaylist, function($playlist) {
+            return preg_match('/radiochannel/', $playlist);
+        })));
 
         foreach ($topTrackPlaylist as $playlistUrl) {
             $response = (string) $browser->get($playlistUrl);

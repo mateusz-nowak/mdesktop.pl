@@ -1,5 +1,8 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
+{% block title %}
+	{{ track.title }}
+{% endblock %}
 {% block content %}
 
 <div class="cmsContent">
@@ -24,7 +27,7 @@
 
 <div class="cmsContent">
 	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': track.comments} %}
-	
+
 	{% if is_granted('ROLE_USER') %}
 	<form class="formComment" action="{{ path('track_comment', {'slug': track.slug}) }}" method="post" {{ form_enctype(form) }}>
 	    {{ form_widget(form) }}
@@ -40,6 +43,6 @@
 
 {% block sideBar %}
 	<h2>Wyszukaj</h2>
-	
+
 	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
 {% endblock %}

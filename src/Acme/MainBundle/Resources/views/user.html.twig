@@ -3,7 +3,7 @@
         <a href="{{ path('fos_user_profile_edit') }}" class="logged_as">
         	{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
         </a>
-        
+
         {% if is_granted('ROLE_ADMIN') %}
         	| <strong><a href="{{ path('sonata_admin_dashboard') }}">Zarządzanie</a></strong>
         {% endif %}
