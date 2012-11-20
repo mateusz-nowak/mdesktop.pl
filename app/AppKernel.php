@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new BinaryThinking\LastfmBundle\BinaryThinkingLastfmBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Liip\SearchBundle\LiipSearchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

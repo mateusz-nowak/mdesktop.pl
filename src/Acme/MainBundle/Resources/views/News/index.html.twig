@@ -4,9 +4,7 @@
 <ul id="boxes">
 	{% for content in news %}
 		<li>
-			{% if content.photos.count %}
-			<img src="{{ content.getThumbnail|apply_filter('boxes') }}" />
-			{% endif %}
+			<img src="{{ content.getThumbnailContent }}" style="width: 225px; height: 150px;" />
 			<strong><a href="{{ path('content_show', {'slug': content.slug}) }}">{{ content.title }}</a></strong>
 			<p>
 				{{ content.text|cut(200)|raw }}

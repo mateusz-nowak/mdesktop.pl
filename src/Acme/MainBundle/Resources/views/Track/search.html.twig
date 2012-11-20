@@ -1,5 +1,8 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
+{% block title %}
+	{{ app.request.query.get('q') }}
+{% endblock %}
 {% block content %}
 <ul id="boxes" class="movieBox">
 	{% for entity in tracks %}
@@ -26,6 +29,6 @@
 
 {% block sideBar %}
 	<h2>Wyszukaj</h2>
-	
+
 	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
 {% endblock %}

@@ -13,13 +13,16 @@ use Acme\MainBundle\DependencyInjection\FactoryInterface;
 class Dloader implements FactoryInterface
 {
     /** @var $string $searchTrackUrl */
-    protected static $searchTrackUrl = 'http://dloader.pl/szukaj/%s/%s';
+    protected static $searchTrackUrl = 'http://dloader.pl/szukaj/%s';
+
+    /** @var $string $searchTrackUrl */
+    protected static $searchTrackUrlPage = 'http://dloader.pl/szukaj/%s/%s';
 
     /** @var $string $trackInfoUrl */
     protected static $trackInfoUrl = 'http://dloader.pl/plik/dev,%s.html';
 
     /** @var $string $trackDownloadUrl */
-    protected static $trackDownloadUrl = 'http://dloader.pl/pobierz/dev,%s.html';
+    protected static $trackDownloadUrl = 'http://d.pobieranie-wrzuta.pl/download.php?link=http://%s.wrzuta.pl/audio/%s/dev';
 
     /** @var $webProxyClient \Acme\MainBundle\Model\WebProxyClient */
     protected $webProxyClient;
@@ -65,8 +68,17 @@ class Dloader implements FactoryInterface
 
     public function	searchForTrack($query, $page, &$isNextPage)
     {
-        $query = iconv(mb_detect_encoding($query), 'ASCII//TRANSLIT', $query);
-        $response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $page, $query));
+        $query = urlencode(mb_strtolower(iconv(mb_detect_encoding($query), 'ASCII//TRANSLIT', $query), 'UTF-8'));
+
+        try {
+            if ($page == 1) {
+                $response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $query));
+            } else {
+                $response = (string) $this->getResponse(sprintf(self::$searchTrackUrlPage, $page-1, $query));
+            }
+        } catch (RuntimeException $e) {
+            throw new RuntimeException('Nie można było wyszukać tego utworu. Wystąpił problem z połaczeniem z zewnętrzną bazą danych - spróbuj poźniej.');
+        }
 
         $trackArray = array();
         $crawler = new Crawler;
@@ -90,7 +102,13 @@ class Dloader implements FactoryInterface
 
     public function processDownload(Track $track)
     {
-        return $this->downloaderContainer->process($track, sprintf(self::$trackDownloadUrl, $track->getRemote()));
+        $crawler = new Crawler;
+        $response = (string) $this->getResponse(sprintf(self::$trackInfoUrl, $track->getRemote()));
+        preg_match('/key=(?P<key>.*?)&login=(?P<login>.*?)&/', $response, $key);
+
+        $downloadUrl = sprintf(self::$trackDownloadUrl, $key['login'], $key['key']);
+
+        return $this->downloaderContainer->process($track, $downloadUrl);
     }
 
     protected function getResponse($url)

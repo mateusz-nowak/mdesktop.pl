@@ -43,6 +43,10 @@ class MoviesCommand extends ContainerAwareCommand
                     continue;
                 }
 
+                if (!isset($tmpEmbed['embed']) || !isset($tmpDataHref['href']) || !isset($tmpData['translation']) || !isset($tmpData['title'])) {
+                    continue;
+                }
+
                 $movieEntity = new Movie;
                 $movieEntity->setTitle($tmpData['title']);
                 $movieEntity->setText($movie->getElementsByTagName('div')->item(5)->nodeValue);

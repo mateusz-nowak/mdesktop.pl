@@ -4,9 +4,9 @@
 <div class="cmsContent">
 	<h1>{{ content.title }}</h1>
 	<span class="date">{{ content.createdAt|date("d/m/Y") }}</span>
-	
+
 	{{ content.text|raw }}
-	
+
 	<div class="photoStack">
 	{% for photo in content.photos %}
 		<a href="{{ photo.fullPath }}">
@@ -15,12 +15,12 @@
 	{% endfor %}
 	</div>
 </div>
-	
+
 	{% if content.commentable %}
 
 <div class="cmsContent">
 	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': content.comments} %}
-	
+
 	{% if is_granted('ROLE_USER') %}
 	<form class="formComment" action="{{ path('content_comment', {'slug': content.slug}) }}" method="post" {{ form_enctype(form) }}>
 	    {{ form_widget(form) }}

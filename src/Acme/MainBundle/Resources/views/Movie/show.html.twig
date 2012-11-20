@@ -4,7 +4,7 @@
 <div class="cmsContent">
 	<h1>{{ movie.title }}</h1>
 	<p><iframe src="http://www.megustavid.com/e={{ movie.embed }}?w=400&h=400" style="border:0;width:400px;height:400px;" frameborder="0" scrolling="no"></iframe></p>
-	
+
 	<div><img class="cms_photo_right" src="{{ movie.getFullPhoto }}" style="margin-top: -500px;" /></div>
 	<p>{{ movie.text }}</p>
 </div>
@@ -13,7 +13,7 @@
 </div>
 <div class="cmsContent">
 	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': movie.comments} %}
-	
+
 	{% if is_granted('ROLE_USER') %}
 	<form class="formComment" action="{{ path('movie_comment', {'slug': movie.slug}) }}" method="post" {{ form_enctype(form) }}>
 	    {{ form_widget(form) }}
@@ -30,7 +30,7 @@
 
 {% block sideBar %}
 	<h2>Wyszukaj</h2>
-	
+
 	<form action="{{ path('category') }}" method="get" {{ form_enctype(form) }}>
 	    {{ form_widget(sidebar) }}
 	    <input type="submit" value="szukaj" />

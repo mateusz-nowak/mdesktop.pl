@@ -195,9 +195,12 @@ ul {
 
 #userSideBar form select {
 	width: 188px;
+	font-size: 11px;
+}
+
+#userSideBar form select.option_list {
 	padding: 3px;
 	height: 300px;
-	font-size: 11px;
 } 
 
 #userSideBar form input[type=submit] {
