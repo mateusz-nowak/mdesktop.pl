@@ -2,12 +2,12 @@
 {% for gossip in gossips %}
 	<li>
 		<img src="{{ gossip.image }}" align="left" />
-		
+
 		<div class="t">
 			<a href="{{ gossip.url }}" rel="nofollow">{{ gossip.title }}</a>
 			<em>{{ gossip.body }}</em>
 		</div>
-		
+
 		<div class="clearfix"></div>
 	</li>
 {% endfor %}

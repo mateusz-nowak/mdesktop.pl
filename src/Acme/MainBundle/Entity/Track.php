@@ -75,8 +75,8 @@ class Track
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-		$this->createdAt = new Datetime;
-		$this->updatedAt = new Datetime;
+        $this->createdAt = new Datetime;
+        $this->updatedAt = new Datetime;
     }
 
     /**

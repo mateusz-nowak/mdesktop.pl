@@ -29,7 +29,7 @@ class TrackController extends Controller
     public function indexAction()
     {
         $paginator = $this->get('knp_paginator');
-		
+
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation
@@ -37,11 +37,11 @@ class TrackController extends Controller
 
         return array
         (
-        	'played' => $paginator->paginate(
+            'played' => $paginator->paginate(
                 $this->getDoctrine()->getEntityManager()->getRepository('AcmeMainBundle:Played')->findBy(array(
-                	'type' => 1
-            	)),
-                $this->get('request')->query->get('page', 1), 
+                    'type' => 1
+                )),
+                $this->get('request')->query->get('page', 1),
                 9
             ),
         );
@@ -77,7 +77,7 @@ class TrackController extends Controller
                 return $this->redirect($this->get('request')->server->get('HTTP_REFERER'));
             }
         }
-		
+
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation

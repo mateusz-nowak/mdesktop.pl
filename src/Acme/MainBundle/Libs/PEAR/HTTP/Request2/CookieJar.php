@@ -96,7 +96,7 @@ class HTTP_Request2_CookieJar implements Serializable
      *
      * @param bool $serializeSessionCookies Controls serializing session cookies,
      *                                      see {@link serializeSessionCookies()}
-     * @param bool $usePublicSuffixList     Controls using Public Suffix List,
+     * @param bool $usePublicSuffixList Controls using Public Suffix List,
      *                                      see {@link usePublicSuffixList()}
      */
     public function __construct(
@@ -115,6 +115,7 @@ class HTTP_Request2_CookieJar implements Serializable
     {
         $dt = new DateTime();
         $dt->setTimezone(new DateTimeZone('UTC'));
+
         return $dt->format(DateTime::ISO8601);
     }
 
@@ -134,13 +135,13 @@ class HTTP_Request2_CookieJar implements Serializable
      * 'expires' field will be converted to ISO8601 format from COOKIE format,
      * 'domain' and 'path' will be set from setter URL if empty.
      *
-     * @param array    $cookie cookie data, as returned by
+     * @param array $cookie cookie data, as returned by
      *                         {@link HTTP_Request2_Response::getCookies()}
      * @param Net_URL2 $setter URL of the document that sent Set-Cookie header
      *
-     * @return   array    Updated cookie array
-     * @throws   HTTP_Request2_LogicException
-     * @throws   HTTP_Request2_MessageException
+     * @return array                          Updated cookie array
+     * @throws HTTP_Request2_LogicException
+     * @throws HTTP_Request2_MessageException
      */
     protected function checkAndUpdateFields(array $cookie, Net_URL2 $setter = null)
     {
@@ -213,11 +214,11 @@ class HTTP_Request2_CookieJar implements Serializable
     /**
      * Stores a cookie in the jar
      *
-     * @param array    $cookie cookie data, as returned by
+     * @param array $cookie cookie data, as returned by
      *                         {@link HTTP_Request2_Response::getCookies()}
      * @param Net_URL2 $setter URL of the document that sent Set-Cookie header
      *
-     * @throws   HTTP_Request2_Exception
+     * @throws HTTP_Request2_Exception
      */
     public function store(array $cookie, Net_URL2 $setter = null)
     {
@@ -297,6 +298,7 @@ class HTTP_Request2_CookieJar implements Serializable
             foreach ($ret as $c) {
                 $str .= (empty($str)? '': '; ') . $c['name'] . '=' . $c['value'];
             }
+
             return $str;
         }
     }
@@ -316,6 +318,7 @@ class HTTP_Request2_CookieJar implements Serializable
                 }
             }
         }
+
         return $cookies;
     }
 
@@ -326,7 +329,7 @@ class HTTP_Request2_CookieJar implements Serializable
      */
     public function serializeSessionCookies($serialize)
     {
-        $this->serializeSession = (bool)$serialize;
+        $this->serializeSession = (bool) $serialize;
     }
 
     /**
@@ -352,7 +355,7 @@ class HTTP_Request2_CookieJar implements Serializable
      */
     public function usePublicSuffixList($useList)
     {
-        $this->useList = (bool)$useList;
+        $this->useList = (bool) $useList;
     }
 
     /**
@@ -372,6 +375,7 @@ class HTTP_Request2_CookieJar implements Serializable
                 }
             }
         }
+
         return serialize(array(
             'cookies'          => $cookies,
             'serializeSession' => $this->serializeSession,
@@ -416,7 +420,7 @@ class HTTP_Request2_CookieJar implements Serializable
      * @param string $requestHost  request host
      * @param string $cookieDomain cookie domain
      *
-     * @return   bool    match success
+     * @return bool match success
      */
     public function domainMatch($requestHost, $cookieDomain)
     {
@@ -436,6 +440,7 @@ class HTTP_Request2_CookieJar implements Serializable
         ) {
             return false;
         }
+
         return substr('.' . $requestHost, -strlen($cookieDomain)) == $cookieDomain;
     }
 
@@ -448,7 +453,7 @@ class HTTP_Request2_CookieJar implements Serializable
      *
      * @param string $domain domain name
      *
-     * @return string|bool   registered domain, will return false if $domain is
+     * @return string|bool registered domain, will return false if $domain is
      *                       either invalid or a TLD itself
      */
     public static function getRegisteredDomain($domain)
@@ -478,8 +483,10 @@ class HTTP_Request2_CookieJar implements Serializable
             if (2 > ($count = count($domainParts))) {
                 return false;
             }
+
             return $domainParts[$count - 2] . '.' . $domainParts[$count - 1];
         }
+
         return $result;
     }
 
@@ -489,7 +496,7 @@ class HTTP_Request2_CookieJar implements Serializable
      * @param array $domainParts remaining domain parts
      * @param mixed $listNode    node in {@link HTTP_Request2_CookieJar::$psl} to check
      *
-     * @return string|null   concatenated domain parts, null in case of error
+     * @return string|null concatenated domain parts, null in case of error
      */
     protected static function checkDomainsList(array $domainParts, $listNode)
     {
@@ -514,4 +521,3 @@ class HTTP_Request2_CookieJar implements Serializable
         return (strlen($result) > 0) ? ($result . '.' . $sub) : null;
     }
 }
-?>

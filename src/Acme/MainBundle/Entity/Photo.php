@@ -96,7 +96,7 @@ class Photo
         );
 
         $this->setFile($fileName);
-	}
+    }
 
     public function getfullPath()
     {

@@ -249,8 +249,8 @@ class HTTP_Request2 implements SplSubject
      *
      * @param string|Net_URL2 $url Request URL
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      */
     public function setUrl($url)
     {
@@ -283,7 +283,7 @@ class HTTP_Request2 implements SplSubject
     /**
      * Returns the request URL
      *
-     * @return   Net_URL2
+     * @return Net_URL2
      */
     public function getUrl()
     {
@@ -295,8 +295,8 @@ class HTTP_Request2 implements SplSubject
      *
      * @param string $method one of the methods defined in RFC 2616
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException if the method name is invalid
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException if the method name is invalid
      */
     public function setMethod($method)
     {
@@ -315,7 +315,7 @@ class HTTP_Request2 implements SplSubject
     /**
      * Returns the request method
      *
-     * @return   string
+     * @return string
      */
     public function getMethod()
     {
@@ -327,52 +327,52 @@ class HTTP_Request2 implements SplSubject
      *
      * The following parameters are available:
      * <ul>
-     *   <li> 'adapter'           - adapter to use (string)</li>
-     *   <li> 'connect_timeout'   - Connection timeout in seconds (integer)</li>
+     *   <li> 'adapter'           - adapter to use (string) </li>
+     *   <li> 'connect_timeout'   - Connection timeout in seconds (integer) </li>
      *   <li> 'timeout'           - Total number of seconds a request can take.
      *                              Use 0 for no limit, should be greater than
-     *                              'connect_timeout' if set (integer)</li>
-     *   <li> 'use_brackets'      - Whether to append [] to array variable names (bool)</li>
-     *   <li> 'protocol_version'  - HTTP Version to use, '1.0' or '1.1' (string)</li>
-     *   <li> 'buffer_size'       - Buffer size to use for reading and writing (int)</li>
+     *                              'connect_timeout' if set (integer) </li>
+     *   <li> 'use_brackets'      - Whether to append [] to array variable names (bool) </li>
+     *   <li> 'protocol_version'  - HTTP Version to use, '1.0' or '1.1' (string) </li>
+     *   <li> 'buffer_size'       - Buffer size to use for reading and writing (int) </li>
      *   <li> 'store_body'        - Whether to store response body in response object.
      *                              Set to false if receiving a huge response and
-     *                              using an Observer to save it (boolean)</li>
-     *   <li> 'proxy_type'        - Proxy type, 'http' or 'socks5' (string)</li>
-     *   <li> 'proxy_host'        - Proxy server host (string)</li>
-     *   <li> 'proxy_port'        - Proxy server port (integer)</li>
-     *   <li> 'proxy_user'        - Proxy auth username (string)</li>
-     *   <li> 'proxy_password'    - Proxy auth password (string)</li>
-     *   <li> 'proxy_auth_scheme' - Proxy auth scheme, one of HTTP_Request2::AUTH_* constants (string)</li>
+     *                              using an Observer to save it (boolean) </li>
+     *   <li> 'proxy_type'        - Proxy type, 'http' or 'socks5' (string) </li>
+     *   <li> 'proxy_host'        - Proxy server host (string) </li>
+     *   <li> 'proxy_port'        - Proxy server port (integer) </li>
+     *   <li> 'proxy_user'        - Proxy auth username (string) </li>
+     *   <li> 'proxy_password'    - Proxy auth password (string) </li>
+     *   <li> 'proxy_auth_scheme' - Proxy auth scheme, one of HTTP_Request2::AUTH_* constants (string) </li>
      *   <li> 'proxy'             - Shorthand for proxy_* parameters, proxy given as URL,
-     *                              e.g. 'socks5://localhost:1080/' (string)</li>
-     *   <li> 'ssl_verify_peer'   - Whether to verify peer's SSL certificate (bool)</li>
+     *                              e.g. 'socks5://localhost:1080/' (string) </li>
+     *   <li> 'ssl_verify_peer'   - Whether to verify peer's SSL certificate (bool) </li>
      *   <li> 'ssl_verify_host'   - Whether to check that Common Name in SSL
-     *                              certificate matches host name (bool)</li>
+     *                              certificate matches host name (bool) </li>
      *   <li> 'ssl_cafile'        - Cerificate Authority file to verify the peer
-     *                              with (use with 'ssl_verify_peer') (string)</li>
+     *                              with (use with 'ssl_verify_peer') (string) </li>
      *   <li> 'ssl_capath'        - Directory holding multiple Certificate
-     *                              Authority files (string)</li>
-     *   <li> 'ssl_local_cert'    - Name of a file containing local cerificate (string)</li>
+     *                              Authority files (string) </li>
+     *   <li> 'ssl_local_cert'    - Name of a file containing local cerificate (string) </li>
      *   <li> 'ssl_passphrase'    - Passphrase with which local certificate
-     *                              was encoded (string)</li>
+     *                              was encoded (string) </li>
      *   <li> 'digest_compat_ie'  - Whether to imitate behaviour of MSIE 5 and 6
      *                              in using URL without query string in digest
-     *                              authentication (boolean)</li>
-     *   <li> 'follow_redirects'  - Whether to automatically follow HTTP Redirects (boolean)</li>
-     *   <li> 'max_redirects'     - Maximum number of redirects to follow (integer)</li>
+     *                              authentication (boolean) </li>
+     *   <li> 'follow_redirects'  - Whether to automatically follow HTTP Redirects (boolean) </li>
+     *   <li> 'max_redirects'     - Maximum number of redirects to follow (integer) </li>
      *   <li> 'strict_redirects'  - Whether to keep request method on redirects via status 301 and
      *                              302 (true, needed for compatibility with RFC 2616)
      *                              or switch to GET (false, needed for compatibility with most
-     *                              browsers) (boolean)</li>
+     *                              browsers) (boolean) </li>
      * </ul>
      *
      * @param string|array $nameOrConfig configuration parameter name or array
      *                                   ('parameter name' => 'parameter value')
-     * @param mixed        $value        parameter value if $nameOrConfig is not an array
+     * @param mixed $value parameter value if $nameOrConfig is not an array
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException If the parameter is unknown
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException If the parameter is unknown
      */
     public function setConfig($nameOrConfig, $value = null)
     {
@@ -409,9 +409,9 @@ class HTTP_Request2 implements SplSubject
      *
      * @param string $name parameter name
      *
-     * @return   mixed   value of $name parameter, array of all configuration
+     * @return mixed value of $name parameter, array of all configuration
      *                   parameters if $name is not given
-     * @throws   HTTP_Request2_LogicException If the parameter is unknown
+     * @throws HTTP_Request2_LogicException If the parameter is unknown
      */
     public function getConfig($name = null)
     {
@@ -423,6 +423,7 @@ class HTTP_Request2 implements SplSubject
                 HTTP_Request2_Exception::INVALID_ARGUMENT
             );
         }
+
         return $this->config[$name];
     }
 
@@ -433,7 +434,7 @@ class HTTP_Request2 implements SplSubject
      * @param string $password password
      * @param string $scheme   authentication scheme
      *
-     * @return   HTTP_Request2
+     * @return HTTP_Request2
      */
     public function setAuth($user, $password = '', $scheme = self::AUTH_BASIC)
     {
@@ -441,8 +442,8 @@ class HTTP_Request2 implements SplSubject
             $this->auth = null;
         } else {
             $this->auth = array(
-                'user'     => (string)$user,
-                'password' => (string)$password,
+                'user'     => (string) $user,
+                'password' => (string) $password,
                 'scheme'   => $scheme
             );
         }
@@ -456,7 +457,7 @@ class HTTP_Request2 implements SplSubject
      * The array has the keys 'user', 'password' and 'scheme', where 'scheme'
      * is one of the HTTP_Request2::AUTH_* constants.
      *
-     * @return   array
+     * @return array
      */
     public function getAuth()
     {
@@ -481,15 +482,15 @@ class HTTP_Request2 implements SplSubject
      * $req->setHeader('FOO'); // removes 'Foo' header from request
      * </code>
      *
-     * @param string|array      $name    header name, header string ('Header: value')
+     * @param string|array $name header name, header string ('Header: value')
      *                                   or an array of headers
-     * @param string|array|null $value   header value if $name is not an array,
+     * @param string|array|null $value header value if $name is not an array,
      *                                   header will be removed if value is null
-     * @param bool              $replace whether to replace previous header with the
+     * @param bool $replace whether to replace previous header with the
      *                                   same name or append to its value
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      */
     public function setHeader($name, $value = null, $replace = true)
     {
@@ -540,7 +541,7 @@ class HTTP_Request2 implements SplSubject
      * The array is of the form ('header name' => 'header value'), header names
      * are lowercased
      *
-     * @return   array
+     * @return array
      */
     public function getHeaders()
     {
@@ -561,8 +562,8 @@ class HTTP_Request2 implements SplSubject
      * @param string $name  cookie name
      * @param string $value cookie value
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      * @see      setCookieJar()
      */
     public function addCookie($name, $value)
@@ -593,20 +594,20 @@ class HTTP_Request2 implements SplSubject
      * If you provide file pointer rather than file name, it should support
      * fstat() and rewind() operations.
      *
-     * @param string|resource|HTTP_Request2_MultipartBody $body       Either a
+     * @param string|resource|HTTP_Request2_MultipartBody $body Either a
      *               string with the body or filename containing body or
      *               pointer to an open file or object with multipart body data
-     * @param bool                                        $isFilename Whether
+     * @param bool $isFilename Whether
      *               first parameter is a filename
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      */
     public function setBody($body, $isFilename = false)
     {
         if (!$isFilename && !is_resource($body)) {
             if (!$body instanceof HTTP_Request2_MultipartBody) {
-                $this->body = (string)$body;
+                $this->body = (string) $body;
             } else {
                 $this->body = $body;
             }
@@ -625,7 +626,7 @@ class HTTP_Request2 implements SplSubject
     /**
      * Returns the request body
      *
-     * @return   string|resource|HTTP_Request2_MultipartBody
+     * @return string|resource|HTTP_Request2_MultipartBody
      */
     public function getBody()
     {
@@ -642,11 +643,13 @@ class HTTP_Request2 implements SplSubject
 
             } elseif (0 === strpos($this->headers['content-type'], 'multipart/form-data')) {
                 require_once 'HTTP/Request2/MultipartBody.php';
+
                 return new HTTP_Request2_MultipartBody(
                     $this->postParams, $this->uploads, $this->getConfig('use_brackets')
                 );
             }
         }
+
         return $this->body;
     }
 
@@ -662,14 +665,14 @@ class HTTP_Request2 implements SplSubject
      * If you provide file pointers rather than file names, they should support
      * fstat() and rewind() operations.
      *
-     * @param string                $fieldName    name of file-upload field
-     * @param string|resource|array $filename     full name of local file,
+     * @param string                $fieldName name of file-upload field
+     * @param string|resource|array $filename  full name of local file,
      *               pointer to open file or an array of files
-     * @param string                $sendFilename filename to send in the request
-     * @param string                $contentType  content-type of file being uploaded
+     * @param string $sendFilename filename to send in the request
+     * @param string $contentType  content-type of file being uploaded
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      */
     public function addUpload(
         $fieldName, $filename, $sendFilename = null, $contentType = null
@@ -715,7 +718,7 @@ class HTTP_Request2 implements SplSubject
      * @param string|array $name  parameter name or array ('name' => 'value')
      * @param mixed        $value parameter value (can be an array)
      *
-     * @return   HTTP_Request2
+     * @return HTTP_Request2
      */
     public function addPostParameter($name, $value = null)
     {
@@ -758,6 +761,7 @@ class HTTP_Request2 implements SplSubject
         foreach ($this->observers as $key => $attached) {
             if ($attached === $observer) {
                 unset($this->observers[$key]);
+
                 return;
             }
         }
@@ -798,18 +802,18 @@ class HTTP_Request2 implements SplSubject
      * The following event names are possible:
      * <ul>
      *   <li>'connect'                 - after connection to remote server,
-     *                                   data is the destination (string)</li>
+     *                                   data is the destination (string) </li>
      *   <li>'disconnect'              - after disconnection from server</li>
      *   <li>'sentHeaders'             - after sending the request headers,
-     *                                   data is the headers sent (string)</li>
+     *                                   data is the headers sent (string) </li>
      *   <li>'sentBodyPart'            - after sending a part of the request body,
-     *                                   data is the length of that part (int)</li>
+     *                                   data is the length of that part (int) </li>
      *   <li>'sentBody'                - after sending the whole request body,
-     *                                   data is request body length (int)</li>
+     *                                   data is request body length (int) </li>
      *   <li>'receivedHeaders'         - after receiving the response headers,
      *                                   data is HTTP_Request2_Response object</li>
      *   <li>'receivedBodyPart'        - after receiving a part of the response
-     *                                   body, data is that part (string)</li>
+     *                                   body, data is that part (string) </li>
      *   <li>'receivedEncodedBodyPart' - as 'receivedBodyPart', but data is still
      *                                   encoded by Content-Encoding</li>
      *   <li>'receivedBody'            - after receiving the complete response
@@ -818,7 +822,7 @@ class HTTP_Request2 implements SplSubject
      * Different adapters may not send all the event types. Mock adapter does
      * not send any events to the observers.
      *
-     * @return   array   The array has two keys: 'name' and 'data'
+     * @return array The array has two keys: 'name' and 'data'
      */
     public function getLastEvent()
     {
@@ -839,8 +843,8 @@ class HTTP_Request2 implements SplSubject
      *
      * @param string|HTTP_Request2_Adapter $adapter Adapter to use
      *
-     * @return   HTTP_Request2
-     * @throws   HTTP_Request2_LogicException
+     * @return HTTP_Request2
+     * @throws HTTP_Request2_LogicException
      */
     public function setAdapter($adapter)
     {
@@ -922,8 +926,8 @@ class HTTP_Request2 implements SplSubject
     /**
      * Sends the request and returns the response
      *
-     * @throws   HTTP_Request2_Exception
-     * @return   HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
      */
     public function send()
     {
@@ -970,6 +974,7 @@ class HTTP_Request2 implements SplSubject
         if (!empty($e)) {
             throw $e;
         }
+
         return $response;
     }
 
@@ -981,7 +986,7 @@ class HTTP_Request2 implements SplSubject
      *                        type of file, will only work if $file is a
      *                        filename, not pointer
      *
-     * @return array array('fp' => file pointer, 'size' => file size, 'type' => MIME type)
+     * @return array                        array('fp' => file pointer, 'size' => file size, 'type' => MIME type)
      * @throws HTTP_Request2_LogicException
      */
     protected function fopenWrapper($file, $detectType = false)
@@ -1027,7 +1032,7 @@ class HTTP_Request2 implements SplSubject
      *
      * @param string $filename file name
      *
-     * @return   string  file MIME type
+     * @return string file MIME type
      */
     protected static function detectMimeType($filename)
     {
@@ -1044,7 +1049,7 @@ class HTTP_Request2 implements SplSubject
         if (empty($info) && function_exists('mime_content_type')) {
             return mime_content_type($filename);
         }
+
         return empty($info)? 'application/octet-stream': $info;
     }
 }
-?>

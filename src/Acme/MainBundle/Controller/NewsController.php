@@ -24,31 +24,31 @@ class NewsController extends Controller
      */
     public function indexAction()
     {
-		$paginator = $this->get('knp_paginator');
-		
+        $paginator = $this->get('knp_paginator');
+
         /** @var $navigation Acme\MainBundle\Menu\Builder */
         $navigation = $this->get('menu_builder_service');
         $navigation
             ->addLocation('Aktualności', array('route' => 'news'));
 
         return array(
-	        'news' => $paginator->paginate(
+            'news' => $paginator->paginate(
                 $this->getDoctrine()->getEntityManager()->getRepository('AcmeMainBundle:Content')->findAllByCategoryName(ContentRepository::NEWS),
                 $this->get('request')->query->get('page', 1),
                 9
             ),
         );
     }
-	
-	/**
+
+    /**
      * Display an RSS feed.
      *
      * @Template()
      */
-	public function gossipAction()
-	{
-		return array(
-			'gossips' => Gossip::toArray(), 
-		);
-	}
+    public function gossipAction()
+    {
+        return array(
+            'gossips' => Gossip::toArray(),
+        );
+    }
 }

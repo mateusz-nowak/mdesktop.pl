@@ -156,8 +156,8 @@ class Net_URL2
      * This method will magically set the value of a private variable ($var)
      * with the value passed as the args
      *
-     * @param  string $var      The private variable to set.
-     * @param  mixed  $arg      An argument of any type.
+     * @param  string $var The private variable to set.
+     * @param  mixed  $arg An argument of any type.
      * @return void
      */
     public function __set($var, $arg)
@@ -174,7 +174,7 @@ class Net_URL2
      * This is the magic get method to retrieve the private variable
      * that was set by either __set() or it's setter...
      *
-     * @param  string $var         The property name to retrieve.
+     * @param  string $var The property name to retrieve.
      * @return mixed  $this->$var  Either a boolean false if the
      *                             property is not set or the value
      *                             of the private property.
@@ -193,7 +193,7 @@ class Net_URL2
      * Returns the scheme, e.g. "http" or "urn", or false if there is no
      * scheme specified, i.e. if this is a relative URL.
      *
-     * @return  string|bool
+     * @return string|bool
      */
     public function getScheme()
     {
@@ -214,6 +214,7 @@ class Net_URL2
     public function setScheme($scheme)
     {
         $this->_scheme = $scheme;
+
         return $this;
     }
 
@@ -221,7 +222,7 @@ class Net_URL2
      * Returns the user part of the userinfo part (the part preceding the first
      *  ":"), or false if there is no userinfo part.
      *
-     * @return  string|bool
+     * @return string|bool
      */
     public function getUser()
     {
@@ -236,7 +237,7 @@ class Net_URL2
      * contain "@" in front of the hostname) or the userinfo part does not
      * contain ":".
      *
-     * @return  string|bool
+     * @return string|bool
      */
     public function getPassword()
     {
@@ -249,7 +250,7 @@ class Net_URL2
      * Returns the userinfo part, or false if there is none, i.e. if the
      * authority part does not contain "@".
      *
-     * @return  string|bool
+     * @return string|bool
      */
     public function getUserinfo()
     {
@@ -271,6 +272,7 @@ class Net_URL2
         if ($password !== false) {
             $this->_userinfo .= ':' . $password;
         }
+
         return $this;
     }
 
@@ -278,7 +280,7 @@ class Net_URL2
      * Returns the host part, or false if there is no authority part, e.g.
      * relative URLs.
      *
-     * @return  string|bool a hostname, an IP address, or false
+     * @return string|bool a hostname, an IP address, or false
      */
     public function getHost()
     {
@@ -296,6 +298,7 @@ class Net_URL2
     public function setHost($host)
     {
         $this->_host = $host;
+
         return $this;
     }
 
@@ -303,7 +306,7 @@ class Net_URL2
      * Returns the port number, or false if there is no port number specified,
      * i.e. if the default port is to be used.
      *
-     * @return  string|bool
+     * @return string|bool
      */
     public function getPort()
     {
@@ -321,6 +324,7 @@ class Net_URL2
     public function setPort($port)
     {
         $this->_port = $port;
+
         return $this;
     }
 
@@ -376,6 +380,7 @@ class Net_URL2
                 $this->_port = $reg[5];
             }
         }
+
         return $this;
     }
 
@@ -399,6 +404,7 @@ class Net_URL2
     public function setPath($path)
     {
         $this->_path = $path;
+
         return $this;
     }
 
@@ -406,7 +412,7 @@ class Net_URL2
      * Returns the query string (excluding the leading "?"), or false if "?"
      * is not present in the URL.
      *
-     * @return  string|bool
+     * @return string|bool
      * @see     self::getQueryVariables()
      */
     public function getQuery()
@@ -426,13 +432,14 @@ class Net_URL2
     public function setQuery($query)
     {
         $this->_query = $query;
+
         return $this;
     }
 
     /**
      * Returns the fragment name, or false if "#" is not present in the URL.
      *
-     * @return  string|bool
+     * @return string|bool
      */
     public function getFragment()
     {
@@ -450,6 +457,7 @@ class Net_URL2
     public function setFragment($fragment)
     {
         $this->_fragment = $fragment;
+
         return $this;
     }
 
@@ -458,7 +466,7 @@ class Net_URL2
      * $_GET in a PHP script. If the URL does not contain a "?", an empty array
      * is returned.
      *
-     * @return  array
+     * @return array
      */
     public function getQueryVariables()
     {
@@ -528,6 +536,7 @@ class Net_URL2
                 $this->getOption(self::OPTION_SEPARATOR_OUTPUT)
             );
         }
+
         return $this;
     }
 
@@ -544,6 +553,7 @@ class Net_URL2
         $array = $this->getQueryVariables();
         $array[$name] = $value;
         $this->setQueryVariables($array);
+
         return $this;
     }
 
@@ -564,7 +574,7 @@ class Net_URL2
     /**
      * Returns a string representation of this URL.
      *
-     * @return  string
+     * @return string
      */
     public function getURL()
     {
@@ -588,14 +598,14 @@ class Net_URL2
         if ($this->_fragment !== false) {
             $url .= '#' . $this->_fragment;
         }
-    
+
         return $url;
     }
 
     /**
      * Returns a string representation of this URL.
      *
-     * @return  string
+     * @return string
      * @see toString()
      */
     public function __toString()
@@ -603,23 +613,24 @@ class Net_URL2
         return $this->getURL();
     }
 
-    /** 
+    /**
      * Returns a normalized string representation of this URL. This is useful
      * for comparison of URLs.
      *
-     * @return  string
+     * @return string
      */
     public function getNormalizedURL()
     {
         $url = clone $this;
         $url->normalize();
+
         return $url->getUrl();
     }
 
-    /** 
+    /**
      * Returns a normalized Net_URL2 instance.
      *
-     * @return  Net_URL2
+     * @return Net_URL2
      */
     public function normalize()
     {
@@ -664,7 +675,7 @@ class Net_URL2
     /**
      * Returns whether this instance represents an absolute URL.
      *
-     * @return  bool
+     * @return bool
      */
     public function isAbsolute()
     {
@@ -802,10 +813,11 @@ class Net_URL2
      */
     public static function urlencode($string)
     {
-    	$encoded = rawurlencode($string);
+        $encoded = rawurlencode($string);
 
         // This is only necessary in PHP < 5.3.
         $encoded = str_replace('%7E', '~', $encoded);
+
         return $encoded;
     }
 
@@ -813,7 +825,7 @@ class Net_URL2
      * Returns a Net_URL2 instance representing the canonical URL of the
      * currently executing PHP script.
      *
-     * @return  string
+     * @return string
      */
     public static function getCanonical()
     {
@@ -832,13 +844,14 @@ class Net_URL2
 
             $url->_port = $port;
         }
+
         return $url;
     }
 
     /**
      * Returns the URL used to retrieve the current request.
      *
-     * @return  string
+     * @return string
      */
     public static function getRequestedURL()
     {
@@ -849,7 +862,7 @@ class Net_URL2
      * Returns a Net_URL2 instance representing the URL used to retrieve the
      * current request.
      *
-     * @return  Net_URL2
+     * @return Net_URL2
      */
     public static function getRequested()
     {
@@ -863,6 +876,7 @@ class Net_URL2
         $url->_scheme = isset($_SERVER['HTTPS']) ? 'https' : 'http';
         // Set host and possibly port
         $url->setAuthority($_SERVER['HTTP_HOST']);
+
         return $url;
     }
 
@@ -871,7 +885,7 @@ class Net_URL2
      *
      * @param string $optionName The name of the option to retrieve
      *
-     * @return  mixed
+     * @return mixed
      */
     public function getOption($optionName)
     {
@@ -883,7 +897,7 @@ class Net_URL2
      * A simple version of http_build_query in userland. The encoded string is
      * percentage encoded according to RFC 3986.
      *
-     * @param array  $data      An array, which has to be converted into
+     * @param array $data An array, which has to be converted into
      *                          QUERY_STRING. Anything is possible.
      * @param string $seperator See {@link self::OPTION_SEPARATOR_OUTPUT}
      * @param string $key       For stacked values (arrays in an array).
@@ -910,6 +924,7 @@ class Net_URL2
                 $query[] = $name . '=' . rawurlencode($value);
             }
         }
+
         return implode($separator, $query);
     }
 

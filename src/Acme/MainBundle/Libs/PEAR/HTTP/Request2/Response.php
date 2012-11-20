@@ -230,7 +230,7 @@ class HTTP_Request2_Response
      * @param bool   $bodyEncoded  Whether body is still encoded by Content-Encoding
      * @param string $effectiveUrl Effective URL of the response
      *
-     * @throws   HTTP_Request2_MessageException if status line is invalid according to spec
+     * @throws HTTP_Request2_MessageException if status line is invalid according to spec
      */
     public function __construct($statusLine, $bodyEncoded = true, $effectiveUrl = null)
     {
@@ -243,8 +243,8 @@ class HTTP_Request2_Response
         $this->version      = $m[1];
         $this->code         = intval($m[2]);
         $this->reasonPhrase = !empty($m[3]) ? trim($m[3]) : self::getDefaultReasonPhrase($this->code);
-        $this->bodyEncoded  = (bool)$bodyEncoded;
-        $this->effectiveUrl = (string)$effectiveUrl;
+        $this->bodyEncoded  = (bool) $bodyEncoded;
+        $this->effectiveUrl = (string) $effectiveUrl;
     }
 
     /**
@@ -380,7 +380,7 @@ class HTTP_Request2_Response
     /**
      * Returns the status code
      *
-     * @return   integer
+     * @return integer
      */
     public function getStatus()
     {
@@ -390,7 +390,7 @@ class HTTP_Request2_Response
     /**
      * Returns the reason phrase
      *
-     * @return   string
+     * @return string
      */
     public function getReasonPhrase()
     {
@@ -400,7 +400,7 @@ class HTTP_Request2_Response
     /**
      * Whether response is a redirect that can be automatically handled by HTTP_Request2
      *
-     * @return   bool
+     * @return bool
      */
     public function isRedirect()
     {
@@ -413,7 +413,7 @@ class HTTP_Request2_Response
      *
      * @param string $headerName Name of header to return
      *
-     * @return   string|array    Value of $headerName header (null if header is
+     * @return string|array Value of $headerName header (null if header is
      *                           not present), array of all response headers if
      *                           $headerName is null
      */
@@ -423,6 +423,7 @@ class HTTP_Request2_Response
             return $this->headers;
         } else {
             $headerName = strtolower($headerName);
+
             return isset($this->headers[$headerName])? $this->headers[$headerName]: null;
         }
     }
@@ -430,7 +431,7 @@ class HTTP_Request2_Response
     /**
      * Returns cookies set in response
      *
-     * @return   array
+     * @return array
      */
     public function getCookies()
     {
@@ -440,8 +441,8 @@ class HTTP_Request2_Response
     /**
      * Returns the body of the response
      *
-     * @return   string
-     * @throws   HTTP_Request2_Exception if body cannot be decoded
+     * @return string
+     * @throws HTTP_Request2_Exception if body cannot be decoded
      */
     public function getBody()
     {
@@ -473,6 +474,7 @@ class HTTP_Request2_Response
             if (!empty($e)) {
                 throw $e;
             }
+
             return $decoded;
         }
     }
@@ -480,7 +482,7 @@ class HTTP_Request2_Response
     /**
      * Get the HTTP version of the response
      *
-     * @return   string
+     * @return string
      */
     public function getVersion()
     {
@@ -496,9 +498,9 @@ class HTTP_Request2_Response
      *
      * @param string $data gzip-encoded data
      *
-     * @return   string  decoded data
-     * @throws   HTTP_Request2_LogicException
-     * @throws   HTTP_Request2_MessageException
+     * @return string                         decoded data
+     * @throws HTTP_Request2_LogicException
+     * @throws HTTP_Request2_MessageException
      * @link     http://tools.ietf.org/html/rfc1952
      */
     public static function decodeGzip($data)
@@ -624,6 +626,7 @@ class HTTP_Request2_Response
                 HTTP_Request2_Exception::DECODE_ERROR
             );
         }
+
         return $unpacked;
     }
 
@@ -632,8 +635,8 @@ class HTTP_Request2_Response
      *
      * @param string $data deflate-encoded data
      *
-     * @return   string  decoded data
-     * @throws   HTTP_Request2_LogicException
+     * @return string                       decoded data
+     * @throws HTTP_Request2_LogicException
      */
     public static function decodeDeflate($data)
     {
@@ -648,7 +651,7 @@ class HTTP_Request2_Response
         // We should check for presence of zlib header and use gzuncompress() or
         // gzinflate() as needed. See bug #15305
         $header = unpack('n', substr($data, 0, 2));
+
         return (0 == $header[1] % 31)? gzuncompress($data): gzinflate($data);
     }
 }
-?>

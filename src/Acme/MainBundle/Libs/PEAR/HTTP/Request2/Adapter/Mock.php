@@ -88,12 +88,12 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
      *
      * @param HTTP_Request2 $request HTTP request message
      *
-     * @return   HTTP_Request2_Response
-     * @throws   Exception
+     * @return HTTP_Request2_Response
+     * @throws Exception
      */
     public function sendRequest(HTTP_Request2 $request)
     {
-        $requestUrl = (string)$request->getUrl();
+        $requestUrl = (string) $request->getUrl();
         $response   = null;
         foreach ($this->responses as $k => $v) {
             if (!$v[1] || $requestUrl == $v[1]) {
@@ -120,12 +120,12 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
     /**
      * Adds response to the queue
      *
-     * @param mixed  $response either a string, a pointer to an open file,
+     * @param mixed $response either a string, a pointer to an open file,
      *                         an instance of HTTP_Request2_Response or Exception
-     * @param string $url      A request URL this response should be valid for
+     * @param string $url A request URL this response should be valid for
      *                         (see {@link http://pear.php.net/bugs/bug.php?id=19276})
      *
-     * @throws   HTTP_Request2_Exception
+     * @throws HTTP_Request2_Exception
      */
     public function addResponse($response, $url = null)
     {
@@ -135,7 +135,7 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
             $response = self::createResponseFromFile($response);
         } elseif (!$response instanceof HTTP_Request2_Response &&
                   !$response instanceof Exception
-        ) {
+) {
             throw new HTTP_Request2_Exception('Parameter is not a valid response');
         }
         $this->responses[] = array($response, $url);
@@ -146,8 +146,8 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
      *
      * @param string $str string containing HTTP response message
      *
-     * @return   HTTP_Request2_Response
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
      */
     public static function createResponseFromString($str)
     {
@@ -161,6 +161,7 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
         if (isset($parts[1])) {
             $response->appendBody($parts[1]);
         }
+
         return $response;
     }
 
@@ -169,8 +170,8 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
      *
      * @param resource $fp file pointer returned by fopen()
      *
-     * @return   HTTP_Request2_Response
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
      */
     public static function createResponseFromFile($fp)
     {
@@ -183,7 +184,7 @@ class HTTP_Request2_Adapter_Mock extends HTTP_Request2_Adapter
         while (!feof($fp)) {
             $response->appendBody(fread($fp, 8192));
         }
+
         return $response;
     }
 }
-?>

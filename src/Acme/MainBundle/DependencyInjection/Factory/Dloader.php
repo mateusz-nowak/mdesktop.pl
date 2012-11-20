@@ -14,8 +14,8 @@ class Dloader implements FactoryInterface
 {
     /** @var $string $searchTrackUrl */
     protected static $searchTrackUrl = 'http://dloader.pl/szukaj/%s';
-	
-	/** @var $string $searchTrackUrl */
+
+    /** @var $string $searchTrackUrl */
     protected static $searchTrackUrlPage = 'http://dloader.pl/szukaj/%s/%s';
 
     /** @var $string $trackInfoUrl */
@@ -69,17 +69,17 @@ class Dloader implements FactoryInterface
     public function	searchForTrack($query, $page, &$isNextPage)
     {
         $query = urlencode(mb_strtolower(iconv(mb_detect_encoding($query), 'ASCII//TRANSLIT', $query), 'UTF-8'));
-		
-		try {
-			if($page == 1) {
-				$response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $query));
-			} else {
-				$response = (string) $this->getResponse(sprintf(self::$searchTrackUrlPage, $page-1, $query));
-			}
-		} catch (RuntimeException $e) {
-			throw new RuntimeException('Nie można było wyszukać tego utworu. Wystąpił problem z połaczeniem z zewnętrzną bazą danych - spróbuj poźniej.');
-		}
-        
+
+        try {
+            if ($page == 1) {
+                $response = (string) $this->getResponse(sprintf(self::$searchTrackUrl, $query));
+            } else {
+                $response = (string) $this->getResponse(sprintf(self::$searchTrackUrlPage, $page-1, $query));
+            }
+        } catch (RuntimeException $e) {
+            throw new RuntimeException('Nie można było wyszukać tego utworu. Wystąpił problem z połaczeniem z zewnętrzną bazą danych - spróbuj poźniej.');
+        }
+
         $trackArray = array();
         $crawler = new Crawler;
         $crawler->addHtmlContent($response);
@@ -96,17 +96,18 @@ class Dloader implements FactoryInterface
         if (preg_match('/Następna/', $response)) {
             $isNextPage = true;
         }
-		
+
         return new ArrayIterator($this->entityManager->getRepository('AcmeMainBundle:Track')->batchInsertTracks($trackArray));
     }
 
     public function processDownload(Track $track)
     {
-    	$crawler = new Crawler;
-    	$response = (string) $this->getResponse(sprintf(self::$trackInfoUrl, $track->getRemote()));
-		preg_match('/key=(?P<key>.*?)&login=(?P<login>.*?)&/', $response, $key);
-		
-    	$downloadUrl = sprintf(self::$trackDownloadUrl, $key['login'], $key['key']);
+        $crawler = new Crawler;
+        $response = (string) $this->getResponse(sprintf(self::$trackInfoUrl, $track->getRemote()));
+        preg_match('/key=(?P<key>.*?)&login=(?P<login>.*?)&/', $response, $key);
+
+        $downloadUrl = sprintf(self::$trackDownloadUrl, $key['login'], $key['key']);
+
         return $this->downloaderContainer->process($track, $downloadUrl);
     }
 

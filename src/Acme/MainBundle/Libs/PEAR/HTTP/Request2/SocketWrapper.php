@@ -88,10 +88,10 @@ class HTTP_Request2_SocketWrapper
     /**
      * Class constructor, tries to establish connection
      *
-     * @param string $address    Address for stream_socket_client() call,
+     * @param string $address Address for stream_socket_client() call,
      *                           e.g. 'tcp://localhost:80'
-     * @param int    $timeout    Connection timeout (seconds)
-     * @param array  $sslOptions SSL context options
+     * @param int   $timeout    Connection timeout (seconds)
+     * @param array $sslOptions SSL context options
      *
      * @throws HTTP_Request2_LogicException
      * @throws HTTP_Request2_ConnectionException
@@ -132,8 +132,8 @@ class HTTP_Request2_SocketWrapper
      *
      * @param int $length Reads up to this number of bytes
      *
-     * @return   string Data read from socket
-     * @throws   HTTP_Request2_MessageException     In case of timeout
+     * @return string                         Data read from socket
+     * @throws HTTP_Request2_MessageException In case of timeout
      */
     public function read($length)
     {
@@ -142,6 +142,7 @@ class HTTP_Request2_SocketWrapper
         }
         $data = fread($this->socket, $length);
         $this->checkTimeout();
+
         return $data;
     }
 
@@ -153,8 +154,8 @@ class HTTP_Request2_SocketWrapper
      *
      * @param int $bufferSize buffer size to use for reading
      *
-     * @return   string Available data up to the newline (not including newline)
-     * @throws   HTTP_Request2_MessageException     In case of timeout
+     * @return string                         Available data up to the newline (not including newline)
+     * @throws HTTP_Request2_MessageException In case of timeout
      */
     public function readLine($bufferSize)
     {
@@ -169,6 +170,7 @@ class HTTP_Request2_SocketWrapper
                 return rtrim($line, "\r\n");
             }
         }
+
         return $line;
     }
 
@@ -191,6 +193,7 @@ class HTTP_Request2_SocketWrapper
         if ($written < strlen($data)) {
             throw new HTTP_Request2_MessageException('Error writing request');
         }
+
         return $written;
     }
 
@@ -209,7 +212,7 @@ class HTTP_Request2_SocketWrapper
      *
      * @param int $deadline Exception will be thrown if request continues
      *                      past this time
-     * @param int $timeout  Original request timeout value, to use in
+     * @param int $timeout Original request timeout value, to use in
      *                      Exception message
      */
     public function setDeadline($deadline, $timeout)
@@ -277,7 +280,7 @@ class HTTP_Request2_SocketWrapper
         if ($errno & E_WARNING) {
             array_unshift($this->connectionWarnings, $errstr);
         }
+
         return true;
     }
 }
-?>

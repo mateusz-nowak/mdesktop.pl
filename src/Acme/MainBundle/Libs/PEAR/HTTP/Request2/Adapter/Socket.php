@@ -134,8 +134,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      *
      * @param HTTP_Request2 $request HTTP request message
      *
-     * @return   HTTP_Request2_Response
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
      */
     public function sendRequest(HTTP_Request2 $request)
     {
@@ -185,6 +185,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
 
         if (!$request->getConfig('follow_redirects') || !$response->isRedirect()) {
             $this->redirectCountdown = null;
+
             return $response;
         } else {
             return $this->handleRedirect($request, $response);
@@ -194,8 +195,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
     /**
      * Connects to the remote server
      *
-     * @return   bool    whether the connection can be persistent
-     * @throws   HTTP_Request2_Exception
+     * @return bool                    whether the connection can be persistent
+     * @throws HTTP_Request2_Exception
      */
     protected function connect()
     {
@@ -327,6 +328,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             self::$sockets[$socketKey] =& $this->socket;
         }
         $this->socket->setDeadline($deadline, $this->request->getConfig('timeout'));
+
         return $keepAlive;
     }
 
@@ -338,7 +340,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      * that presents its certificate.
      *
      * @link     http://tools.ietf.org/html/rfc2817#section-5.2
-     * @throws   HTTP_Request2_Exception
+     * @throws HTTP_Request2_Exception
      */
     protected function establishTunnel()
     {
@@ -362,11 +364,11 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
     /**
      * Checks whether current connection may be reused or should be closed
      *
-     * @param boolean                $requestKeepAlive whether connection could
+     * @param boolean $requestKeepAlive whether connection could
      *                               be persistent in the first place
-     * @param HTTP_Request2_Response $response         response object to check
+     * @param HTTP_Request2_Response $response response object to check
      *
-     * @return   boolean
+     * @return boolean
      */
     protected function canKeepAlive($requestKeepAlive, HTTP_Request2_Response $response)
     {
@@ -385,6 +387,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         $persistent  = 'keep-alive' == strtolower($response->getHeader('connection')) ||
                        (null === $response->getHeader('connection') &&
                         '1.1' == $response->getVersion());
+
         return $requestKeepAlive && $lengthKnown && $persistent;
     }
 
@@ -409,8 +412,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      * @param HTTP_Request2          $request  Original request
      * @param HTTP_Request2_Response $response Response containing redirect
      *
-     * @return   HTTP_Request2_Response      Response from a new location
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response  Response from a new location
+     * @throws HTTP_Request2_Exception
      */
     protected function handleRedirect(
         HTTP_Request2 $request, HTTP_Request2_Response $response
@@ -458,6 +461,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         if (0 < $this->redirectCountdown) {
             $this->redirectCountdown--;
         }
+
         return $this->sendRequest($redirect);
     }
 
@@ -476,8 +480,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      *
      * @param HTTP_Request2_Response $response response to check
      *
-     * @return   boolean whether another request should be performed
-     * @throws   HTTP_Request2_Exception in case of unsupported challenge parameters
+     * @return boolean                 whether another request should be performed
+     * @throws HTTP_Request2_Exception in case of unsupported challenge parameters
      */
     protected function shouldUseServerDigestAuth(HTTP_Request2_Response $response)
     {
@@ -523,6 +527,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             }
             self::$challenges[$prefix] =& $challenge;
         }
+
         return $ret;
     }
 
@@ -541,8 +546,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      *
      * @param HTTP_Request2_Response $response response to check
      *
-     * @return   boolean whether another request should be performed
-     * @throws   HTTP_Request2_Exception in case of unsupported challenge parameters
+     * @return boolean                 whether another request should be performed
+     * @throws HTTP_Request2_Exception in case of unsupported challenge parameters
      */
     protected function shouldUseProxyDigestAuth(HTTP_Request2_Response $response)
     {
@@ -564,6 +569,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             $ret = true;
         }
         self::$challenges[$key] = $challenge;
+
         return $ret;
     }
 
@@ -592,9 +598,9 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      *
      * @param string $headerValue value of WWW-Authenticate or Proxy-Authenticate header
      *
-     * @return   mixed   associative array with challenge parameters, false if
+     * @return mixed associative array with challenge parameters, false if
      *                   no challenge is present in header value
-     * @throws   HTTP_Request2_NotImplementedException in case of unsupported challenge parameters
+     * @throws HTTP_Request2_NotImplementedException in case of unsupported challenge parameters
      */
     protected function parseDigestChallenge($headerValue)
     {
@@ -671,12 +677,12 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
     /**
      * Creates a value for [Proxy-]Authorization header when using digest authentication
      *
-     * @param string $user       user name
-     * @param string $password   password
-     * @param string $url        request URL
+     * @param string $user     user name
+     * @param string $password password
+     * @param string $url      request URL
      * @param array  &$challenge digest challenge parameters
      *
-     * @return   string  value of [Proxy-]Authorization request header
+     * @return string value of [Proxy-]Authorization request header
      * @link     http://tools.ietf.org/html/rfc2617#section-3.2.2
      */
     protected function createDigestResponse($user, $password, $url, &$challenge)
@@ -703,6 +709,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
                 $challenge['cnonce'] . ':auth:' . $a2
             );
         }
+
         return 'Digest username="' . str_replace(array('\\', '"'), array('\\\\', '\\"'), $user) . '", ' .
                'realm="' . $challenge['realm'] . '", ' .
                'nonce="' . $challenge['nonce'] . '", ' .
@@ -723,7 +730,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      * @param string $requestHost request host (needed for digest authentication)
      * @param string $requestUrl  request URL (needed for digest authentication)
      *
-     * @throws   HTTP_Request2_NotImplementedException
+     * @throws HTTP_Request2_NotImplementedException
      */
     protected function addAuthorizationHeader(&$headers, $requestHost, $requestUrl)
     {
@@ -768,7 +775,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      * @param array  &$headers   request headers
      * @param string $requestUrl request URL (needed for digest authentication)
      *
-     * @throws   HTTP_Request2_NotImplementedException
+     * @throws HTTP_Request2_NotImplementedException
      */
     protected function addProxyAuthorizationHeader(&$headers, $requestUrl)
     {
@@ -809,12 +816,11 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         }
     }
 
-
     /**
      * Creates the string with the Request-Line and request headers
      *
-     * @return   string
-     * @throws   HTTP_Request2_Exception
+     * @return string
+     * @throws HTTP_Request2_Exception
      */
     protected function prepareHeaders()
     {
@@ -870,13 +876,14 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             $canonicalName = implode('-', array_map('ucfirst', explode('-', $name)));
             $headersStr   .= $canonicalName . ': ' . $value . "\r\n";
         }
+
         return $headersStr . "\r\n";
     }
 
     /**
      * Sends the request body
      *
-     * @throws   HTTP_Request2_MessageException
+     * @throws HTTP_Request2_MessageException
      */
     protected function writeBody()
     {
@@ -907,8 +914,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
     /**
      * Reads the remote server's response
      *
-     * @return   HTTP_Request2_Response
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
      */
     protected function readResponse()
     {
@@ -974,6 +981,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         if ($hasBody) {
             $this->request->setLastEvent('receivedBody', $response);
         }
+
         return $response;
     }
 
@@ -982,8 +990,8 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
      *
      * @param int $bufferSize buffer size to use for reading
      *
-     * @return   string
-     * @throws   HTTP_Request2_MessageException
+     * @return string
+     * @throws HTTP_Request2_MessageException
      */
     protected function readChunked($bufferSize)
     {
@@ -1000,6 +1008,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
                 // Chunk with zero length indicates the end
                 if (0 == $this->chunkLength) {
                     $this->socket->readLine($bufferSize);
+
                     return '';
                 }
             }
@@ -1009,8 +1018,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         if (0 == $this->chunkLength) {
             $this->socket->readLine($bufferSize); // Trailing CRLF
         }
+
         return $data;
     }
 }
-
-?>

@@ -42,10 +42,10 @@ class MoviesCommand extends ContainerAwareCommand
                 if ($em->getRepository('AcmeMainBundle:Movie')->findOneByRemoteKey($tmpDataHref['href'])) {
                     continue;
                 }
-				
-				if (!isset($tmpEmbed['embed']) || !isset($tmpDataHref['href']) || !isset($tmpData['translation']) || !isset($tmpData['title'])) {
-					continue;
-				}
+
+                if (!isset($tmpEmbed['embed']) || !isset($tmpDataHref['href']) || !isset($tmpData['translation']) || !isset($tmpData['title'])) {
+                    continue;
+                }
 
                 $movieEntity = new Movie;
                 $movieEntity->setTitle($tmpData['title']);

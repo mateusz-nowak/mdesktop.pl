@@ -169,6 +169,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
             $class = self::$errorMap[$nativeCode][0];
             $code  = empty(self::$errorMap[$nativeCode][1])
                      ? 0 : self::$errorMap[$nativeCode][1];
+
             return new $class($message, $code, $nativeCode);
         }
     }
@@ -178,8 +179,8 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
      *
      * @param HTTP_Request2 $request HTTP request message
      *
-     * @return   HTTP_Request2_Response
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
      */
     public function sendRequest(HTTP_Request2 $request)
     {
@@ -220,13 +221,14 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
         if (0 < $this->lastInfo['size_download']) {
             $request->setLastEvent('receivedBody', $response);
         }
+
         return $response;
     }
 
     /**
      * Returns information about last transfer
      *
-     * @return   array   associative array as returned by curl_getinfo()
+     * @return array associative array as returned by curl_getinfo()
      */
     public function getInfo()
     {
@@ -236,8 +238,8 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
     /**
      * Creates a new cURL handle and populates it with data from the request
      *
-     * @return   resource    a cURL handle, as created by curl_init()
-     * @throws   HTTP_Request2_LogicException
+     * @return resource                     a cURL handle, as created by curl_init()
+     * @throws HTTP_Request2_LogicException
      */
     protected function createCurlHandle()
     {
@@ -411,7 +413,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
      * and setting it as CURLOPT_POSTFIELDS, so it isn't recommended for large
      * file uploads, use Socket adapter instead.
      *
-     * @param resource $ch       cURL handle
+     * @param resource $ch cURL handle
      * @param array    &$headers Request headers
      */
     protected function workaroundPhpBug47204($ch, &$headers)
@@ -448,7 +450,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
      * @param resource $fd     file descriptor (not used)
      * @param integer  $length maximum length of data to return
      *
-     * @return   string      part of the request body, up to $length bytes
+     * @return string part of the request body, up to $length bytes
      */
     protected function callbackReadBody($ch, $fd, $length)
     {
@@ -472,6 +474,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
         }
         $this->request->setLastEvent('sentBodyPart', strlen($string));
         $this->position += strlen($string);
+
         return $string;
     }
 
@@ -481,7 +484,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
      * @param resource $ch     cURL handle
      * @param string   $string response header (with trailing CRLF)
      *
-     * @return   integer     number of bytes saved
+     * @return integer number of bytes saved
      * @see      HTTP_Request2_Response::parseHeaderLine()
      */
     protected function callbackWriteHeader($ch, $string)
@@ -551,6 +554,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
                 $this->eventReceivedHeaders = true;
             }
         }
+
         return strlen($string);
     }
 
@@ -560,8 +564,8 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
      * @param resource $ch     cURL handle (not used)
      * @param string   $string part of the response body
      *
-     * @return   integer     number of bytes saved
-     * @throws   HTTP_Request2_MessageException
+     * @return integer                        number of bytes saved
+     * @throws HTTP_Request2_MessageException
      * @see      HTTP_Request2_Response::appendBody()
      */
     protected function callbackWriteBody($ch, $string)
@@ -578,7 +582,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
             $this->response->appendBody($string);
         }
         $this->request->setLastEvent('receivedBodyPart', $string);
+
         return strlen($string);
     }
 }
-?>

@@ -14,10 +14,10 @@ class Builder extends ContainerAware
     public function addLocation($title, array $options = array())
     {
         $this->navBuilder[$title] = $options;
-		
-		// Meta
-		$meta = Meta::getInstance();
-		$meta->addTitle($title);
+
+        // Meta
+        $meta = Meta::getInstance();
+        $meta->addTitle($title);
 
         return $this;
     }

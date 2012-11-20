@@ -97,15 +97,14 @@ class HTTP_Request2_MultipartBody
      */
     private $_pos = array(0, 0);
 
-
     /**
      * Constructor. Sets the arrays with POST data.
      *
-     * @param array $params      values of form fields set via
+     * @param array $params values of form fields set via
      *                           {@link HTTP_Request2::addPostParameter()}
-     * @param array $uploads     file uploads set via
+     * @param array $uploads file uploads set via
      *                           {@link HTTP_Request2::addUpload()}
-     * @param bool  $useBrackets whether to append brackets to array variable names
+     * @param bool $useBrackets whether to append brackets to array variable names
      */
     public function __construct(array $params, array $uploads, $useBrackets = true)
     {
@@ -130,7 +129,7 @@ class HTTP_Request2_MultipartBody
     /**
      * Returns the length of the body to use in Content-Length header
      *
-     * @return   integer
+     * @return integer
      */
     public function getLength()
     {
@@ -145,19 +144,21 @@ class HTTP_Request2_MultipartBody
             $length += $headerUploadLength + strlen($u['name']) + strlen($u['type']) +
                        strlen($u['filename']) + $u['size'] + 2;
         }
+
         return $length;
     }
 
     /**
      * Returns the boundary to use in Content-Type header
      *
-     * @return   string
+     * @return string
      */
     public function getBoundary()
     {
         if (empty($this->_boundary)) {
             $this->_boundary = '--' . md5('PEAR-HTTP_Request2-' . microtime());
         }
+
         return $this->_boundary;
     }
 
@@ -166,7 +167,7 @@ class HTTP_Request2_MultipartBody
      *
      * @param integer $length Number of bytes to read
      *
-     * @return   string  Up to $length bytes of data, empty string if at end
+     * @return string Up to $length bytes of data, empty string if at end
      */
     public function read($length)
     {
@@ -216,6 +217,7 @@ class HTTP_Request2_MultipartBody
                 $this->_pos[1] += $oldLength;
             }
         }
+
         return $ret;
     }
 
@@ -238,14 +240,14 @@ class HTTP_Request2_MultipartBody
      * Note that it reads all file uploads into memory so it is a good idea not
      * to use this method with large file uploads and rely on read() instead.
      *
-     * @return   string
+     * @return string
      */
     public function __toString()
     {
         $this->rewind();
+
         return $this->read($this->getLength());
     }
-
 
     /**
      * Helper function to change the (probably multidimensional) associative array
@@ -255,7 +257,7 @@ class HTTP_Request2_MultipartBody
      * @param mixed  $values      item's values
      * @param bool   $useBrackets whether to append [] to array variables' names
      *
-     * @return   array   array with the following items: array('item name', 'item value');
+     * @return array array with the following items: array('item name', 'item value');
      */
     private static function _flattenArray($name, $values, $useBrackets)
     {
@@ -273,8 +275,8 @@ class HTTP_Request2_MultipartBody
                 }
                 $ret = array_merge($ret, self::_flattenArray($newName, $v, $useBrackets));
             }
+
             return $ret;
         }
     }
 }
-?>

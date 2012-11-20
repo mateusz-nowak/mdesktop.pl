@@ -104,8 +104,8 @@ abstract class HTTP_Request2_Adapter
      *
      * @param HTTP_Request2 $request HTTP request message
      *
-     * @return   HTTP_Request2_Response
-     * @throws   HTTP_Request2_Exception
+     * @return HTTP_Request2_Response
+     * @throws HTTP_Request2_Exception
      */
     abstract public function sendRequest(HTTP_Request2 $request);
 
@@ -154,4 +154,3 @@ abstract class HTTP_Request2_Adapter
         }
     }
 }
-?>

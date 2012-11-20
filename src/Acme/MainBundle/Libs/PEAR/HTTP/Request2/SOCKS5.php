@@ -155,4 +155,3 @@ class HTTP_Request2_SOCKS5 extends HTTP_Request2_SocketWrapper
         }
     }
 }
-?>

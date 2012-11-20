@@ -18,8 +18,8 @@ class Twig extends Twig_Extension
 
     public function getGlobals()
     {
-    	$meta = Meta::getInstance();
-		
+        $meta = Meta::getInstance();
+
         return array(
             'footerContainer' => $this->entityManager->getRepository('AcmeMainBundle:Content')->findAllByCategoryName(Content::PAGE),
             'lastTitle' => $meta->getLastTitle(),
@@ -53,8 +53,8 @@ class Twig extends Twig_Extension
 
     public function getCuttedVersion($string, $length = 300)
     {
-    	$string = strip_tags($string);
-		
+        $string = strip_tags($string);
+
         if (mb_strlen($string, 'UTF-8') == mb_strlen(mb_substr($string, 0, $length, 'UTF-8'), 'UTF-8')) {
             return $string;
         }
