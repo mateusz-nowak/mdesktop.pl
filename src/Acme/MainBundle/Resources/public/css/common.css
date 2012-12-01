@@ -671,3 +671,11 @@ ul#vote li a:hover {
 	margin-right: 5px;
 	padding-bottom: 10px;
 }
+
+.delete_from_playlist {
+	color: #ff0000;
+	font-style: italic;
+	font-size: 10px;
+	text-align: right;
+	display: block;
+}
