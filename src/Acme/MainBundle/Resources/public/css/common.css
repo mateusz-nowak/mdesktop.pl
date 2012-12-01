@@ -559,7 +559,6 @@ div.noticeUser {
 ul#boxes.movieBox li {
 	height: 200px;
 }
-
 .cmsContent .cms_photo_right {
 	position: relative;
 	width: 300px;
@@ -616,4 +615,59 @@ ul#vote li a:hover {
 	margin: 0px;
 	cursor: pointer;
 	margin-top: 5px;
+}
+
+.sidebar_info {
+	margin: 5px;
+	margin-top: 0px;
+	background: #222;
+	padding: 10px;
+	color: #999;
+}
+
+#trackPlaylistCatalogs {
+	margin: 5px;
+}
+
+#trackPlaylistCatalogs li {
+	padding: 5px;
+	background: #222;
+}
+
+#trackPlaylistCatalogs li a {
+	color: #999;
+}
+
+#trackPlaylistCatalogs li a.delete {
+	color: #ff0000;
+	opacity: 0.5;
+}
+
+#trackPlaylistCatalogs li:hover a.delete {
+	opacity: 1;
+}
+
+.important_notice {
+	padding: 10px;
+	background: #fff;
+	color: #333;
+	margin: 10px;
+	text-align: center;
+}
+
+.add_new_playlist {
+	background: green;
+	color: #fff;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.right * {
+	cursor: pointer;
+}
+
+.right {
+	text-align: right;
+	margin-right: 5px;
+	padding-bottom: 10px;
 }
