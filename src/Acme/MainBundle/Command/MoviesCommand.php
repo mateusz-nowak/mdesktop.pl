@@ -27,7 +27,7 @@ class MoviesCommand extends ContainerAwareCommand
         for ($i = 1; $i <= 1351; ++$i) {
             echo sprintf(">> Loading %d of %d movies...\n", $i*10, 13510);
 
-            $response = $browser->get(sprintf('http://kinoland.pl/filmy_online/strona-%d.html', $i));
+            $response = $browser->get(sprintf('http://kinoland.pl/videos?page=%d', $i));
             $crawler = new Crawler;
             $crawler->addHtmlContent((string) $response);
 
