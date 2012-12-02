@@ -1,0 +1,25 @@
+{% if is_granted("ROLE_USER") %}
+	<ul id="trackPlaylistCatalogs">
+	{% if tracks|length == 0 %}
+		<li data-playlist-id="">Nieprzypisane</li>
+	{% endif %}
+	{% for track in tracks %}
+		<li data-playlist-id="{{track.name}}">
+			<a class="delete" href="{{ path('playlist_delete', {'id': track.id}) }}">x</a>
+			<a href="{{ path('playlist_show', {'id': track.id}) }}">
+				{{ track.name }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+
+	<div class="right">
+		<span class="add_new_playlist">Dodaj</span>
+	</div>
+
+	<div class="clearfix"></div>
+{% else %}
+	<div class="sidebar_info">
+		Nie możesz tworzyć playlist - zarejestruj/zaloguj się.
+	</div>
+{% endif %}

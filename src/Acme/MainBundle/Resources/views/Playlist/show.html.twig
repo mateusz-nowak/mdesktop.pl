@@ -1,26 +1,26 @@
 {% extends 'AcmeMainBundle::layout.html.twig' %}
 
 {% block content %}
-<ul id="boxes">
-	{% for item in played %}
+<ul id="boxes" class="movieBox">
+	{% for entity in tracks %}
 		<li>
+			<a class="delete_from_playlist" href="{{ path('playlist_delete_track', {'id': entity.id}) }}">x</a>
+			
 			<img src="{{ asset('images/music.png') }}" />
-			<div>
-				<strong>{{ item.header }}</strong>
-			</div>
-			{% for id, track in item.data %}
-				{{ id+1 }}. <a href="{{ path('track_search', {'q': track}) }}">{{ track|cut(35) }}</a><br/>
-			{% endfor %}
+			<h2><a href="{{ path('track_show', {'slug': entity.track.slug}) }}">{{ entity.track.title }}</a></h2>
+			<div class="clearfix"></div>
 		</li>
 	{% endfor %}
-</ul>
 
 <div class="clearfix"></div>
 
 {# display navigation #}
 <div class="navigation">
-    {{ played.render()|raw }}
+    {{ tracks.render()|raw }}
 </div>
+</ul>
+
+<div class="clearfix"></div>
 {% endblock %}
 
 {% block sideBar %}
