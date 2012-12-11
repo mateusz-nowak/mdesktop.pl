@@ -5,7 +5,7 @@
 	{% endif %}
 	{% for track in tracks %}
 		<li data-playlist-id="{{track.name}}">
-			<a class="delete" href="{{ path('playlist_delete', {'id': track.id}) }}">x</a>
+    		<a href="{{ path('playlist_delete', {'id': track.id}) }}" class="delete confirm_before">x</a>
 			<a href="{{ path('playlist_show', {'id': track.id}) }}">
 				{{ track.name }}
 			</a>

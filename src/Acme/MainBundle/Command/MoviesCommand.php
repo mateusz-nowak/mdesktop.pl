@@ -18,7 +18,7 @@ class MoviesCommand extends ContainerAwareCommand
         $this
             ->setName('main:movies')
             ->setDescription('Search for movies update')
-			->addArgument(
+            ->addArgument(
                 'pages',
                 InputArgument::OPTIONAL,
                 'How many pages deph does the task follow?'
@@ -27,8 +27,8 @@ class MoviesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	$pages = $input->getArgument('pages') ? $input->getArgument('pages') : 1351;
-		
+        $pages = $input->getArgument('pages') ? $input->getArgument('pages') : 1351;
+
         $browser = new Browser;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
@@ -46,7 +46,7 @@ class MoviesCommand extends ContainerAwareCommand
 
                 $responseInfo = $browser->get(sprintf('http://kinoland.pl/film_online/%s-dev.html', $tmpDataHref['href']));
                 preg_match('/megustavid.com\/e=(?P<embed>.*?)\?/', $responseInfo, $tmpEmbed);
-				
+
                 if ($em->getRepository('AcmeMainBundle:Movie')->findOneByRemoteKey($tmpDataHref['href'])) {
                     continue;
                 }
@@ -64,7 +64,7 @@ class MoviesCommand extends ContainerAwareCommand
                 $movieEntity->setRemoteKey($tmpDataHref['href']);
                 $movieEntity->setRatingCount(0);
                 $movieEntity->setRatingValue(5);
-                
+
                 foreach (explode(',', str_replace(', ', ',', $tmpCategory['categories'])) as $catItem) {
                     $categoryName = trim($catItem);
 

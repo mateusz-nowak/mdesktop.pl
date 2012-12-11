@@ -4,8 +4,8 @@
 <ul id="boxes" class="movieBox">
 	{% for entity in tracks %}
 		<li>
-			<a class="delete_from_playlist" href="{{ path('playlist_delete_track', {'id': entity.id}) }}">x</a>
-			
+			<a href="{{ path('playlist_delete_track', {'id': entity.id}) }}" class="delete_from_playlist confirm_before">x</a>
+
 			<img src="{{ asset('images/music.png') }}" />
 			<h2><a href="{{ path('track_show', {'slug': entity.track.slug}) }}">{{ entity.track.title }}</a></h2>
 			<div class="clearfix"></div>
