@@ -7,7 +7,7 @@ app/bootstrap*
 */cache/*
 web/uploads/*
 web/bundles/*
-composer.lock
+# composer.lock
 
 # Configuration files
 app/config/parameters.ini
