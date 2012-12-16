@@ -37,5 +37,5 @@ web1:
     - "php app/console doctrine:schema:update --force"
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
-    - "php composer.phar update"
+    - "php composer.phar install"
     - "php app/console cache:clear"
