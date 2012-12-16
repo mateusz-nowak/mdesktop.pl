@@ -38,6 +38,9 @@ web1:
     - "php app/console doctrine:schema:update --force"
 #    - "php app/console fos:user:create matix mateusz.nowak@xsolve.pl 5qrnaq3"
     - "php app/console fos:user:promote matix ROLE_ADMIN"
+    - "php app/console cache:clear --env=prod --no-debug"
+    - "php app/console assets:install web"
+    - "php app/console assetic:dump"
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
     - "php composer.phar install"
