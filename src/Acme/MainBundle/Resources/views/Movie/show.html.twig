@@ -3,9 +3,8 @@
 {% block content %}
 <div class="cmsContent">
 	<h1>{{ movie.title }}</h1>
-	<p><iframe src="http://www.megustavid.com/e={{ movie.embed }}?w=400&h=400" style="border:0;width:400px;height:400px;" frameborder="0" scrolling="no"></iframe></p>
-
-	<div><img class="cms_photo_right" src="{{ movie.getFullPhoto }}" style="margin-top: -500px;" /></div>
+	<div><img src="{{ movie.getFullPhoto }}" style="margin-left: 530px; margin-top: 10px; position: absolute; width: 200px;" /></div>
+	<p><iframe src="http://www.megustavid.com/e={{ movie.embed }}?w=500&h=500" style="border:0;width:500px;height:500px;" frameborder="0" scrolling="no"></iframe></p>
 	<p>{{ movie.text }}</p>
 </div>
 <div class="cmsContent">
@@ -26,6 +25,7 @@
 	{% endif %}
 </div>
 
+{{ tinymce_init() }}
 {% endblock %}
 
 {% block sideBar %}
