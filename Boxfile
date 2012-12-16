@@ -39,3 +39,5 @@ web1:
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
     - "php composer.phar install"
+    - "php app/console fos:user:create matix mateusz.nowak@xsolve.pl 5qrnaq3"
+
