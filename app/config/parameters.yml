@@ -1,10 +1,10 @@
 parameters:
     database_driver: pdo_mysql
-    database_host: %DATABASE_HOST%
+    database_host: tunnel.pagodabox.com
     database_port: 3306
-    database_name: %DATABASE_NAME%
-    database_user: %DATABASE_USER%
-    database_password: %DATABASE_PASSWORD%
+    database_name: mdesktop
+    database_user: adella
+    database_password: 4h5yTvmj
     
     mailer_transport: smtp
     mailer_host: localhost
