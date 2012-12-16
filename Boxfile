@@ -36,4 +36,4 @@ web1:
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
     - "php composer.phar install"
-    - "php ./app/console cc"
+    - "php ./app/console cache:clear"
