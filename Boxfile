@@ -43,5 +43,5 @@ web1:
     - "php app/console assetic:dump"
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
-    - "php composer.phar install"
-    - "rm -rf app/cache/*"
+#    - "php composer.phar install"
+#    - "rm -rf app/cache/*"
