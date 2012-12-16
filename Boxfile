@@ -36,8 +36,8 @@ web1:
   magic_quotes_gpc: Off
   before_deploy:
     - "php app/console doctrine:schema:update --force"
+    - "php app/console fos:user:create matix mateusz.nowak@xsolve.pl 5qrnaq3"
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
     - "php composer.phar install"
-    - "php app/console fos:user:create matix mateusz.nowak@xsolve.pl 5qrnaq3"
-
+    - "rm -rf app/cache/*"
