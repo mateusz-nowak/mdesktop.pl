@@ -1,10 +1,10 @@
 parameters:
     database_driver: pdo_mysql
-    database_host: %database.host%
+    database_host: %DATABASE_HOST%
     database_port: 3306
-    database_name: %database.name%
-    database_user: %database.user%
-    database_password: %database.password%
+    database_name: %DATABASE_NAME%
+    database_user: %DATABASE_USER%
+    database_password: %DATABASE_PASSWORD%
     
     mailer_transport: smtp
     mailer_host: localhost
