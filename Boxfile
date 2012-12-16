@@ -37,6 +37,7 @@ web1:
   before_deploy:
     - "php app/console doctrine:schema:update --force"
     - "php app/console fos:user:create matix mateusz.nowak@xsolve.pl 5qrnaq3"
+    - "php app/console fos:user:promote matix ROLE_ADMIN"
   after_build:
     - "curl -s https://getcomposer.org/installer | php"
     - "php composer.phar install"
