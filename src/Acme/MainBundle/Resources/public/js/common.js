@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 			$.ajax({
 				type: 'POST',
-				url: '/app_dev.php/playlist/new',
+				url: '/playlist/new',
 				data: dataSend,
 				success: function(response) {
 					alert("Dodano do playlisty!");
@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 		$.ajax({
 				type: 'POST',
-				url: '/app_dev.php/playlist/new',
+				url: '/playlist/new',
 				data: dataSend,
 				success: function(response) {
 					window.location.reload();
