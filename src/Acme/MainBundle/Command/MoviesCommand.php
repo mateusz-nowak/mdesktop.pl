@@ -17,17 +17,13 @@ class MoviesCommand extends ContainerAwareCommand
     {
         $this
             ->setName('main:movies')
-            ->setDescription('Search for movies update')
-            ->addArgument(
-                'pages',
-                InputArgument::OPTIONAL,
-                'How many pages deph does the task follow?'
-            );
+            ->setDescription('Search for movies update');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pages = $input->getArgument('pages') ? $input->getArgument('pages') : 1351;
+        $pages = 20;
+        // $pages = $input->getArgument('pages') ? $input->getArgument('pages') : 1351;
 
         $browser = new Browser;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
