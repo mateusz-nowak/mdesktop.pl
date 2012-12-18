@@ -23,7 +23,7 @@ class MoviesCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $pages = 20;
-        // $pages = $input->getArgument('pages') ? $input->getArgument('pages') : 1351;
+        // $pages = 1351;
 
         $browser = new Browser;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
