@@ -29,7 +29,7 @@ class MoviesCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         for ($i = 1; $i <= $pages; ++$i) {
-            echo sprintf(">> Loading %d of %d movies...\n", $i*10, $pages*10);
+            // echo sprintf(">> Loading %d of %d movies...\n", $i*10, $pages*10);
 
             $response = $browser->get(sprintf('http://kinoland.pl/videos?page=%d', $i));
             $crawler = new Crawler;
@@ -79,6 +79,7 @@ class MoviesCommand extends ContainerAwareCommand
 
                 $em->persist($movieEntity);
                 $em->flush();
+                echo "Sciagam film: " . $movieEntity->getTitle() . PHP_EOL;
             }
         }
     }
