@@ -22,16 +22,20 @@ class MoviesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pages = 200;
-        // $pages = 1351;
+        // $pages = 200;
+        $pages = 1351;
 
         $browser = new Browser;
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         for ($i = 1; $i <= $pages; ++$i) {
             // echo sprintf(">> Loading %d of %d movies...\n", $i*10, $pages*10);
+            try {
+              $response = $browser->get(sprintf('http://kinoland.pl/videos?page=%d', $i));
+            } catch (RuntimeException $e) {
+              continue;
+            }
 
-            $response = $browser->get(sprintf('http://kinoland.pl/videos?page=%d', $i));
             $crawler = new Crawler;
             $crawler->addHtmlContent((string) $response);
 
@@ -40,7 +44,12 @@ class MoviesCommand extends ContainerAwareCommand
                 preg_match('/(?<title>.*?) \[(?<translation>.*?)\]/', $movie->getElementsByTagName('h2')->item(0)->nodeValue, $tmpData);
                 preg_match('/film\_online\/(?P<href>\d+)/', $movie->getElementsByTagName('a')->item(0)->getAttribute('href'), $tmpDataHref);
 
-                $responseInfo = $browser->get(sprintf('http://kinoland.pl/film_online/%s-dev.html', $tmpDataHref['href']));
+                try {
+                  $responseInfo = $browser->get(sprintf('http://kinoland.pl/film_online/%s-dev.html', $tmpDataHref['href']));
+                } catch (RuntimeException $e) {
+                  continue;
+                }
+
                 preg_match('/megustavid.com\/e=(?P<embed>.*?)\?/', $responseInfo, $tmpEmbed);
 
                 if ($em->getRepository('AcmeMainBundle:Movie')->findOneByRemoteKey($tmpDataHref['href'])) {
