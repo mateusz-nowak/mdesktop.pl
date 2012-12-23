@@ -22,7 +22,7 @@ class MoviesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pages = 1351;
+        $pages = 20;
         // $pages = 1351;
 
         $browser = new Browser;
