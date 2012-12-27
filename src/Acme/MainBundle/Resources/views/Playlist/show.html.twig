@@ -1,0 +1,31 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+<ul id="boxes" class="movieBox">
+	{% for entity in tracks %}
+		<li>
+			<a href="{{ path('playlist_delete_track', {'id': entity.id}) }}" class="delete_from_playlist confirm_before">x</a>
+
+			<img src="{{ asset('images/music.png') }}" />
+			<h2><a href="{{ path('track_show', {'slug': entity.track.slug}) }}">{{ entity.track.title }}</a></h2>
+			<div class="clearfix"></div>
+		</li>
+	{% endfor %}
+
+<div class="clearfix"></div>
+
+{# display navigation #}
+<div class="navigation">
+    {{ tracks.render()|raw }}
+</div>
+</ul>
+
+<div class="clearfix"></div>
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+	{% include 'AcmeMainBundle:Track:playlist.html.twig' %}
+{% endblock %}
