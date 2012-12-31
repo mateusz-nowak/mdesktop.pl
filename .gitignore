@@ -13,3 +13,5 @@ composer.lock
 app/config/parameters.ini
 
 .project
+.settings
+.*
