@@ -1,5 +1,5 @@
 # Bootstrap
-app/bootstrap
+app/bootstrap*
 
 # Symfony directories
 vendor/*
@@ -11,6 +11,7 @@ composer.lock
 
 # Configuration files
 app/config/parameters.ini
+app/config/parameters.yml
 
 .project
 .settings
