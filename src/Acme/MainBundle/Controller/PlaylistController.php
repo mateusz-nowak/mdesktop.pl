@@ -73,10 +73,6 @@ class PlaylistController extends Controller
      */
     public function indexAction()
     {
-        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException();
-        }
-
         $tracks = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('AcmeMainBundle:Playlist')
