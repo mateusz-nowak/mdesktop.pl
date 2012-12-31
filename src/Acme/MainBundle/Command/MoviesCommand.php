@@ -9,7 +9,6 @@ use Symfony\Component\DomCrawler\Crawler;
 use Acme\MainBundle\Entity\Category;
 use Acme\MainBundle\Entity\Movie;
 use Buzz\Browser;
-use Symfony\Component\Console\Input\InputArgument;
 use RuntimeException;
 
 class MoviesCommand extends ContainerAwareCommand

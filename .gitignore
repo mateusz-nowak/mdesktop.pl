@@ -1,5 +1,5 @@
 # Bootstrap
-# app/bootstrap
+app/bootstrap
 
 # Symfony directories
 vendor/*
@@ -7,9 +7,9 @@ vendor/*
 */cache/*
 web/uploads/*
 web/bundles/*
-# composer.lock
+composer.lock
 
 # Configuration files
-# app/config/parameters.ini
+app/config/parameters.ini
 
 .project
