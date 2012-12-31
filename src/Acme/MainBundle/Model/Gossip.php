@@ -6,7 +6,7 @@ use SimpleXMLIterator;
 
 class Gossip
 {
-    const URL = '../plotki.xml';
+    const URL = '../app/Resources/gossips.xml';
 
     public static function toArray()
     {
