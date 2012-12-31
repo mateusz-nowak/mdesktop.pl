@@ -4,10 +4,13 @@
 	{{ app.request.query.get('q') }}
 {% endblock %}
 {% block content %}
+<div class="important_notice">
+	Jeżeli chcesz dodać utwór do playlisty, przeciągnij ikonkę przy utworze do wybranej przez Ciebie playlisty
+</div>
 <ul id="boxes" class="movieBox">
 	{% for entity in tracks %}
 		<li>
-			<img src="{{ asset('images/music.png') }}" />
+			<img src="{{ asset('images/music.png') }}" class="draggable" data-draggable-id="{{ entity.id }}" />
 			<h2><a href="{{ path('track_show', {'slug': entity.slug}) }}">{{ entity.title }}</a></h2>
 			<div class="clearfix"></div>
 		</li>
@@ -31,4 +34,5 @@
 	<h2>Wyszukaj</h2>
 
 	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+	{% include 'AcmeMainBundle:Track:playlist.html.twig' %}
 {% endblock %}

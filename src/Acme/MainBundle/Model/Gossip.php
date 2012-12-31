@@ -6,7 +6,7 @@ use SimpleXMLIterator;
 
 class Gossip
 {
-    const URL = 'http://www.kozaczek.pl/plotki.xml';
+    const URL = '../plotki.xml';
 
     public static function toArray()
     {

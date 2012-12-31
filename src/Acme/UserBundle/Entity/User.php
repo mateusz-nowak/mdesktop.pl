@@ -21,14 +21,19 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Comment", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Comment", mappedBy="user", cascade={"all"})
      */
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Shoutbox", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Shoutbox", mappedBy="user", cascade={"all"})
      */
     private $shouts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Acme\MainBundle\Entity\Playlist", mappedBy="user", cascade={"all"})
+     */
+     private $tracks;
 
     public function __construct()
     {
@@ -43,6 +48,11 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getTracks()
+    {
+        return $this->tracks;
     }
 
     public function canManageComment(Comment $comment)

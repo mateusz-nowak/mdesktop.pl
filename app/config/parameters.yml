@@ -1,10 +1,10 @@
 parameters:
     database_driver: pdo_mysql
-    database_host: localhost
-    database_port: null
-    database_name: devel_mdesktop
-    database_user: root
-    database_password: 5qrnaq3
+    database_host: tunnel.pagodabox.com
+    database_port: 3306
+    database_name: mdesktop
+    database_user: adella
+    database_password: 4h5yTvmj
     
     mailer_transport: smtp
     mailer_host: localhost

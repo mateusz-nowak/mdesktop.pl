@@ -31,6 +31,10 @@ shoutbox:
   resource: "@AcmeMainBundle/Controller/ShoutboxController.php"
   type: annotation
 
+playlist:
+  resource: "@AcmeMainBundle/Controller/PlaylistController.php"
+  type: annotation
+
 _imagine:
   resource: .
   type:     imagine
