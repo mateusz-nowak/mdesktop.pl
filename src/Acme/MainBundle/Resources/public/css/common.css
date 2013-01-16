@@ -1,0 +1,758 @@
+body {
+	background: #222;
+	font: 12px Arial, Helvetica, sans-serif;
+	margin: 0px;
+}
+
+#header {
+	margin: auto;
+	display: block;
+	background: #000;
+}
+
+#header div#logo, #header div#menu {
+	width: 1000px;
+	margin: auto;
+}
+
+#container {
+	margin: auto;
+	width: 1000px;
+}
+
+#footer {
+	margin: 0px;
+	margin-top: 10px;
+	background: #000;
+}
+
+#footerContent {
+	width: 1000px;
+	margin: auto;
+}
+
+#footerBar {
+	text-align: right;
+	font-size: 12px;
+	width: 1000px;
+	margin: auto;
+	padding-top: 5px;
+}
+
+#footerBar a {
+	margin-right: 5px;
+	padding-right: 5px;
+	border-right: 1px solid #333;
+	color: #444;
+	font-size: 11px;
+}
+
+#footerBar a:last-child {
+	border-right: 0px;
+	padding-right: 0px;
+}
+
+#policy {
+	clear: both;
+	text-align: center;
+	font-size: 10px;
+	color: #444;
+	font-style: italic;
+	margin-top: 10px;
+}
+
+#header div#auth {
+	width: 1000px;
+	margin: auto;
+	background: #fff;
+}
+
+#header div#auth div#userAuthBar {
+	position: absolute;
+	margin-top: -50px;
+	margin-left: auto;
+	width: 1000px;
+	text-align: right;
+}
+
+#header div#auth div#userAuthBar a {
+	background: #499dd1;
+	padding: 10px;
+	color: #fff;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#header div#auth div#userAuthBar a.logged_as {
+	background: #FF0000;
+}
+
+ul#shoutbox {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	height: 150px;
+	background: #111;
+	padding: 5px;
+	font-size: 11px;
+	overflow: hidden;
+	border: 2px solid #fff;
+}
+
+ul#shoutbox li {
+	margin: 0px;
+	color: #999;
+	padding: 3px;
+	display: block;
+}
+
+#shoutbox .heading {
+	display: block;
+	background: #fff;
+	padding: 5px;
+	color: #999;
+	font-size: 11px;
+	font-style: italic;
+}
+
+ul#shoutbox li:nth-child(odd) {
+	background: #222;
+}
+
+#shoutbox form {
+	margin: 0px;
+	padding: 0px;
+}
+
+#shoutbox form label {
+	display: none;
+}
+
+#shoutbox form input[type=text] {
+	width: 900px;
+	background: #fff;
+	border: 2px solid #fff;
+	margin: 0px;
+	float: left;
+	padding: 3px;
+}
+
+#shoutbox form input[type=submit] {
+	width: 90px;
+	background: #ff0000;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #fff;
+	border: 0px;
+	padding: 5px;
+	margin: 0px;
+	cursor: pointer;
+}
+
+* { 
+	outline: none; 
+}
+
+#contentBox {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#contentBox li span.comment {
+	display: block;
+	text-align: right;
+}
+
+#userSideBar {
+	float: left;
+	width: 200px;
+	background: #333;
+}
+
+#userSideBar form {
+	margin: 5px;
+	padding: 0px;
+}
+
+#userSideBar form input[type=search] {
+	background: #fff;
+	padding: 5px;
+	width: 180px;
+    margin-bottom: 5px;
+	font-size: 12px;
+	border: 1px solid #fff;
+}
+
+#userSideBar form input[type=input] {
+	background: #fff;
+	padding: 3px;
+	width: 180px;
+	font-size: 12px;
+	border: 1px solid #fff;
+}
+
+#userSideBar form label {
+	color: #999;
+	margin-top: 10px;
+}
+
+#userSideBar form select {
+	width: 188px;
+	font-size: 11px;
+}
+
+#userSideBar form select.option_list {
+	padding: 3px;
+	height: 300px;
+} 
+
+#userSideBar form input[type=submit] {
+	font-weight: bold;
+	text-transform: uppercase;
+	background: #444;
+	color: #fff;
+	border: 0px;
+	padding: 10px;
+	margin: 0px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+#userSideBar h2 {
+	color: #999;
+	font-size: 16px;
+	background: #333;
+	text-transform: uppercase;
+	padding: 10px;
+	margin: 0px;
+	margin-bottom: 10px;
+}
+
+#mediaLeft {
+	width: 400px;
+	float: left;
+}
+
+#mediaRight {
+	width: 400px;
+	float: right;
+}
+
+#menu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	background: #fff;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#menu ul li {
+	display: inline;
+	margin: 0px;
+}
+
+#menu ul li a {
+	color: #000;
+	font-style: none;
+	background: #fff;
+	padding: 10px;
+	margin: 0px;
+	font-size: 13px;
+}
+
+#menu ul li a:hover {
+	background: #eee;
+	text-decoration: underline;
+}
+
+#menu ul li.current a {
+	background: #499dd1;
+	color: #fff;
+	text-decoration: underline;
+}
+
+#mediaRight img {
+	width: 380px;
+	margin: 5px;
+}
+
+#contentBar {
+	width: 800px;
+	float: right;
+}
+
+#topSideBar {
+	padding: 10px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+
+#content {
+	margin-top: 10px;
+}
+
+.clearfix {
+	clear: both;
+}
+
+form {
+	margin: 0px;
+}
+
+form label {
+	display: block;
+}
+
+form #remember_me {
+	display: block;
+}
+
+#pagination {
+	text-align: center;
+}
+
+a {
+	font-style: none;
+	text-decoration: none;
+	color: #000
+}
+
+#flashContainer div {
+	clear: both;
+	color: #FFF;
+	text-align: center;
+	padding: 10px;
+}
+
+.flash_fos_user_success {
+	background: #006611;
+	text-align: center;
+	padding: 10px;
+}
+
+.flash_notice {
+	background: #006611;
+}
+
+.flash_error {
+	background: #ff0000;
+}
+
+ul#boxes {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#boxes li img {
+	text-align: center;
+	margin: auto;
+	display: block;
+}
+
+ul#boxes li h2 {
+	font-size: 16px;
+	font-style: none;
+	text-decoration: underline;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 10px;	
+}
+
+ul#boxes li {
+	float: left;
+	padding: 10px;
+	margin: 10px;
+	background: #fff;
+	width: 225px;
+	height: 300px;
+}
+
+ul#boxes li strong {
+	font-size: 13px;
+	text-decoration: underline;
+}
+
+ul#boxes li span.comment {
+	display: block;
+	margin-top: 5px;
+	text-align: right;
+}
+
+ul#boxes li p {
+	margin: 0px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+#nav {
+	display: block;
+	background: #333;
+	height: 35px;
+}
+
+#nav ul {
+	list-style: none;
+	margin: 0px;
+	padding-top: 10px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#nav ul li {
+	display: inline;
+	margin: 0px;
+	padding: 0px;
+	margin-right: -5px;
+}
+
+#nav ul li a {
+	background: #333;
+	color: #999;
+	padding: 10px;
+}
+
+#nav ul li:last-child a {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#footerBottomArea {
+	background: #252525;
+	padding-bottom: 5px;
+}
+
+ul#gossip {
+	margin: 0px;
+	padding: 0px;
+	
+}
+
+ul#gossip li {
+	clear: both;
+	margin: 10px;
+	background: #444;
+}
+
+ul#gossip li a {
+	font-weight: bold;
+	display: block;
+	color: #eee;
+	font-size: 11px;
+}
+
+ul#gossip li em {
+	font-size: 10px;
+	color: #999;
+}
+
+ul#gossip li div.t {
+	float: right;
+	width: 120px;
+}
+
+ul#gossip li img {
+	width: 50px;
+	padding: 5px;
+}
+
+div.navigation {
+	text-align: center;
+	margin-top: 10px;
+}
+
+div.navigation span {
+	padding: 5px;
+	margin-right: 3px;
+}
+
+div.navigation span.current {
+	font-weight: bold;
+}
+
+div.navigation span, div.navigation span a {
+	background: #fff;
+	color: #999;
+}
+
+div.cmsContent {
+	padding: 10px;
+	margin: 10px;
+	background: #fff;
+}
+
+div.cmsContent h1 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 20px;
+}
+
+div.cmsContent p {
+	padding: 10px;
+	margin: 0px;
+}
+
+div.cmsContent form.formComment {
+	margin: 0px;
+	padding: 0px;
+}
+
+div.cmsContent form.formComment label {
+	display: none;
+}
+
+div.cmsContent form.formComment textarea {
+	width: 100%;
+	height: 200px;
+}
+
+div.cmsContent form.formComment input[type=submit] {
+	background: #999;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #fff;
+	border: 0px;
+	padding: 10px;
+	margin: 0px;
+	margin-left: 350px;
+	cursor: pointer;
+	margin-top: 15px;
+}
+
+div.photoStack {
+	text-align: center;
+}
+
+span.date {
+	color: #ff0000;
+	display: block;
+}
+
+ul#comments {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#comments li {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#comments li p.quote {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#comments li h3 {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul#comments span.actions {
+	font-size: 10px;
+}
+
+div.noticeUser {
+	text-align: center;
+	color: #999;
+}
+
+ul#boxes.movieBox li {
+	height: 200px;
+}
+.cmsContent .cms_photo_right {
+	position: relative;
+	width: 300px;
+	left: 450px;
+	margin-top: -150px;
+	top: -30px;
+}
+
+.playerpreview {
+	margin-top: 30px;
+}
+
+.button_download {
+	margin-top: 10px;
+	display: block;
+}
+
+ul#vote {
+	margin: 0px;
+	padding: 0px;
+	display: block;
+	margin-bottom: 10px;
+}
+
+ul#vote li {
+	display: inline;
+}
+
+ul#vote li a {
+	padding: 10px;
+	background: #999;
+}
+
+ul#vote li a:hover {
+	background: #666;
+}
+
+.formCms form {
+	margin: 0px;
+	padding: 0px;
+}
+
+.formCms form label {
+	font-weight: bold;
+}
+
+.formCms form input[type=submit] {
+	font-weight: bold;
+	text-transform: uppercase;
+	background: #444;
+	color: #fff;
+	border: 0px;
+	padding: 10px;
+	margin: 0px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+#trackList li.selected {
+	background: #eee;
+}
+
+.sidebar_info {
+	margin: 5px;
+	margin-top: 0px;
+	background: #222;
+	padding: 10px;
+	color: #999;
+}
+
+#trackPlaylistCatalogs {
+	margin: 5px;
+}
+
+#trackPlaylistCatalogs li {
+	padding: 5px;
+	background: #222;
+}
+
+#trackPlaylistCatalogs li a {
+	color: #999;
+}
+
+#trackPlaylistCatalogs li a.delete {
+	color: #ff0000;
+	opacity: 0.5;
+}
+
+#trackPlaylistCatalogs li:hover a.delete {
+	opacity: 1;
+}
+
+.important_notice {
+	padding: 10px;
+	background: #fff;
+	color: #333;
+	margin: 10px;
+	text-align: center;
+}
+
+.add_new_playlist {
+	background: green;
+	color: #fff;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.right * {
+	cursor: pointer;
+}
+
+.right {
+	text-align: right;
+	margin-right: 5px;
+	padding-bottom: 10px;
+}
+
+.delete_from_playlist {
+	color: #ff0000;
+	font-style: italic;
+	font-size: 10px;
+	text-align: right;
+	display: block;
+}
+
+#trackList {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+#trackList li {
+	margin: 0px;
+	height: 40px;
+	border-bottom: 1px dashed #ccc;
+	padding: 5px;
+}
+
+.centerizeAudio {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin: auto;
+	width: auto;
+}
+
+#trackList li:last-child {
+	border-bottom: 0px;
+}
+
+#trackList li h2 {
+	margin: 0px;
+	position: relative;
+	left: 10px;
+	text-decoration: underline;
+	top: 5px;
+	font-size: 14px;
+	font-weight: none;
+}
+
+#trackList .actions {
+	position: relative;
+	left: 10px;
+	top: 7px;
+	display: none;
+}
+
+#trackList li:hover {
+	background: #eee;	
+}
+
+#trackList .actions li {
+	width: auto;
+	height: auto;
+	border: 0px;
+	padding: 0px;
+	float: left;
+}
+
+#trackList .actions li a {
+	margin-right: 20px;
+	font-size: 10px;
+	color: #999;
+}
+
+#trackList li img {
+	width: 40px;
+	float: left;
+}

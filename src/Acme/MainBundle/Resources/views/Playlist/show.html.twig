@@ -1,0 +1,42 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="cmsContent">
+
+<div class="centerizeAudio">
+    <audio id="audioPlaylist" controls preload="auto" autobuffer>
+        <source src="{{ path('track_download', {'slug': first.track.slug}) }}" />
+    </audio>
+</div>
+
+<ul id="trackList" class="playlistItems">
+{% for entity in tracks %}
+	<li class="up">
+		<img src="{{ asset('images/music.png') }}" class="draggable" />
+		<h2><a href="{{ path('track_show', {'slug': entity.track.slug}) }}" rel="switchPlaylist">{{ entity.track.title|title }}</a></h2>
+		<ul class="actions">
+		    <li><a href="{{ path('track_download', {'slug': entity.track.slug}) }}">Pobierz utwór</a></li>
+		</ul>
+    	<a href="{{ path('playlist_delete_track', {'id': entity.id}) }}" class="delete_from_playlist confirm_before">x</a>
+		<div class="clearfix"></div>
+	</li>
+{% endfor %}
+</ul>
+
+<div class="clearfix"></div>
+
+{# display navigation #}
+<div class="navigation">
+    {{ tracks.render()|raw }}
+</div>
+</ul>
+
+<div class="clearfix"></div>
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+	{% include 'AcmeMainBundle:Track:playlist.html.twig' %}
+{% endblock %}

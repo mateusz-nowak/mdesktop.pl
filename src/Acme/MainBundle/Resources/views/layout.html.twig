@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{{ lastTitle }}{% endblock %} - Filmy Online, Wyszukiwarka MP3, Darmowe MP3</title>
+    <meta name="description" content="filmy online, darmowe mp3, wyszukiwarka mp3, najlepsze mp3, wyszukaj mp3, filmy z wrzuty, wrzuta.pl pobieranie, ulub.pl pobieranie, wrzuta.pl downloader" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+{% stylesheets '@AcmeMainBundle/Resources/public/css/*' %}
+	<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% javascripts '@AcmeMainBundle/Resources/public/js/*' %}
+	<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+    <link rel="shortcut icon" href="{{ asset('favicon.jpg') }}" />
+</head>
+<body>
+    <div id="header">
+        <div id="logo">
+        	<a href="{{ path('root') }}">
+            	<img src="{{ asset('images/logo.png') }}" />
+            </a>
+        </div>
+        <div id="auth">
+        	{% include "AcmeMainBundle::user.html.twig" %}
+        </div>
+        <div id="menu">
+    		{{ knp_menu_render('AcmeMainBundle:Builder:mainMenu') }}
+    	</div>
+    </div>
+    <div id="container">
+        <div id="shoutbox">
+            <span class="heading">Rozmowy prowadzone przez użytkowników serwisu</span>
+    		{% render 'AcmeMainBundle:Shoutbox:index' %}
+    	</div>
+		<div id="cmsContent">
+	    	<div id="userSideBar">
+	    		{% block sideBar %}
+	    			<h2>Plotki</h2>
+	    			{% render 'AcmeMainBundle:News:Gossip' %}
+	    		{% endblock %}
+	        </div>
+	        <div id="contentBar">
+		        <div id="nav">
+			    	{{ knp_menu_render('AcmeMainBundle:Builder:navigation')|raw }}
+				</div>
+	        	<div id="content">
+	        		{% include "AcmeMainBundle::flash.html.twig" %}
+	        		{% block content %}{% endblock %}
+	        	</div>
+	        </div>
+        	<div class="clearfix"></div>
+        </div>
+    </div>
+    <div id="footer">
+    	<div id="footerContent">
+    	{% block footer %}
+	        <img src="/images/footer.png" id="footerLinks" />
+	        <div class="clearfix"></div>
+    	{% endblock %}
+    	</div>
+    </div>
+    <div id="footerBottomArea">
+		<div id="footerBar">
+	    	{% include 'AcmeMainBundle::footer.html.twig' %}
+	    </div>
+	    <div id="policy">
+	    	Wszelkie prawa zastrzeżone. {{ "now"|date("Y") }} &copy;<br />
+	    	Twoja autoryzacja oraz działania w serwisie są logowane.<br />
+	    	Rozpowszechnianie jakichkolwiek informacji, próba włamania się do serwisu będzie skutkowała powiadomieniem odpowiednich służb.
+	    </div>
+    </div>
+    </body>
+    <script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-36458059-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</html>

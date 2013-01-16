@@ -1,0 +1,60 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block title %}
+	{{ track.title }}
+{% endblock %}
+{% block content %}
+
+<div class="cmsContent">
+<h1>{{ track.title }}</h1>
+<span class="date">Rozmiar: {{ track.size }}</span>
+
+<object class="playerpreview" type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="200" height="20">
+    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf">
+    <param name="FlashVars" value="mp3={{ path('track_download', {'slug': track.slug}) }}&amp;showstop=1&amp;showvolume=1&amp;bgcolor1=189ca8&amp;bgcolor2=085c68">
+</object>
+
+{% if is_granted('ROLE_USER') %}
+<a class="button_download" href="{{ path('track_download', {'slug': track.slug}) }}" rel="nofollow">
+	<img src="{{ asset('images/download.png') }}" />
+</a>
+{% else %}
+<p>
+    <strong>Jako niezalogowany użytkownik możesz pobierać tylko przez program GOD:</strong>
+
+    <a class="button_download" href="http://pp.god.com.pl/?ref=239" rel="nofollow">
+    	<img src="{{ asset('images/download.png') }}" />
+    </a>
+</p>
+{% endif %}
+
+<div>
+	<img class="cms_photo_right" src="{{ photoTrack(artist) }}" />
+</div>
+
+</div>
+
+<div class="cmsContent">
+	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': track.comments} %}
+
+	{% if is_granted('ROLE_USER') %}
+	<form class="formComment" action="{{ path('track_comment', {'slug': track.slug}) }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+	    <input type="submit" value="komentuj" />
+	</form>
+	{% else %}
+		<div class="noticeUser">
+			<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
+		</div>
+	{% endif %}
+</div>
+
+{{ tinymce_init() }}
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+	{% include 'AcmeMainBundle:Track:playlist.html.twig' %}
+{% endblock %}

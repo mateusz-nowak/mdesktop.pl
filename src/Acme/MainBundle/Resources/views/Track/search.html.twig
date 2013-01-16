@@ -1,0 +1,47 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block title %}
+	{{ app.request.query.get('q') }}
+{% endblock %}
+{% block content %}
+<div class="important_notice">
+	Jeżeli chcesz dodać utwór do playlisty, przeciągnij ikonkę przy utworze do wybranej przez Ciebie playlisty
+</div>
+<div class="cmsContent">
+    <ul id="trackList">
+    	{% for entity in tracks %}
+    		<li>
+    			<img src="{{ asset('images/music.png') }}" class="draggable" data-draggable-id="{{ entity.id }}" />
+    			<h2><a href="{{ path('track_show', {'slug': entity.slug}) }}">{{ entity.title|title }}</a></h2>
+    			<ul class="actions">
+    			    {% if is_granted('ROLE_USER') %}
+    			    <li><a href="{{ path('track_download', {'slug': entity.slug}) }}">Pobierz utwór</a></li>
+    			    {% else %}
+    			    <li><a href="" onClick="return confirm('Musisz być zalogowany, aby móc pobierać utwory');">Pobierz utwór</a></li>
+    			    {% endif %}
+    			</ul>
+    			<div class="clearfix"></div>
+    		</li>
+    	{% endfor %}
+    </ul>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="navigation">
+{% if page != 2 %}
+	<span><a href="{{ path('track_search', {'q': query, 'page': page-2}) }}">Poprzednia strona</a></span>
+{% endif %}
+{% if next_page %}
+	<span><a href="{{ path('track_search', {'q': query, 'page': page}) }}">Nastepna strona</a></span>
+{% endif %}
+</div>
+
+{% endblock %}
+
+{% block sideBar %}
+	<h2>Wyszukaj</h2>
+
+	{% include 'AcmeMainBundle:Track:searchForm.html.twig' %}
+	{% include 'AcmeMainBundle:Track:playlist.html.twig' %}
+{% endblock %}

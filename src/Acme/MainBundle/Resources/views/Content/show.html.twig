@@ -1,0 +1,39 @@
+{% extends 'AcmeMainBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="cmsContent">
+	<h1>{{ content.title }}</h1>
+	<span class="date">{{ content.createdAt|date("d/m/Y") }}</span>
+
+	{{ content.text|raw }}
+
+	<div class="photoStack">
+	{% for photo in content.photos %}
+		<a href="{{ photo.fullPath }}">
+			<img src="{{ photo.fullPath|apply_filter('movie') }}" />
+		</a>
+	{% endfor %}
+	</div>
+</div>
+
+	{% if content.commentable %}
+
+<div class="cmsContent">
+	{% include 'AcmeMainBundle:Comment:showComments.html.twig' with {'comments': content.comments} %}
+
+	{% if is_granted('ROLE_USER') %}
+	<form class="formComment" action="{{ path('content_comment', {'slug': content.slug}) }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+	    <input type="submit" value="komentuj" />
+	</form>
+	{% else %}
+		<div class="noticeUser">
+			<a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>, aby móc komentować utwory muzyczne.
+		</div>
+	{% endif %}
+</div>
+
+	{% endif %}
+
+{{ tinymce_init() }}
+{% endblock %}

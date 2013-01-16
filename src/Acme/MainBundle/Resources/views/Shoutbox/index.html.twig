@@ -1,0 +1,14 @@
+<ul id="shoutbox">
+{% for entry in entries %}
+	<li>
+		[ {{ entry.createdAt|date("d/m/y H:i") }} ]
+		<strong>{{ entry.user }}: </strong>
+		<span>{{ entry.text }}</span>
+	</li>
+{% endfor %}
+</ul>
+
+<form action="{{ path('shoutbox_new') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" value="Krzyknij"/>
+</form>

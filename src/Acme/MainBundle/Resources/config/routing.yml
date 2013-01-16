@@ -1,0 +1,43 @@
+root:
+  pattern:  /
+  defaults:
+      _controller: AcmeMainBundle:News:index
+
+track:
+  resource: "@AcmeMainBundle/Controller/TrackController.php"
+  type:     annotation
+
+movie:
+  resource: "@AcmeMainBundle/Controller/MovieController.php"
+  type:     annotation
+
+content:
+  resource: "@AcmeMainBundle/Controller/ContentController.php"
+  type: annotation
+
+category:
+  resource: "@AcmeMainBundle/Controller/CategoryController.php"
+  type: annotation
+
+news:
+  resource: "@AcmeMainBundle/Controller/NewsController.php"
+  type: annotation
+
+comment:
+  resource: "@AcmeMainBundle/Controller/CommentController.php"
+  type: annotation
+
+shoutbox:
+  resource: "@AcmeMainBundle/Controller/ShoutboxController.php"
+  type: annotation
+
+playlist:
+  resource: "@AcmeMainBundle/Controller/PlaylistController.php"
+  type: annotation
+
+_imagine:
+  resource: .
+  type:     imagine
+
+genemu_image:
+    resource: "@GenemuFormBundle/Resources/config/routing/image.xml"

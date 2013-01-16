@@ -1,0 +1,3 @@
+{% for content in footerContainer %}
+<a href="{{ path('content_show', {'slug': content.slug}) }}">{{ content.title }}</a>
+{% endfor %}
